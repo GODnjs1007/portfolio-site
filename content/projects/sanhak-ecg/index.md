@@ -1,16 +1,19 @@
 ---
 title: "산학 ECG 부정맥 검출 서버"
-summary: "산학 프로젝트의 서버·백엔드 담당. 기업 비공개 내용은 게시하지 않음."
+summary: "산학 프로젝트에서 서버·백엔드를 맡고 있습니다. 홈랩 VM 101에서 팀 개발 서버를 운영합니다."
 role: "서버·백엔드"
 status: "진행 중"
 category: "인프라"
 stack: []
-featured: false
-weight: 10
+period: "2026.09 ~"
+weight: 20
 runsOn: "homelab"
 mapLabel: "vm 101"
-draft: true
+preview: true          # 지도·목록에 점선 칸으로만 표시. 상세 페이지는 만들지 않음
+build:
+  render: never
+  list: always
+draft: false
 ---
 
-<!-- 내부 초안. 확인된 사실만 채운 뒤 draft: false 로 공개 -->
-[작성 필요]
+<!-- 내용이 생기면 preview·build 줄을 지우고 상세 섹션(개요/내 역할/시스템 구조/…)을 채워 공개 -->

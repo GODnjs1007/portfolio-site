@@ -7,7 +7,7 @@
 </section>
 <div class="stat-row" style="margin-bottom:32px"><div><b>{{ len $notes }}</b><span>기록</span></div><div><b>{{ $ts }}</b><span>트러블슈팅 사례</span></div></div>
 <div class="note-groups">
-{{ $projects := where (where site.RegularPages "Section" "projects") "Draft" false }}
+{{ $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true }}
 {{ range $projects.ByWeight }}
   {{ $p := . }}
   {{ $slug := partial "slug.html" . }}

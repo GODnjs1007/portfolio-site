@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $notes := where site.RegularPages "Section" "notes" }}
 {{ $ts := 0 }}{{ range $notes }}{{ with .Params.troubleshooting }}{{ $ts = add $ts (len .) }}{{ end }}{{ end }}
-{{ $projects := where (where site.RegularPages "Section" "projects") "Draft" false }}
+{{ $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true }}
 <section class="intro">
   <h1>{{ .Title }}</h1>
   <p>{{ .Params.intro }}</p>
