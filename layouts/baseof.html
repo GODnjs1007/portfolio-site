@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "ko" }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Params.author }}{{ end }}</title>
+<meta name="description" content="{{ with .Summary }}{{ . | plainify | truncate 150 }}{{ else }}{{ site.Params.description }}{{ end }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">{{ end }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400&display=swap">
+{{ with resources.Get "css/extended/site.css" | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="bar">
+  <a class="logo" href="{{ "/" | relURL }}">{{ site.Params.author }}</a>
+  <nav aria-label="주 메뉴">
+    {{ $cur := . }}
+    {{ range site.Menus.main }}
+      {{ $active := or ($cur.IsMenuCurrent "main" .) ($cur.HasMenuCurrent "main" .) }}
+      {{ if eq .URL "/" }}{{ $active = $cur.IsHome }}{{ end }}
+      {{ if and (ne .URL "/") (strings.HasPrefix $cur.RelPermalink .URL) }}{{ $active = true }}{{ end }}
+      <a href="{{ .URL | relURL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{ end }}
+  </nav>
+</header>
+<main id="main">
+{{ block "main" . }}{{ end }}
+</main>
+<footer><p>이 사이트는 Hugo로 만들어, 제 방 미니PC의 Proxmox VM에서 직접 운영합니다. 상태 표시는 실시간 조회가 아니라 직접 갱신하는 기록입니다.</p></footer>
+</body>
+</html>

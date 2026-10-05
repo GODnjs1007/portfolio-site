@@ -38,3 +38,33 @@
 3. 기존 `/posts/proxmox-homelab/` 주소는 `aliases`로 유지.
 4. `[작성 필요]` 칸(배운 점, AWS 기간, 이력서)은 직접 작성.
 5. VM 배포는 사용자가 `git pull` + `hugo`로 직접.
+
+---
+
+# 2차: B 시안 실제 적용 (design/apply-b)
+
+## 한 것
+- 노션 실습 로그 12개 단계(AWS 1~9, 홈랩 1~3)를 `content/notes/<slug>/index.md`로 옮김. 규칙: `docs/notion-import-spec.md`
+  - 문장은 노션 원문 그대로. 오타도 그대로라 직접 고칠 것
+  - 민감정보 치환: Tailscale·내부·퍼블릭 IP, 계정 ID, 리소스 ID, 계정명, ALB/RDS 주소, 산학 VM 이름(ecg→산학 VM)
+  - 이미지는 노션 파일 서버 접근이 막혀 못 옮김. 자리에 `<!-- 이미지: 설명 -->` 주석만 있음 (총 약 110곳)
+  - AWS 10단계는 노션 페이지가 비어 있어 기록 없음
+  - date는 노션 수정일 기준이라 실제 작업일과 다를 수 있음
+- 프로젝트: `content/projects/` 공개 3개(AWS, 홈랩, 이 사이트) + 초안 6개(`draft: true`, 빌드에서 제외)
+- 프로젝트 상세 맨 위 "30초 요약"(왜 / 내가 한 일 / 직접 확인한 결과), 진행 단계 → 기록 링크, 관련 기록 목록
+- 소개 페이지: 역량 → 근거 기록 표
+- 기록 페이지: 프로젝트별 단계 목록 + 트러블슈팅 사례 태그
+- 레이아웃: `layouts/`(baseof, home, projects/, notes/, about, partials), CSS: `assets/css/extended/site.css`. PaperMod 원본 미수정. PaperMod CSS는 로드하지 않음
+- 기존 `/posts/proxmox-homelab/` → `/projects/homelab/`, `/posts/` → `/projects/` 리다이렉트(aliases)
+- `hugo.toml`: 메뉴 4개, goldmark unsafe(=details, br 렌더링), locale
+
+## 확인
+- `hugo` 빌드 오류 없음(경고 1: PaperMod rss.xml의 deprecated 함수, 테마 원본이라 그대로 둠)
+- 초안 6개 public/에 없음, design-previews 없음, 실제 IP·계정 ID 없음
+- 1440·390px 가로 넘침 없음. 스크린샷 `docs/screenshots/` (작업 환경에서 Google Fonts가 막혀 기본 글꼴로 찍힘)
+
+## 사용자가 할 일
+- 배운 점, 선택한 이유 직접 작성 (프로젝트 front matter `servers.*.learn`에 넣으면 펼치기 칸에 나옴)
+- 이미지: 노션에서 내보내 `content/notes/<slug>/`에 넣고 주석 자리를 `![설명](파일명.png)`로 교체
+- 소개: 자격·수상·이력서는 확정된 것만 추가
+- 배포: VM에서 `git pull` 후 `hugo`

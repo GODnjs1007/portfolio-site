@@ -1,0 +1,7 @@
+{{- $p := . -}}
+<a class="node{{ if $p.Params.here }} here{{ end }}" href="{{ $p.RelPermalink }}">
+  {{ with $p.Params.mapLabel }}<span class="id">{{ . }}</span>{{ end }}
+  <h4>{{ $p.Title }}</h4>
+  <p>{{ $p.Params.status }}{{ with $p.Params.period }} · {{ . }}{{ end }}{{ if $p.Params.here }} · 지금 이 사이트{{ end }}</p>
+  {{ with $p.Params.relations }}<div class="rel">{{ range . }}<span>{{ . }}</span>{{ end }}</div>{{ end }}
+</a>

@@ -1,0 +1,71 @@
+{{ define "main" }}
+{{ $slug := partial "slug.html" . }}
+{{ $notes := where (where site.RegularPages "Section" "notes") "Params.projects" "intersect" (slice $slug) }}
+<p class="crumbs"><a href="{{ "/projects/" | relURL }}">프로젝트</a> / {{ .Params.category }}</p>
+<header class="d-head">
+  <h1>{{ .Title }}</h1>
+  <p>{{ .Params.summary }}</p>
+  <div class="chips"><span>{{ .Params.role }}</span><span>{{ .Params.status }}</span>{{ with .Params.period }}<span>{{ . }}</span>{{ end }}{{ range .Params.stack }}<span>{{ . }}</span>{{ end }}</div>
+</header>
+
+<div class="layout">
+  <div class="project-main">
+    {{ with .Params.brief }}
+    <section class="brief" aria-labelledby="h-brief">
+      <h2 id="h-brief">30초 요약</h2>
+      {{ with .why }}<p class="why">{{ . }}</p>{{ end }}
+      <div class="cols">
+        {{ with .did }}<div><h3>내가 한 일</h3><ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul></div>{{ end }}
+        {{ with .verified }}<div class="verified"><h3>직접 확인한 결과</h3><ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul></div>{{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    {{ with .Params.servers }}
+    <section aria-labelledby="h-arch">
+      <div class="sec-head"><h2 id="h-arch">시스템 구조</h2></div>
+      <div class="path">
+        <span class="hop">방문자 · 내 기기</span>
+        <div class="wire"></div>
+        {{ with .access }}<span class="hop">{{ . }}</span><div class="wire"></div>{{ end }}
+        <details class="pve" open>
+          {{ with .host }}<summary><span class="id">물리 서버 1대 · {{ .kind }}</span><b>{{ .name }}</b><span class="id">{{ .spec }}</span>{{ with .state }}<span class="ok">{{ . }} (직접 표시)</span>{{ end }}</summary>{{ end }}
+          <div class="pve-body">
+            <div class="vms">
+              {{ range .vms }}
+              <details class="vm{{ if .here }} here{{ end }}">
+                <summary><span class="id">{{ .id }}</span><b>{{ .name }}</b><span class="id">{{ .spec }}</span><span class="hint"></span></summary>
+                <div class="vm-body"><p>{{ .role }}</p>{{ with .learn }}<p><strong>배운 점</strong> {{ . }}</p>{{ end }}</div>
+              </details>
+              {{ end }}
+            </div>
+            {{ with .host.learn }}<div class="host-learn"><p><strong>배운 점</strong> {{ . }}</p></div>{{ end }}
+          </div>
+        </details>
+      </div>
+    </section>
+    {{ end }}
+
+    {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  </div>
+
+  <aside class="side">
+    {{ with .Params.steps }}
+    <section class="box" aria-labelledby="h-prog"><h2 id="h-prog">진행 단계</h2>
+      <ol class="progress">
+        {{ range . }}
+        {{ $cls := "" }}{{ if eq .status "완료" }}{{ $cls = "done" }}{{ else if eq .status "진행 중" }}{{ $cls = "now" }}{{ end }}
+        <li class="{{ $cls }}">{{ with .note }}{{ with site.GetPage (printf "/notes/%s" .) }}<a href="{{ .RelPermalink }}">{{ end }}{{ end }}{{ .name }}{{ with .note }}{{ with site.GetPage (printf "/notes/%s" .) }}</a>{{ end }}{{ end }}<em>{{ .status }}</em></li>
+        {{ end }}
+      </ol>
+    </section>
+    {{ end }}
+    {{ with .Params.next }}<section class="box" aria-labelledby="h-next"><h2 id="h-next">다음 작업</h2><p>{{ . }}</p></section>{{ end }}
+    {{ with $notes }}
+    <section class="box" aria-labelledby="h-rel"><h2 id="h-rel">관련 기록 {{ len . }}개</h2>
+      <ul class="rel-notes">{{ range sort . "Params.step" }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.troubleshooting }}<small>트러블슈팅 {{ len . }}건</small>{{ end }}</li>{{ end }}</ul>
+    </section>
+    {{ end }}
+  </aside>
+</div>
+{{ end }}

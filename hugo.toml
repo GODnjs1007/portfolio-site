@@ -1,16 +1,41 @@
 baseURL = "/"
-languageCode = "ko-kr"
+locale = "ko-KR"
+defaultContentLanguage = "ko"
 title = "이해원 | Cloud Infra Portfolio"
 theme = "PaperMod"
+enableRobotsTXT = true
 
 [params]
-  defaultTheme = "auto"
+  author = "이해원"
+  description = "클라우드·인프라 운영을 준비하는 이해원의 프로젝트와 기록"
+  intro = "제가 만든 것들이 서로 어떻게 이어지는지 그려두었습니다."
+  introSub = "클라우드·인프라 운영을 준비하는 이해원입니다. AWS에서 배운 걸 집 서버로 옮기고, 그 서버 위에 다른 프로젝트를 올리고 있습니다."
+  github = "https://github.com/GODnjs1007"
+  categories = ["인프라", "서비스", "연구"]
 
-[params.homeInfoParams]
-  Title = "안녕하세요, 이해원입니다"
-  Content = "클라우드·인프라 운영을 공부하며 직접 구축한 환경을 기록합니다."
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 2
+
+[taxonomies]
+  tag = "tags"
 
 [[menu.main]]
-  name = "Projects"
-  url = "/posts/"
+  name = "홈"
+  url = "/"
   weight = 1
+[[menu.main]]
+  name = "프로젝트"
+  url = "/projects/"
+  weight = 2
+[[menu.main]]
+  name = "기록"
+  url = "/notes/"
+  weight = 3
+[[menu.main]]
+  name = "소개"
+  url = "/about/"
+  weight = 4

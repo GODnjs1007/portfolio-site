@@ -1,0 +1,24 @@
+{{ define "main" }}
+{{ $notes := where site.RegularPages "Section" "notes" }}
+{{ $ts := 0 }}{{ range $notes }}{{ with .Params.troubleshooting }}{{ $ts = add $ts (len .) }}{{ end }}{{ end }}
+<section class="intro">
+  <h1>{{ .Title }}</h1>
+  <p>{{ .Params.summary }} 주황색 태그는 그 글에 담긴 트러블슈팅 사례입니다.</p>
+</section>
+<div class="stat-row" style="margin-bottom:32px"><div><b>{{ len $notes }}</b><span>기록</span></div><div><b>{{ $ts }}</b><span>트러블슈팅 사례</span></div></div>
+<div class="note-groups">
+{{ $projects := where (where site.RegularPages "Section" "projects") "Draft" false }}
+{{ range $projects.ByWeight }}
+  {{ $p := . }}
+  {{ $slug := partial "slug.html" . }}
+  {{ $mine := where $notes "Params.projects" "intersect" (slice $slug) }}
+  {{ if $mine }}
+  <section class="note-group" aria-labelledby="g-{{ $slug }}">
+    <h2 id="g-{{ $slug }}"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
+    <p>{{ len $mine }}개 기록</p>
+    <ol class="note-rows">{{ range sort $mine "Params.step" }}{{ partial "note-row.html" . }}{{ end }}</ol>
+  </section>
+  {{ end }}
+{{ end }}
+</div>
+{{ end }}
