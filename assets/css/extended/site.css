@@ -228,3 +228,5 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
   .pager .next{grid-column:1}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+.list tr.pre td{color:var(--muted)}
+.list tr.pre small{display:block;font-size:12px}
