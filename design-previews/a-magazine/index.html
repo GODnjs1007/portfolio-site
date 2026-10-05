@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이해원 · 시안 A 기술 매거진</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="a.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="mast">
+  <a class="logo" href="index.html">이해원</a>
+  <nav aria-label="주 메뉴"><a href="index.html" aria-current="page">홈</a><a href="#projects">프로젝트</a><a href="#notes">기록</a><a href="#about">소개</a></nav>
+</header>
+
+<main id="main">
+  <section class="cover">
+    <p class="issue">2026년 10월 · 클라우드·인프라 운영</p>
+    <h1>서버를 직접 세우고, 쪼개고, 잠그고, 기록합니다.</h1>
+    <p class="deck">클라우드·인프라 운영 직무를 준비하는 이해원입니다. AWS에서 인프라를 열 단계로 키워봤고, 지금은 방 안의 미니PC 한 대로 홈랩을 운영합니다. 이 사이트도 거기서 돌아갑니다.</p>
+  </section>
+
+  <section id="projects" class="stories" aria-labelledby="h-proj">
+    <h2 id="h-proj" class="sec">대표 프로젝트</h2>
+
+    <article class="lead-story">
+      <a href="homelab.html" class="story-link">
+        <p class="kicker">인프라 · 진행 중</p>
+        <h3>미니PC 한 대를 서버 여러 대로 나눈 홈랩</h3>
+        <p class="story-deck">Proxmox 위에 VM 두 대를 올려 포트폴리오와 산학 서버를 분리했습니다. 집 밖에서는 포트를 열지 않고 사설망으로만 들어갑니다.</p>
+        <p class="meta">Proxmox · Docker · Tailscale · Nginx</p>
+        <span class="more">홈랩 이야기 읽기</span>
+      </a>
+    </article>
+
+    <article class="side-story">
+      <a href="#" class="story-link">
+        <p class="kicker">인프라 · 완료</p>
+        <h3>EC2 한 대에서 시작해 열 단계로 키운 AWS 인프라</h3>
+        <p class="story-deck">VPC, ALB와 Auto Scaling, Terraform, Private RDS, ECS, CloudWatch까지 한 단계씩 쌓았습니다.</p>
+        <span class="more">AWS 이야기 읽기</span>
+      </a>
+    </article>
+
+    <article class="side-story">
+      <a href="#" class="story-link">
+        <p class="kicker">인프라 · 진행 중</p>
+        <h3>지금 읽고 계신 이 사이트</h3>
+        <p class="story-deck">Hugo로 만들어 홈랩의 Docker Nginx 컨테이너에서 운영합니다.</p>
+        <span class="more">제작 기록 읽기</span>
+      </a>
+    </article>
+    <p class="all"><a href="#">프로젝트 전체 보기</a></p>
+  </section>
+
+  <section id="notes" class="notes" aria-labelledby="h-notes">
+    <h2 id="h-notes" class="sec">최근 기록</h2>
+    <ol class="note-list">
+      <li><a href="#"><time datetime="2026-10-01">10.01</time><span>40GB를 줬는데 18.5GB만 잡힌 디스크, LVM으로 늘리기</span></a></li>
+      <li><a href="#"><time datetime="2026-10-01">10.01</time><span>docker 그룹에 넣었는데 permission denied가 날 때</span></a></li>
+      <li><a href="#"><time datetime="2026-09-30">09.30</time><span>Proxmox 업데이트가 실패한 두 가지 이유: 유료 저장소와 IPv6</span></a></li>
+      <li><a href="#"><time datetime="2026-09-30">09.30</time><span>ISO를 USB에 복사만 하면 부팅되지 않는 이유</span></a></li>
+    </ol>
+  </section>
+
+  <section id="about" class="about" aria-labelledby="h-about">
+    <h2 id="h-about" class="sec">소개</h2>
+    <p>연세대학교 미래캠퍼스 소프트웨어학부, 2027년 2월 졸업 예정. 이미 돌아가는 시스템을 이해하고 안정적으로 운영하는 일, 그리고 그 운영을 자동화하는 쪽에 관심이 있습니다.</p>
+    <p class="links"><a href="https://github.com/GODnjs1007">GitHub</a><a href="#">이력서 [작성 필요]</a></p>
+  </section>
+</main>
+
+<footer class="colophon"><p>이 사이트는 Hugo로 만들어, 제 방 미니PC의 Proxmox VM에서 운영합니다.</p></footer>
+</body>
+</html>

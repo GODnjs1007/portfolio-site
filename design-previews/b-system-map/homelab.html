@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proxmox 홈랩 · 시안 B 시스템 지도</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="b.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="bar">
+  <a class="logo" href="index.html">이해원</a>
+  <nav aria-label="주 메뉴"><a href="index.html">홈</a><a href="index.html#list" aria-current="page">프로젝트</a><a href="index.html#notes">기록</a><a href="index.html#about">소개</a></nav>
+</header>
+<main id="main">
+  <p class="crumbs"><a href="index.html">프로젝트 지도</a> / 인프라 / 홈랩</p>
+  <header class="d-head">
+    <h1>Proxmox 홈랩</h1>
+    <p>미니PC 한 대에 Proxmox를 설치해 VM 두 대로 나눴습니다. 집 밖에서는 포트를 열지 않고 사설망으로만 들어갑니다.</p>
+    <div class="chips"><span>개인 프로젝트</span><span>진행 중</span><span>2026.09 ~</span><span>Proxmox</span><span>Docker</span><span>Tailscale</span><span>Nginx</span></div>
+  </header>
+
+  <div class="layout">
+    <section class="path" aria-label="접속 경로와 서버 구성">
+      <span class="hop">방문자 · 내 기기</span>
+      <div class="wire"></div>
+      <span class="hop">Tailscale 사설망 · 공유기 포트 개방 없음</span>
+      <div class="wire"></div>
+      <details class="pve" open>
+        <summary><span class="id">물리 서버 1대</span><b>pve</b><span class="id">i5-14450HX / RAM 16GB / NVMe 512GB</span><span class="ok">가동 중 (직접 표시)</span></summary>
+        <div class="pve-body">
+          <div class="vms">
+            <details class="vm here">
+              <summary><span class="id">VM 100</span><b>portfolio</b><span class="id">4코어 / 4GB / 38GB</span><span class="hint"></span></summary>
+              <div class="vm-body"><p>이 사이트를 Docker Nginx로 서빙합니다.</p><p class="draft-text">배운 점 [작성 필요]</p></div>
+            </details>
+            <details class="vm">
+              <summary><span class="id">VM 101</span><b>ecg</b><span class="id">4코어 / 6GB / 39GB</span><span class="hint"></span></summary>
+              <div class="vm-body"><p>산학 ECG 부정맥 검출 서버. 팀원은 이 VM에만 접속합니다.</p><p class="draft-text">배운 점 [작성 필요]</p></div>
+            </details>
+          </div>
+          <div class="host-learn"><p class="draft-text">호스트 배운 점 [작성 필요]</p></div>
+        </div>
+      </details>
+    </section>
+
+    <aside class="side">
+      <section class="box" aria-labelledby="h-prog"><h2 id="h-prog">진행 단계</h2>
+        <ol class="progress">
+          <li class="done">Proxmox 설치와 원격 접속<em>완료</em></li>
+          <li class="done">VM 원격 접속과 Docker<em>완료</em></li>
+          <li class="now">포트폴리오 사이트 배포<em>진행 중</em></li>
+          <li>도메인·HTTPS 외부 공개<em>예정</em></li>
+          <li>k3s 이전<em>예정</em></li>
+          <li>Actions·Argo CD 자동 배포<em>예정</em></li>
+          <li>모니터링<em>예정</em></li>
+        </ol>
+      </section>
+      <section class="box" aria-labelledby="h-next"><h2 id="h-next">다음 작업</h2>
+        <p>도메인을 정하고 HTTPS로 외부에 공개합니다. 정전 후 자동 부팅도 켜둘 계획입니다.</p></section>
+      <section class="box" aria-labelledby="h-rel"><h2 id="h-rel">연결된 프로젝트</h2>
+        <p>이전 단계: AWS 인프라 10단계</p><p>이 위에서 운영: 이 포트폴리오 사이트</p></section>
+    </aside>
+  </div>
+</main>
+<footer><p>상태 표시는 실시간 조회가 아니라 직접 갱신하는 기록입니다.</p></footer>
+</body>
+</html>

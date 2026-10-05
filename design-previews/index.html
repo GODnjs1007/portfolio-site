@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자인 시안 비교</title>
+<style>
+:root{--bg:#F3F3F1;--ink:#17181A;--muted:#55585D;--rule:#CFD0CD;--card:#fff;--link:#1F4FA8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;line-height:1.7;padding:32px clamp(16px,4vw,48px) 64px}
+main{max-width:1200px;margin:0 auto}
+h1{margin:0 0 8px;font-size:clamp(26px,3vw,36px)}
+.lead{margin:0 0 32px;color:var(--muted);max-width:44em}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+article{background:var(--card);border:1px solid var(--ink);padding:20px;display:flex;flex-direction:column;gap:10px}
+article h2{margin:0;font-size:22px}
+.tag{font-size:13px;color:var(--muted);margin:0}
+article p{margin:0}
+article ul{margin:0;padding-left:1.2em;font-size:15px}
+.go{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:auto;padding-top:8px;font-weight:700}
+.go a{color:var(--link)}
+a:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+.rec{border-width:3px}
+.rec .tag{color:var(--ink);font-weight:700}
+.note{margin-top:32px;font-size:14px;color:var(--muted);max-width:52em}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <h1>포트폴리오 디자인 시안 3개</h1>
+  <p class="lead">내용은 같고 구조만 다릅니다. 각 시안마다 홈과 대표 프로젝트(Proxmox 홈랩) 상세를 만들었습니다. 실제 사이트에는 포함되지 않는 미리보기 전용 페이지입니다.</p>
+  <div class="grid">
+    <article>
+      <h2>A 기술 매거진</h2>
+      <p class="tag">큰 제목으로 읽히는 잡지 지면</p>
+      <ul>
+        <li>홈: 표지 문장 → 커버 스토리 1개 + 옆 기사 2개</li>
+        <li>상세: 왼쪽 고정 요약, 오른쪽 긴 본문</li>
+        <li>장점: 첫인상이 강하고 글이 잘 읽힘</li>
+        <li>약점: 프로젝트가 늘면 지면 배치를 계속 손봐야 함</li>
+      </ul>
+      <p class="go"><a href="a-magazine/index.html">홈</a><a href="a-magazine/homelab.html">홈랩 상세</a></p>
+    </article>
+    <article class="rec">
+      <h2>B 시스템 지도</h2>
+      <p class="tag">추천 · 프로젝트끼리의 연결을 지도로</p>
+      <ul>
+        <li>홈: 분류별 지도(홈랩 안에 VM 두 대) + 같은 내용의 표</li>
+        <li>상세: 접속 경로 도면 + 진행 단계 사이드</li>
+        <li>장점: "AWS → 홈랩 → 그 위의 서비스" 흐름이 한눈에 보임. 인프라 직무와 가장 잘 맞음</li>
+        <li>약점: 지도는 프로젝트가 많아지면 정리 규칙이 필요</li>
+      </ul>
+      <p class="go"><a href="b-system-map/index.html">홈</a><a href="b-system-map/homelab.html">홈랩 상세</a></p>
+    </article>
+    <article>
+      <h2>C 엔지니어 작업실</h2>
+      <p class="tag">시간순 작업 일지</p>
+      <ul>
+        <li>홈: 왼쪽 고정 소개·분류, 오른쪽 월별 일지(프로젝트와 기록이 섞임)</li>
+        <li>상세: 노트 한 장, 서버 행을 펼치는 표</li>
+        <li>장점: 꾸준히 쓰는 사람으로 보임. 글이 쌓일수록 좋아짐</li>
+        <li>약점: 대표작이 시간에 묻힐 수 있음</li>
+      </ul>
+      <p class="go"><a href="c-workshop/index.html">홈</a><a href="c-workshop/homelab.html">홈랩 상세</a></p>
+    </article>
+  </div>
+  <p class="note">점선이나 "초안" 표시가 붙은 항목은 아직 공개 확정 전이라 실제 사이트에서는 숨겨집니다. "가동 중"은 실시간 조회가 아니라 직접 갱신하는 표시입니다. 모바일(약 390px)에서도 모든 내용이 펼쳐서 보이도록 만들었습니다.</p>
+</main>
+</body>
+</html>

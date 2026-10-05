@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이해원 · 시안 B 시스템 지도</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="b.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="bar">
+  <a class="logo" href="index.html">이해원</a>
+  <nav aria-label="주 메뉴"><a href="index.html" aria-current="page">홈</a><a href="#list">프로젝트</a><a href="#notes">기록</a><a href="#about">소개</a></nav>
+</header>
+<main id="main">
+  <section class="intro">
+    <h1>제가 만든 것들이 서로 어떻게 이어지는지 그려두었습니다.</h1>
+    <p>클라우드·인프라 운영을 준비하는 이해원입니다. AWS에서 배운 걸 집 서버로 옮기고, 그 서버 위에 다른 프로젝트를 올리고 있습니다.</p>
+  </section>
+
+  <section aria-labelledby="h-map">
+    <div class="sec-head"><h2 id="h-map">프로젝트 지도</h2>
+      <p class="legend"><span>공개</span><span class="l-here">지금 이 사이트</span><span class="l-draft">초안 (실제 사이트에서는 숨김)</span></p></div>
+    <div class="map">
+      <div class="root"><span>이해원</span></div>
+      <div class="trunk"></div>
+      <div class="branches">
+        <div class="col">
+          <h3>인프라</h3>
+          <a class="node" href="#"><span class="id">aws</span><h4>AWS 인프라 10단계</h4><p>완료 · EC2에서 ECS까지</p><div class="rel"><span>다음 단계 → 홈랩</span></div></a>
+          <div class="host">
+            <a class="node" href="homelab.html"><span class="id">homelab</span><h4>Proxmox 홈랩</h4><p>진행 중 · 미니PC 1대</p></a>
+            <div class="inner">
+              <a class="node here" href="#"><span class="id">vm 100</span><h4>이 포트폴리오 사이트</h4><p>여기서 운영 중</p></a>
+              <div class="node draft"><span class="id">vm 101</span><h4>산학 ECG 서버</h4><p>공개 범위 확인 중</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <h3>서비스</h3>
+          <div class="node draft"><h4>여울목</h4><p>물 위험 알림 · 공모전 제출</p><div class="rel"><span>서버·인프라 담당</span></div></div>
+          <div class="node draft"><h4>융합캡스톤디자인 게임</h4><p>백엔드·서버 · 진행 중</p></div>
+          <div class="node draft"><h4>미용실 사전상담</h4><p>모두의 창업 제출</p></div>
+        </div>
+        <div class="col">
+          <h3>연구</h3>
+          <div class="node draft"><h4>LLM API 지연·오류 대응 정책</h4><p>실측 예정</p><div class="rel"><span>실측 → 홈랩 VM</span></div></div>
+          <div class="node draft"><h4>반려동물 돌봄 인수인계 AI</h4><p>A/B/C 비교 설계</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="list" class="list" aria-labelledby="h-list">
+    <div class="sec-head"><h2 id="h-list">목록으로 보기</h2></div>
+    <table>
+      <thead><tr><th>프로젝트</th><th>분류</th><th>내 역할</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td><a href="homelab.html">Proxmox 홈랩</a></td><td>인프라</td><td>개인</td><td>진행 중</td></tr>
+        <tr><td><a href="#">AWS 인프라 10단계</a></td><td>인프라</td><td>개인</td><td>완료</td></tr>
+        <tr><td><a href="#">이 포트폴리오 사이트</a></td><td>인프라</td><td>개인</td><td>진행 중</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="notes" class="notes" aria-labelledby="h-notes">
+    <h2 id="h-notes">최근 기록</h2>
+    <ol>
+      <li><a href="#"><time datetime="2026-10-01">10.01</time><span>40GB를 줬는데 18.5GB만 잡힌 디스크, LVM으로 늘리기<span class="tag">홈랩</span></span></a></li>
+      <li><a href="#"><time datetime="2026-10-01">10.01</time><span>docker 그룹에 넣었는데 permission denied가 날 때<span class="tag">홈랩</span></span></a></li>
+      <li><a href="#"><time datetime="2026-09-30">09.30</time><span>Proxmox 업데이트가 실패한 두 가지 이유<span class="tag">홈랩</span></span></a></li>
+    </ol>
+  </section>
+
+  <section id="about" class="about" aria-labelledby="h-about">
+    <h2 id="h-about">소개</h2>
+    <div><p>연세대학교 미래캠퍼스 소프트웨어학부, 2027년 2월 졸업 예정. 운영을 자동화하는 인프라 엔지니어를 목표로 합니다.</p>
+    <p class="links"><a href="https://github.com/GODnjs1007">GitHub</a><a href="#">이력서 [작성 필요]</a></p></div>
+  </section>
+</main>
+<footer><p>이 사이트는 Hugo로 만들어, 지도의 주황색 칸에서 운영합니다.</p></footer>
+</body>
+</html>
