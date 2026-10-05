@@ -1,15 +1,19 @@
 ---
-title: "반려동물 돌봄 인수인계 AI 실험"
-summary: "대화 정보 정리와 누락·충돌 점검을 A/B/C로 비교하는 연구 후보. B의 구조화 추출 결과를 C 규칙 검사에서 재사용."
-role: "[작성 필요]"
-status: "구상"
+title: "반려동물 위탁돌봄 인수인계 점검 AI"
+summary: "위탁돌봄 인수인계 대화에서 지시 누락·충돌을 점검하는 AI 구조를 제안하는 논문. 일반 요약과 추출+점검 방식을 가상 사례로 비교합니다."
+role: "논문 작성"
+status: "작성 중 · 10월 투고 예정"
 category: "연구"
 stack: []
-featured: false
-weight: 10
-
-draft: true
+period: "2026.10"
+weight: 40
+mapLabel: "논문"
+relations: ["반려·돌봄 챌린지"]
+preview: true
+build:
+  render: never
+  list: always
+draft: false
 ---
 
-<!-- 내부 초안. 확인된 사실만 채운 뒤 draft: false 로 공개 -->
-[작성 필요]
+<!-- 투고 → "투고", 심사 통과 → "게재 승인", 발표 후 → "발표"로 status만 바꿈 -->
