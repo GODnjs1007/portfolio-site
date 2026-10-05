@@ -1,0 +1,31 @@
+{{- $projects := where (where site.RegularPages "Section" "projects") "Draft" false -}}
+{{- $cols := slice -}}
+{{- range site.Params.categories -}}
+  {{- $in := where (where $projects "Params.category" .) "Params.runsOn" "==" nil -}}
+  {{- if $in }}{{ $cols = $cols | append (dict "name" . "pages" $in.ByWeight) }}{{ end -}}
+{{- end -}}
+<div class="map">
+  <div class="root"><span>{{ site.Params.author }}</span></div>
+  <div class="trunk"></div>
+  <div class="branches" style="--cols:{{ len $cols }}">
+    {{ range $cols }}
+    <div class="col">
+      <h3>{{ .name }}</h3>
+      <div class="stack">
+      {{ range .pages }}
+        {{ $slug := partial "slug.html" . }}
+        {{ $children := where $projects "Params.runsOn" $slug }}
+        {{ if $children }}
+          <div class="host">
+            {{ partial "node.html" . }}
+            <div class="inner">{{ range $children.ByWeight }}{{ partial "node.html" . }}{{ end }}</div>
+          </div>
+        {{ else }}
+          {{ partial "node.html" . }}
+        {{ end }}
+      {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>

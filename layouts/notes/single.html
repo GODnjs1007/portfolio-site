@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{ $pslug := index (.Params.projects | default (slice "")) 0 }}
+{{ $proj := site.GetPage (printf "/projects/%s" $pslug) }}
+<p class="crumbs"><a href="{{ "/notes/" | relURL }}">기록</a>{{ with $proj }} / <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</p>
+<header class="note-head">
+  <h1>{{ .Title }}</h1>
+  {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+  <div class="chips"><span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></span>{{ range .Params.tags }}<span>{{ . }}</span>{{ end }}</div>
+</header>
+<div class="note-layout">
+  <article class="prose">{{ .Content }}
+    {{ with $proj }}
+    {{ $sib := sort (where (where site.RegularPages "Section" "notes") "Params.projects" "intersect" (slice $pslug)) "Params.step" }}
+    {{ $prev := false }}{{ $next := false }}{{ $found := false }}
+    {{ range $sib }}{{ if $found }}{{ if not $next }}{{ $next = . }}{{ end }}{{ else if eq .RelPermalink $.RelPermalink }}{{ $found = true }}{{ else }}{{ $prev = . }}{{ end }}{{ end }}
+    <nav class="pager" aria-label="이전·다음 단계">
+      {{ with $prev }}<a class="prev" href="{{ .RelPermalink }}"><small>← 이전 단계</small><strong>{{ .Title }}</strong></a>{{ end }}
+      {{ with $next }}<a class="next" href="{{ .RelPermalink }}"><small>다음 단계 →</small><strong>{{ .Title }}</strong></a>{{ end }}
+    </nav>
+    {{ end }}
+  </article>
+  <aside class="note-side">
+    {{ with .Params.troubleshooting }}<section class="box"><h2>트러블슈팅 {{ len . }}건</h2><ol class="ts-list">{{ range . }}<li>{{ . }}</li>{{ end }}</ol></section>{{ end }}
+    {{ if gt (len (findRE "<h2" .TableOfContents)) 0 }}
+    <details class="box toc" open><summary><b>목차</b></summary>{{ .TableOfContents }}</details>
+    {{ end }}
+  </aside>
+</div>
+{{ end }}

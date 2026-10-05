@@ -1,0 +1,4 @@
+{{ define "main" }}
+<section class="intro"><h1>{{ .Title }}</h1></section>
+<ol class="note-rows" style="margin-bottom:56px">{{ range .Pages }}{{ partial "note-row.html" . }}{{ end }}</ol>
+{{ end }}

@@ -1,0 +1,30 @@
+{{ define "main" }}
+{{ $notes := where site.RegularPages "Section" "notes" }}
+{{ $ts := 0 }}{{ range $notes }}{{ with .Params.troubleshooting }}{{ $ts = add $ts (len .) }}{{ end }}{{ end }}
+{{ $projects := where (where site.RegularPages "Section" "projects") "Draft" false }}
+<section class="intro">
+  <h1>{{ .Title }}</h1>
+  <p>{{ .Params.intro }}</p>
+</section>
+<div class="about-page">
+  <section aria-labelledby="h-num">
+    <h2 id="h-num" class="sr-only">기록 현황</h2>
+    <div class="stat-row"><div><b>{{ len $projects }}</b><span>공개 프로젝트</span></div><div><b>{{ len $notes }}</b><span>단계별 기록</span></div><div><b>{{ $ts }}</b><span>트러블슈팅 사례</span></div></div>
+  </section>
+  <section aria-labelledby="h-skill">
+    <h2 id="h-skill">할 수 있는 일과 근거</h2>
+    <table class="skills">
+      <thead><tr><th scope="col">분야</th><th scope="col">직접 해본 것</th><th scope="col">근거 기록</th></tr></thead>
+      <tbody>
+      {{ range .Params.skills }}
+      <tr><td>{{ .area }}</td><td>{{ .what }}</td><td><ul>{{ range .notes }}{{ with site.GetPage (printf "/notes/%s" .) }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}{{ end }}</ul></td></tr>
+      {{ end }}
+      </tbody>
+    </table>
+  </section>
+  {{ with .Content }}<section class="prose">{{ . }}</section>{{ end }}
+  <section aria-labelledby="h-link"><h2 id="h-link">링크</h2>
+    <p class="links" style="display:flex;gap:20px;font-weight:700">{{ range .Params.links }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</p>
+  </section>
+</div>
+{{ end }}
