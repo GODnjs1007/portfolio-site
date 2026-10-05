@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proxmox 홈랩 · 시안 A 기술 매거진</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="a.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="mast">
+  <a class="logo" href="index.html">이해원</a>
+  <nav aria-label="주 메뉴"><a href="index.html">홈</a><a href="index.html#projects" aria-current="page">프로젝트</a><a href="index.html#notes">기록</a><a href="index.html#about">소개</a></nav>
+</header>
+<main id="main">
+  <header class="article-head">
+    <p class="kicker">인프라 · 진행 중</p>
+    <h1>미니PC 한 대를 서버 여러 대로 나눈 홈랩</h1>
+    <p class="deck">AWS에서 버튼 하나로 끝나던 가상화와 네트워크를, 이번엔 손으로 직접 해봤습니다.</p>
+  </header>
+  <div class="article">
+    <dl class="facts">
+      <div><dt>내 역할</dt><dd>개인 프로젝트, 설계부터 운영까지</dd></div>
+      <div><dt>상태</dt><dd>운영 중, 3단계 진행 중</dd></div>
+      <div><dt>기간</dt><dd>2026.09 ~</dd></div>
+      <div><dt>사용 기술</dt><dd>Proxmox VE, Ubuntu Server, Docker, Nginx, Tailscale, Hugo</dd></div>
+    </dl>
+    <div class="body">
+      <h2>개요</h2>
+      <p>방에 둔 미니PC에 Proxmox를 설치해 VM 두 대로 나눴습니다. 하나는 이 사이트를, 하나는 산학 프로젝트 서버를 맡습니다. 집 밖에서는 공유기 포트를 열지 않고 Tailscale 사설망과 SSH 키로만 접속합니다.</p>
+
+      <h2>시스템 구조</h2>
+      <figure class="figure">
+        <details class="host" open>
+          <summary><b>pve</b><span class="spec">Proxmox 호스트 · i5-14450HX / RAM 16GB / NVMe 512GB</span><span class="state">가동 중 (직접 표시)</span></summary>
+          <div class="vms">
+            <details class="vm">
+              <summary><b>portfolio</b><span class="toggle">VM 100</span></summary>
+              <p class="spec">4코어 / RAM 4GB / 디스크 38GB · 이 사이트가 돌아가는 곳</p>
+              <div class="learn"><p class="draft">배운 점 [작성 필요]</p></div>
+            </details>
+            <details class="vm">
+              <summary><b>ecg</b><span class="toggle">VM 101</span></summary>
+              <p class="spec">4코어 / RAM 6GB / 디스크 39GB · 산학 ECG 부정맥 검출 서버</p>
+              <div class="learn"><p class="draft">배운 점 [작성 필요]</p></div>
+            </details>
+          </div>
+          <div class="learn"><p class="draft">호스트 배운 점 [작성 필요]</p></div>
+        </details>
+        <figcaption>물리 서버는 한 대입니다. VM 두 대는 pve 안에 있습니다. 상태 표시는 실시간 조회가 아니라 직접 갱신하는 기록입니다.</figcaption>
+      </figure>
+
+      <h2>진행 단계</h2>
+      <ol class="steps">
+        <li>Proxmox 설치와 원격 접속<em>완료</em></li>
+        <li>VM 원격 접속과 Docker<em>완료</em></li>
+        <li class="now">포트폴리오 사이트 배포<em>진행 중</em></li>
+        <li>도메인·HTTPS 외부 공개<em>예정</em></li>
+        <li>k3s 이전<em>예정</em></li>
+        <li>GitHub Actions·Argo CD 자동 배포<em>예정</em></li>
+        <li>모니터링<em>예정</em></li>
+      </ol>
+
+      <h2>다음 작업</h2>
+      <p>도메인을 정하고 HTTPS로 외부에 공개합니다. 그 전에 정전 후 자동 부팅을 BIOS에서 켜둘 계획입니다.</p>
+    </div>
+  </div>
+</main>
+<footer class="colophon"><p>이 사이트는 Hugo로 만들어, 제 방 미니PC의 Proxmox VM에서 운영합니다.</p></footer>
+</body>
+</html>

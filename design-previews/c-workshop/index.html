@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이해원 · 시안 C 엔지니어 작업실</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Nanum+Gothic+Coding&display=swap">
+<link rel="stylesheet" href="c.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<div class="shell">
+  <aside class="side">
+    <div>
+      <a class="name" href="index.html">이해원</a>
+      <p class="role">클라우드·인프라 운영 준비 중. 서버를 세우고, 고장 내고, 고친 과정을 적습니다.</p>
+    </div>
+    <nav aria-label="주 메뉴"><a href="index.html" aria-current="page">홈</a><a href="#log">프로젝트</a><a href="#log">기록</a><a href="#about">소개</a></nav>
+    <div>
+      <h2>분류</h2>
+      <ul class="filters"><li><a href="#log">인프라</a></li><li><a href="#log">서비스</a></li><li><a href="#log">연구</a></li></ul>
+    </div>
+    <div>
+      <h2>유형</h2>
+      <ul class="filters"><li><a href="#log">프로젝트</a></li><li><a href="#log">트러블슈팅</a></li></ul>
+    </div>
+    <div class="now">
+      <h2>지금 하는 일</h2>
+      <p><span class="mark">홈랩 3단계</span> 이 사이트를 VM에 배포 중</p>
+    </div>
+    <p class="foot">이 사이트는 Hugo로 만들어 미니PC의 Proxmox VM에서 운영합니다.</p>
+  </aside>
+
+  <main id="main" class="log">
+    <div class="log-head" id="log">
+      <h1>작업 일지</h1>
+      <p>프로젝트 ■ · 기록 ○ · 최신순</p>
+    </div>
+
+    <section class="month" aria-labelledby="m-10">
+      <h2 id="m-10">2026.10</h2>
+      <ol class="entries">
+        <li class="entry project">
+          <div class="line"><span class="type">프로젝트</span><span>인프라</span><span class="status on">진행 중</span></div>
+          <h3><a href="#">이 포트폴리오 사이트</a></h3>
+          <p>Hugo로 만들고 홈랩 VM의 Docker Nginx에서 서빙합니다. 지금 보고 계신 페이지입니다.</p>
+          <p class="stack">Hugo · PaperMod · Docker · Nginx</p>
+        </li>
+        <li class="entry">
+          <div class="line"><time datetime="2026-10-01">10.01</time><span class="type">트러블슈팅</span><span>홈랩</span></div>
+          <h3><a href="#">40GB를 줬는데 18.5GB만 잡힌 디스크, LVM으로 늘리기</a></h3>
+        </li>
+        <li class="entry">
+          <div class="line"><time datetime="2026-10-01">10.01</time><span class="type">트러블슈팅</span><span>홈랩</span></div>
+          <h3><a href="#">docker 그룹에 넣었는데 permission denied가 날 때</a></h3>
+        </li>
+      </ol>
+    </section>
+
+    <section class="month" aria-labelledby="m-09">
+      <h2 id="m-09">2026.09</h2>
+      <ol class="entries">
+        <li class="entry project">
+          <div class="line"><span class="type">프로젝트</span><span>인프라</span><span class="status on">진행 중</span></div>
+          <h3><a href="homelab.html">Proxmox 홈랩</a></h3>
+          <p>미니PC 한 대에 Proxmox를 설치해 VM 두 대로 나눴습니다. 포트를 열지 않고 Tailscale과 SSH 키로만 접속합니다.</p>
+          <p class="stack">Proxmox VE · Ubuntu Server · Docker · Tailscale</p>
+        </li>
+        <li class="entry">
+          <div class="line"><time datetime="2026-09-30">09.30</time><span class="type">트러블슈팅</span><span>홈랩</span></div>
+          <h3><a href="#">Proxmox 업데이트가 실패한 두 가지 이유</a></h3>
+        </li>
+        <li class="entry">
+          <div class="line"><time datetime="2026-09-30">09.30</time><span class="type">트러블슈팅</span><span>홈랩</span></div>
+          <h3><a href="#">USB에 ISO를 복사만 해서 부팅이 안 됐던 일</a></h3>
+        </li>
+        <li class="entry draft-item">
+          <div class="line"><span class="type">프로젝트</span><span>서비스</span><span class="preview-note">초안 · 실제 사이트에서는 숨김</span></div>
+          <h3>여울목</h3>
+          <p>공모전 제출. 결과 미정.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="month" aria-labelledby="m-prev">
+      <h2 id="m-prev">이전</h2>
+      <ol class="entries">
+        <li class="entry project">
+          <div class="line"><span class="type">프로젝트</span><span>인프라</span><span class="status done">완료</span><span class="draft">기간 [작성 필요]</span></div>
+          <h3><a href="#">AWS 인프라 10단계</a></h3>
+          <p>EC2에 Nginx 하나 올리는 것부터 비용·보안 최적화까지, 단계마다 직접 만들고 기록했습니다.</p>
+          <p class="stack">EC2 · VPC · ALB · RDS · ECS</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="h-about">
+      <h2 id="h-about">소개</h2>
+      <div>
+        <p>연세대학교 미래캠퍼스 소프트웨어학부, 2027년 2월 졸업 예정. 운영을 자동화하는 인프라 엔지니어를 목표로 합니다.</p>
+        <p class="links"><a href="https://github.com/GODnjs1007">GitHub</a><a href="#">이력서 [작성 필요]</a></p>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
