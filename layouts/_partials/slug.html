@@ -1,2 +1,3 @@
-{{- with .File }}{{ return .ContentBaseName }}{{ end -}}
-{{- return path.Base .RelPermalink -}}
+{{- $s := path.Base .RelPermalink -}}
+{{- with .File }}{{ $s = .ContentBaseName }}{{ end -}}
+{{- return $s -}}
