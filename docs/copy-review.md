@@ -2,10 +2,9 @@
 
 `python3 scripts/check_copy.py`로 다시 만들 수 있다. 고친 뒤 다시 돌려서 0건이 되는지 확인.
 
-## 1. 깨진 문자 (�) (2건)
+## 1. 깨진 문자 (�) (0건)
 
-- `content/notes/aws-02-custom-page/index.md:9` — - "한글이 물음표(�)로 깨져서 표시됨"
-- `content/notes/aws-02-custom-page/index.md:34` — ### 한글이 물음표(�)로 깨져서 표시됨
+없음
 
 ## 2. 오타 후보 (노션 원문 포함, 고칠지는 직접 판단) (8건)
 
