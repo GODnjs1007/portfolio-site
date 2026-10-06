@@ -17,8 +17,6 @@ draft: false
 
 미니PC(FIREBAT F2)에 Proxmox VE를 설치해 물리 서버 한 대 위에서 여러 VM을 운영할 수 있는 기반을 만든다. 모니터 없이 웹 UI로 관리하고, Tailscale로 집 밖에서도 접속할 수 있게 구성한 뒤 첫 Ubuntu Server VM을 만든다. 1번 프로젝트에서 AWS가 대신 해주던 가상화와 네트워크를 직접 운영해보는 것이 목적이다.
 
-## 진행 과정
-
 ## A. Proxmox 설치와 초기 설정
 
 ### 개요

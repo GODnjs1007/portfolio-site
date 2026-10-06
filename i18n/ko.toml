@@ -18,9 +18,9 @@ other = "목록으로 보기"
 [homeToAbout]
 other = "역량별로 보기 →"
 [homeRecent]
-other = "최근 기록"
+other = "최근 실습 로그"
 [homeAllNotes]
-other = "기록 전체 보기 →"
+other = "실습 로그 전체 보기 →"
 [homeAbout]
 other = "소개"
 [homeAboutLink]
@@ -78,27 +78,37 @@ other = "진행 단계"
 [nextTitle]
 other = "다음 작업"
 [relatedNotes]
-other = "관련 기록 {{ .Count }}개"
+other = "관련 실습 로그 {{ .Count }}개"
 [tsCount]
 other = "트러블슈팅 {{ .Count }}건"
 
-# ── 기록 ─────────────────────────────
+# ── 실습 로그 ─────────────────────────────
 [crumbNotes]
-other = "기록"
+other = "실습 로그"
+[notesHow]
+other = "어떻게 쓴 글인가요?"
+[notesHowProcess]
+other = "진행 과정"
+[notesHowProcessText]
+other = "실습하면서 한 작업과 트러블슈팅을 AI와 함께 정리했습니다."
+[notesHowLearned]
+other = "배운 점"
+[notesHowLearnedText]
+other = "정리된 과정을 다시 보면서 제가 이해한 내용을 직접 썼습니다. 초록색 박스로 따로 표시했습니다."
 [notesTagHint]
 other = "주황색 태그는 그 글에 담긴 트러블슈팅 사례입니다."
 [viewSwitch]
 other = "보기 전환"
 [viewAll]
-other = "전체 기록"
+other = "실습 로그"
 [viewLearned]
 other = "배운 점만 보기"
 [statNotes]
-other = "기록"
+other = "단계"
 [statTs]
 other = "트러블슈팅 사례"
 [groupCount]
-other = "{{ .Count }}개 기록"
+other = "{{ .Count }}개 단계"
 [toc]
 other = "목차"
 [pagerLabel]
@@ -114,7 +124,7 @@ other = "직접 작성"
 [learnedBadgeSmall]
 other = "배운 점"
 [learnedFlag]
-other = "이 단계에서 배운 점은 제가 직접 정리했습니다."
+other = "진행 과정은 실습 내용을 AI와 함께 정리했고, 배운 점은 그걸 보고 제가 이해한 대로 직접 썼습니다."
 [learnedJump]
 other = "배운 점 바로가기 ↓"
 [learnedTitle]
@@ -128,11 +138,11 @@ other = "이 단계의 진행 과정 보기 →"
 
 # ── 소개 ─────────────────────────────
 [aboutStatsLabel]
-other = "기록 현황"
+other = "실습 현황"
 [aboutStatProjects]
 other = "공개 프로젝트"
 [aboutStatNotes]
-other = "단계별 기록"
+other = "실습 단계"
 [aboutStatTs]
 other = "트러블슈팅 사례"
 [aboutSkills]
@@ -142,6 +152,6 @@ other = "분야"
 [aboutColWhat]
 other = "직접 해본 것"
 [aboutColProof]
-other = "근거 기록"
+other = "근거 실습 로그"
 [aboutLinks]
 other = "링크"
