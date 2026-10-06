@@ -230,3 +230,33 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 .list tr.pre td{color:var(--muted)}
 .list tr.pre small{display:block;font-size:12px}
+
+/* 직접 정리한 배운 점 */
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;background:#1E6B43;color:#fff;vertical-align:middle;letter-spacing:.02em}
+.badge.sm{font-size:11px;padding:0 6px;margin-left:6px;background:#E3F1E8;color:#1E6B43;border:1px solid #1E6B43}
+.learned-flag{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:15px;color:var(--ink)!important}
+.learned-flag a{color:#1E6B43;font-weight:700}
+.learned{margin-top:56px;border:2px solid #1E6B43;background:#F3FAF5}
+.learned>header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;padding:12px 20px;background:#1E6B43;color:#fff}
+.learned>header h2{margin:0;padding:0;border:0;font-size:20px;color:#fff}
+.learned>header .badge{background:#fff;color:#1E6B43}
+.learned-body{padding:8px 20px 20px}
+.prose .learned-body h3{margin-top:20px}
+.toc-learned{margin:10px 0 0;font-size:14px}
+.toc-learned a{color:#1E6B43;font-weight:700;text-decoration:none}
+.switch{display:flex;gap:0;margin:-8px 0 24px;border:2px solid var(--ink);width:max-content;max-width:100%}
+.switch a{padding:8px 16px;text-decoration:none;font-weight:500;background:var(--node)}
+.switch a[aria-current]{background:var(--ink);color:#fff}
+.learned-hint{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--muted);margin:0 0 28px}
+.learned-list{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:12px}
+.learned-item{border:2px solid #1E6B43;background:#F3FAF5}
+.learned-item>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:3em minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:12px 16px}
+.learned-item>summary::-webkit-details-marker{display:none}
+.learned-item .no{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.learned-item .t{font-weight:700;font-size:17px}
+.learned-item .hint{font-size:13px;font-weight:700;color:#1E6B43}
+.learned-item[open]>summary{border-bottom:1px solid #9CC9AE}
+.learned-item .src{margin-top:16px;font-size:14px}
+.prose pre{max-width:100%}
+.prose li,.prose .learned-body{min-width:0}
+@media (max-width:860px){.prose ul,.prose ol{padding-left:1.2em}}
