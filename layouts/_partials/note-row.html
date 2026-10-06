@@ -1,7 +1,12 @@
 {{- $n := . -}}
 <li>
   <span class="no">{{ with $n.Params.step }}{{ printf "%02d" . }}{{ end }}</span>
-  <div><h3><a href="{{ $n.RelPermalink }}">{{ $n.Title }}</a>{{ with $n.Resources.GetMatch "learned.md" }} <span class="badge sm">{{ i18n "learnedBadgeSmall" }}</span>{{ end }}</h3><p>{{ $n.Params.summary }}</p></div>
+  <div><h3><a href="{{ $n.RelPermalink }}">{{ $n.Title }}</a></h3><p>{{ $n.Params.summary }}</p>
+    <p class="parts" aria-label="{{ i18n "rowParts" }}">
+      <span class="part">{{ i18n "notesHowProcess" }}</span>
+      {{ if $n.Resources.GetMatch "learned.md" }}<span class="part mine">{{ i18n "rowLearned" }}</span>{{ end }}
+    </p>
+  </div>
   <time datetime="{{ $n.Date.Format "2006-01-02" }}">{{ $n.Date.Format "2006.01.02" }}</time>
   {{ with $n.Params.troubleshooting }}<ul class="ts" aria-label="{{ i18n "statTs" }}">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
 </li>
