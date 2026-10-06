@@ -37,11 +37,6 @@ draft: false
 - 해결: \<head\> 안에 \<meta charset="UTF-8"\> 추가
 - 재발방지: HTML 파일 작성할 때 charset 태그 기본으로 넣는 습관
 
-## 배운 점
-
-- sudo nginx -T \| grep root —\> 루트 경로 확인
-- http:// public 주소 —\> nginx 웹페이지 확인
-
 ## 2단계 용어
 
 2단계에서 처음 나온 개념과 명령어. **실습 진행 순서대로** 정리했다.

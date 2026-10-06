@@ -23,6 +23,7 @@
     {{ range site.Menus.main }}
       {{ $active := or ($cur.IsMenuCurrent "main" .) ($cur.HasMenuCurrent "main" .) }}
       {{ if eq .URL "/" }}{{ $active = $cur.IsHome }}{{ end }}
+      {{ if and (eq .URL "/notes/") (strings.HasPrefix $cur.RelPermalink "/learned/") }}{{ $active = true }}{{ end }}
       {{ if and (ne .URL "/") (strings.HasPrefix $cur.RelPermalink .URL) }}{{ $active = true }}{{ end }}
       <a href="{{ .URL | relURL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
     {{ end }}

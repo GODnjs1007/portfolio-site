@@ -1,7 +1,7 @@
 {{- $n := . -}}
 <li>
   <span class="no">{{ with $n.Params.step }}{{ printf "%02d" . }}{{ end }}</span>
-  <div><h3><a href="{{ $n.RelPermalink }}">{{ $n.Title }}</a></h3><p>{{ $n.Params.summary }}</p></div>
+  <div><h3><a href="{{ $n.RelPermalink }}">{{ $n.Title }}</a>{{ with $n.Resources.GetMatch "learned.md" }} <span class="badge sm">배운 점</span>{{ end }}</h3><p>{{ $n.Params.summary }}</p></div>
   <time datetime="{{ $n.Date.Format "2006-01-02" }}">{{ $n.Date.Format "2006.01.02" }}</time>
   {{ with $n.Params.troubleshooting }}<ul class="ts" aria-label="트러블슈팅">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
 </li>

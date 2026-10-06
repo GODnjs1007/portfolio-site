@@ -5,10 +5,17 @@
 <header class="note-head">
   <h1>{{ .Title }}</h1>
   {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+  {{ with .Resources.GetMatch "learned.md" }}<p class="learned-flag"><span class="badge">직접 작성</span>이 단계에서 배운 점은 제가 직접 정리했습니다. <a href="#learned">배운 점 바로가기 ↓</a></p>{{ end }}
   <div class="chips"><span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></span>{{ range .Params.tags }}<span>{{ . }}</span>{{ end }}</div>
 </header>
 <div class="note-layout">
   <article class="prose">{{ .Content }}
+    {{ with .Resources.GetMatch "learned.md" }}
+    <section id="learned" class="learned" aria-labelledby="h-learned">
+      <header><h2 id="h-learned">직접 정리한 배운 점</h2><span class="badge">직접 작성</span></header>
+      <div class="learned-body">{{ .Content }}</div>
+    </section>
+    {{ end }}
     {{ with $proj }}
     {{ $sib := sort (where (where site.RegularPages "Section" "notes") "Params.projects" "intersect" (slice $pslug)) "Params.step" }}
     {{ $prev := false }}{{ $next := false }}{{ $found := false }}
@@ -21,8 +28,8 @@
   </article>
   <aside class="note-side">
     {{ with .Params.troubleshooting }}<section class="box"><h2>트러블슈팅 {{ len . }}건</h2><ol class="ts-list">{{ range . }}<li>{{ . }}</li>{{ end }}</ol></section>{{ end }}
-    {{ if gt (len (findRE "<h2" .TableOfContents)) 0 }}
-    <details class="box toc" open><summary><b>목차</b></summary>{{ .TableOfContents }}</details>
+    {{ if strings.Contains .TableOfContents "<li" }}
+    <details class="box toc" open><summary><b>목차</b></summary>{{ .TableOfContents }}{{ with .Resources.GetMatch "learned.md" }}<p class="toc-learned"><a href="#learned">직접 정리한 배운 점</a></p>{{ end }}</details>
     {{ end }}
   </aside>
 </div>
