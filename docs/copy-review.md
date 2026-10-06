@@ -8,16 +8,16 @@
 
 ## 2. 오타 후보 (노션 원문 포함, 고칠지는 직접 판단) (8건)
 
-- `content/notes/aws-06-terraform/index.md:418` — **바뀜다** → 바뀐다
-- `content/notes/aws-08-docker-ecs/index.md:676` — **없앱다** → 없앤다
-- `content/notes/aws-08-docker-ecs/index.md:676` — **서브티** → 서브넷
+- `content/notes/aws-06-terraform/index.md:416` — **바뀜다** → 바뀐다
+- `content/notes/aws-08-docker-ecs/index.md:674` — **없앱다** → 없앤다
+- `content/notes/aws-08-docker-ecs/index.md:674` — **서브티** → 서브넷
 - `content/notes/aws-09-cloudwatch/index.md:73` — **바뀜다** → 바뀐다
 - `content/notes/aws-09-cloudwatch/index.md:145` — **곷** → 곧
 - `content/notes/aws-01-ec2-nginx/learned.md:9` — **설지** → 설치
 - `content/notes/aws-05-alb-asg/learned.md:8` — **트랙픽** → 트래픽
 - `content/notes/homelab-03-site-deploy/learned.md:31` — **되도** → 돼도
 
-## 3. AI 말투 후보 (사이트 문구만) (17건)
+## 3. AI 말투 후보 (사이트 문구만) (19건)
 
 - `i18n/ko.toml:11` — '직접' 반복. 정말 강조할 곳만 남기기
   > other = "이 사이트는 Hugo로 만들어, 제 방 미니PC의 Proxmox VM에서 직접 운영합니다. 상태 표시는 실시간 조회가 아니라 직접 갱신하는 기록입니다."
@@ -25,13 +25,15 @@
   > other = "직접 확인한 결과"
 - `i18n/ko.toml:73` — '직접' 반복. 정말 강조할 곳만 남기기
   > other = "직접 표시"
-- `i18n/ko.toml:113` — '직접' 반복. 정말 강조할 곳만 남기기
+- `i18n/ko.toml:97` — '직접' 반복. 정말 강조할 곳만 남기기
+  > other = "정리된 과정을 다시 보면서 제가 이해한 내용을 직접 썼습니다. 초록색 박스로 따로 표시했습니다."
+- `i18n/ko.toml:123` — '직접' 반복. 정말 강조할 곳만 남기기
   > other = "직접 작성"
-- `i18n/ko.toml:117` — '직접' 반복. 정말 강조할 곳만 남기기
-  > other = "이 단계에서 배운 점은 제가 직접 정리했습니다."
-- `i18n/ko.toml:121` — '직접' 반복. 정말 강조할 곳만 남기기
+- `i18n/ko.toml:127` — '직접' 반복. 정말 강조할 곳만 남기기
+  > other = "진행 과정은 실습 내용을 AI와 함께 정리했고, 배운 점은 그걸 보고 제가 이해한 대로 직접 썼습니다."
+- `i18n/ko.toml:131` — '직접' 반복. 정말 강조할 곳만 남기기
   > other = "직접 정리한 배운 점"
-- `i18n/ko.toml:143` — '직접' 반복. 정말 강조할 곳만 남기기
+- `i18n/ko.toml:153` — '직접' 반복. 정말 강조할 곳만 남기기
   > other = "직접 해본 것"
 - `hugo.toml:11` — '~해두었습니다' 반복은 소개문 티가 남
   > intro = "제가 만든 것들이 서로 어떻게 이어지는지 그려두었습니다."
@@ -51,13 +53,14 @@
   > 배포 과정은 홈랩 3단계 기록과 같은 작업이라, 자세한 내용은 그 기록에 모아두었습니다.
 - `content/projects/sanhak-ecg/index.md:3` — '직접' 반복. 정말 강조할 곳만 남기기
   > summary: "산학 프로젝트 팀장으로 팀을 이끌며 서버·백엔드를 맡고 있습니다. 홈랩 VM 101에 팀 개발 서버를 직접 구축해 운영합니다."
+- `content/notes/_index.md:3` — '직접' 반복. 정말 강조할 곳만 남기기
+  > summary: "AWS와 홈랩을 직접 구축하면서 단계별로 남긴 실습 로그입니다."
 - `content/learned/_index.md:3` — '직접' 반복. 정말 강조할 곳만 남기기
   > summary: "각 단계를 마치고 제가 직접 정리한 배운 점만 모았습니다. 진행 과정은 기록에, 이해한 내용은 여기에 있습니다."
 
-## 4. [작성 필요] 남은 곳 (2건)
+## 4. [작성 필요] 남은 곳 (0건)
 
-- `content/projects/startup-contest/index.md:4` — role: "[작성 필요]"
-- `content/projects/startup-contest/index.md:15` — [작성 필요]
+없음
 
 ## 5. 옮기지 못한 이미지 (110곳)
 

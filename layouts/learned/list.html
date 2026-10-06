@@ -5,6 +5,7 @@
   <h1>{{ .Title }}</h1>
   <p>{{ .Params.summary }}</p>
 </section>
+{{ partial "how-written.html" . }}
 <nav class="switch" aria-label="{{ i18n "viewSwitch" }}"><a href="{{ "/notes/" | relURL }}">{{ i18n "viewAll" }}</a><a href="{{ "/learned/" | relURL }}" aria-current="page">{{ i18n "viewLearned" }}</a></nav>
 <p class="learned-hint">{{ i18n "learnedHint" }} <span class="badge">{{ i18n "learnedBadge" }}</span></p>
 <div class="note-groups">

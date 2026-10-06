@@ -35,7 +35,7 @@ enableRobotsTXT = true
   url = "/projects/"
   weight = 2
 [[menu.main]]
-  name = "기록"
+  name = "실습 로그"
   url = "/notes/"
   weight = 3
 [[menu.main]]

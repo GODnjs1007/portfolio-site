@@ -5,7 +5,7 @@
 <header class="note-head">
   <h1>{{ .Title }}</h1>
   {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
-  {{ with .Resources.GetMatch "learned.md" }}<p class="learned-flag"><span class="badge">{{ i18n "learnedBadge" }}</span>{{ i18n "learnedFlag" }} <a href="#learned">{{ i18n "learnedJump" }}</a></p>{{ end }}
+  {{ with .Resources.GetMatch "learned.md" }}<p class="learned-flag">{{ i18n "learnedFlag" }} <a href="#learned">{{ i18n "learnedJump" }}</a></p>{{ end }}
   <div class="chips"><span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></span>{{ range .Params.tags }}<span>{{ . }}</span>{{ end }}</div>
 </header>
 <div class="note-layout">

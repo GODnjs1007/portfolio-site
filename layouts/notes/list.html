@@ -5,6 +5,7 @@
   <h1>{{ .Title }}</h1>
   <p>{{ .Params.summary }} {{ i18n "notesTagHint" }}</p>
 </section>
+{{ partial "how-written.html" . }}
 <nav class="switch" aria-label="{{ i18n "viewSwitch" }}"><a href="{{ "/notes/" | relURL }}" aria-current="page">{{ i18n "viewAll" }}</a><a href="{{ "/learned/" | relURL }}">{{ i18n "viewLearned" }}</a></nav>
 <div class="stat-row" style="margin-bottom:32px"><div><b>{{ len $notes }}</b><span>{{ i18n "statNotes" }}</span></div><div><b>{{ $ts }}</b><span>{{ i18n "statTs" }}</span></div></div>
 <div class="note-groups">
