@@ -1,7 +1,7 @@
 ---
 title: "웹 프로젝트"
 summary: "주제 미정. 백엔드 담당."
-role: "백엔드"
+role: "조원, 백엔드"
 status: "구상"
 category: "서비스"
 stack: []
