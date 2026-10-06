@@ -5,8 +5,8 @@
   <h1>{{ .Title }}</h1>
   <p>{{ .Params.summary }}</p>
 </section>
-<nav class="switch" aria-label="보기 전환"><a href="{{ "/notes/" | relURL }}">전체 기록</a><a href="{{ "/learned/" | relURL }}" aria-current="page">배운 점만 보기</a></nav>
-<p class="learned-hint">단계 제목만 보고 먼저 떠올려본 다음, 펼쳐서 확인하는 용도로 씁니다. <span class="badge">직접 작성</span></p>
+<nav class="switch" aria-label="{{ i18n "viewSwitch" }}"><a href="{{ "/notes/" | relURL }}">{{ i18n "viewAll" }}</a><a href="{{ "/learned/" | relURL }}" aria-current="page">{{ i18n "viewLearned" }}</a></nav>
+<p class="learned-hint">{{ i18n "learnedHint" }} <span class="badge">{{ i18n "learnedBadge" }}</span></p>
 <div class="note-groups">
 {{ $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true }}
 {{ range $projects.ByWeight }}
@@ -16,13 +16,13 @@
   {{ if $mine }}
   <section class="note-group" aria-labelledby="l-{{ $slug }}">
     <h2 id="l-{{ $slug }}"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
-    <p>{{ len $mine }}개 단계</p>
+    <p>{{ i18n "learnedStepCount" (len $mine) }}</p>
     <div class="learned-list">
     {{ range sort $mine "Params.step" }}
       <details class="learned-item">
         <summary><span class="no">{{ with .Params.step }}{{ printf "%02d" . }}{{ end }}</span><span class="t">{{ .Title }}</span><span class="hint"></span></summary>
         <div class="learned-body prose">{{ (.Resources.GetMatch "learned.md").Content }}
-          <p class="src"><a href="{{ .RelPermalink }}">이 단계의 진행 과정 보기 →</a></p></div>
+          <p class="src"><a href="{{ .RelPermalink }}">{{ i18n "learnedToNote" }}</a></p></div>
       </details>
     {{ end }}
     </div>

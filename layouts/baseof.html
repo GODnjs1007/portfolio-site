@@ -15,10 +15,10 @@
 {{ with resources.Get "css/extended/site.css" | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}
 </head>
 <body>
-<a class="skip" href="#main">본문으로 건너뛰기</a>
+<a class="skip" href="#main">{{ i18n "skipToContent" }}</a>
 <header class="bar">
   <a class="logo" href="{{ "/" | relURL }}">{{ site.Params.author }}</a>
-  <nav aria-label="주 메뉴">
+  <nav aria-label="{{ i18n "mainMenu" }}">
     {{ $cur := . }}
     {{ range site.Menus.main }}
       {{ $active := or ($cur.IsMenuCurrent "main" .) ($cur.HasMenuCurrent "main" .) }}
@@ -32,6 +32,6 @@
 <main id="main">
 {{ block "main" . }}{{ end }}
 </main>
-<footer><p>이 사이트는 Hugo로 만들어, 제 방 미니PC의 Proxmox VM에서 직접 운영합니다. 상태 표시는 실시간 조회가 아니라 직접 갱신하는 기록입니다.</p></footer>
+<footer><p>{{ i18n "footer" }}</p></footer>
 </body>
 </html>

@@ -48,6 +48,11 @@
 - 기존 글과 URL(`/posts/...`)은 보존한다. 옮겨야 하면 `aliases`로 이전 주소를 유지한다.
 - 진행 상태와 할 일은 `docs/portfolio-plan.md`, 작업 인수인계는 `docs/design-handoff.md`에 남긴다.
 
+## 문구
+
+- 화면 고정 문구는 템플릿에 직접 쓰지 않고 `i18n/ko.toml`에 키로 둔다. 어디를 고치는지는 `docs/copy-guide.md`.
+- 문구를 바꾼 뒤 `python3 scripts/check_copy.py`로 깨진 문자·오타 후보·AI 말투 후보를 점검한다.
+
 ## 검증
 
 - `hugo` 빌드가 경고 외 오류 없이 끝나야 한다. (`--minify`는 현재 PaperMod와 충돌하므로 쓰지 않는다)

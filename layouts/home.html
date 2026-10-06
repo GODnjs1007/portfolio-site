@@ -5,32 +5,32 @@
 </section>
 
 <section aria-labelledby="h-map">
-  <div class="sec-head"><h2 id="h-map">프로젝트 지도</h2>
-    <p class="legend"><span>프로젝트</span><span class="l-here">지금 이 사이트</span><span class="l-draft">진행 중 · 상세 준비 중</span></p></div>
+  <div class="sec-head"><h2 id="h-map">{{ i18n "homeMap" }}</h2>
+    <p class="legend"><span>{{ i18n "legendProject" }}</span><span class="l-here">{{ i18n "legendHere" }}</span><span class="l-draft">{{ i18n "legendPreview" }}</span></p></div>
   {{ partial "map.html" . }}
 </section>
 
 <section class="list" aria-labelledby="h-list">
-  <div class="sec-head"><h2 id="h-list">목록으로 보기</h2><a class="more" href="{{ "/about/" | relURL }}">역량별로 보기 →</a></div>
+  <div class="sec-head"><h2 id="h-list">{{ i18n "homeList" }}</h2><a class="more" href="{{ "/about/" | relURL }}">{{ i18n "homeToAbout" }}</a></div>
   {{ partial "project-table.html" . }}
 </section>
 
 {{ $notes := where site.RegularPages "Section" "notes" }}
 <section class="notes" aria-labelledby="h-notes">
-  <h2 id="h-notes">최근 기록</h2>
+  <h2 id="h-notes">{{ i18n "homeRecent" }}</h2>
   <div>
   <ol>
     {{ range first 5 $notes.ByDate.Reverse }}
-    <li><a href="{{ .RelPermalink }}"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "01.02" }}</time><span>{{ .Title }}{{ with .Params.troubleshooting }}<span class="tag">트러블슈팅 {{ len . }}건</span>{{ end }}</span></a></li>
+    <li><a href="{{ .RelPermalink }}"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "01.02" }}</time><span>{{ .Title }}{{ with .Params.troubleshooting }}<span class="tag">{{ i18n "tsCount" (len .) }}</span>{{ end }}</span></a></li>
     {{ end }}
   </ol>
-  <p><a class="more" href="{{ "/notes/" | relURL }}">기록 전체 보기 →</a></p>
+  <p><a class="more" href="{{ "/notes/" | relURL }}">{{ i18n "homeAllNotes" }}</a></p>
   </div>
 </section>
 
 <section class="about" aria-labelledby="h-about">
-  <h2 id="h-about">소개</h2>
+  <h2 id="h-about">{{ i18n "homeAbout" }}</h2>
   <div>{{ with site.GetPage "/about" }}<p>{{ .Params.intro }}</p>{{ end }}
-  <p class="links"><a href="{{ "/about/" | relURL }}">역량과 근거 보기</a>{{ with site.Params.github }}<a href="{{ . }}">GitHub</a>{{ end }}</p></div>
+  <p class="links"><a href="{{ "/about/" | relURL }}">{{ i18n "homeAboutLink" }}</a>{{ with site.Params.github }}<a href="{{ . }}">GitHub</a>{{ end }}</p></div>
 </section>
 {{ end }}

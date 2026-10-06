@@ -1,10 +1,10 @@
 {{- $projects := where (where site.RegularPages "Section" "projects") "Draft" false -}}
 <div class="list">
 <table>
-  <thead><tr><th scope="col">프로젝트</th><th scope="col">분류</th><th scope="col">내 역할</th><th scope="col">상태</th><th scope="col">기간</th></tr></thead>
+  <thead><tr><th scope="col">{{ i18n "colProject" }}</th><th scope="col">{{ i18n "colCategory" }}</th><th scope="col">{{ i18n "colRole" }}</th><th scope="col">{{ i18n "colStatus" }}</th><th scope="col">{{ i18n "colPeriod" }}</th></tr></thead>
   <tbody>
   {{ range $projects.ByWeight }}
-    <tr{{ if .Params.preview }} class="pre"{{ end }}><td>{{ if .Params.preview }}{{ .Title }}<small>상세 준비 중</small>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</td><td>{{ .Params.category }}</td><td>{{ .Params.role }}</td><td>{{ .Params.status }}</td><td>{{ .Params.period }}</td></tr>
+    <tr{{ if .Params.preview }} class="pre"{{ end }}><td>{{ if .Params.preview }}{{ .Title }}<small>{{ i18n "previewNote" }}</small>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</td><td>{{ .Params.category }}</td><td>{{ .Params.role }}</td><td>{{ .Params.status }}</td><td>{{ .Params.period }}</td></tr>
   {{ end }}
   </tbody>
 </table>
