@@ -3,10 +3,10 @@
 {{ $ts := 0 }}{{ range $notes }}{{ with .Params.troubleshooting }}{{ $ts = add $ts (len .) }}{{ end }}{{ end }}
 <section class="intro">
   <h1>{{ .Title }}</h1>
-  <p>{{ .Params.summary }} 주황색 태그는 그 글에 담긴 트러블슈팅 사례입니다.</p>
+  <p>{{ .Params.summary }} {{ i18n "notesTagHint" }}</p>
 </section>
-<nav class="switch" aria-label="보기 전환"><a href="{{ "/notes/" | relURL }}" aria-current="page">전체 기록</a><a href="{{ "/learned/" | relURL }}">배운 점만 보기</a></nav>
-<div class="stat-row" style="margin-bottom:32px"><div><b>{{ len $notes }}</b><span>기록</span></div><div><b>{{ $ts }}</b><span>트러블슈팅 사례</span></div></div>
+<nav class="switch" aria-label="{{ i18n "viewSwitch" }}"><a href="{{ "/notes/" | relURL }}" aria-current="page">{{ i18n "viewAll" }}</a><a href="{{ "/learned/" | relURL }}">{{ i18n "viewLearned" }}</a></nav>
+<div class="stat-row" style="margin-bottom:32px"><div><b>{{ len $notes }}</b><span>{{ i18n "statNotes" }}</span></div><div><b>{{ $ts }}</b><span>{{ i18n "statTs" }}</span></div></div>
 <div class="note-groups">
 {{ $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true }}
 {{ range $projects.ByWeight }}
@@ -16,7 +16,7 @@
   {{ if $mine }}
   <section class="note-group" aria-labelledby="g-{{ $slug }}">
     <h2 id="g-{{ $slug }}"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
-    <p>{{ len $mine }}개 기록</p>
+    <p>{{ i18n "groupCount" (len $mine) }}</p>
     <ol class="note-rows">{{ range sort $mine "Params.step" }}{{ partial "note-row.html" . }}{{ end }}</ol>
   </section>
   {{ end }}

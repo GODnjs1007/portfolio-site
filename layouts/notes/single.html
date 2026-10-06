@@ -1,18 +1,18 @@
 {{ define "main" }}
 {{ $pslug := index (.Params.projects | default (slice "")) 0 }}
 {{ $proj := site.GetPage (printf "/projects/%s" $pslug) }}
-<p class="crumbs"><a href="{{ "/notes/" | relURL }}">기록</a>{{ with $proj }} / <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</p>
+<p class="crumbs"><a href="{{ "/notes/" | relURL }}">{{ i18n "crumbNotes" }}</a>{{ with $proj }} / <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</p>
 <header class="note-head">
   <h1>{{ .Title }}</h1>
   {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
-  {{ with .Resources.GetMatch "learned.md" }}<p class="learned-flag"><span class="badge">직접 작성</span>이 단계에서 배운 점은 제가 직접 정리했습니다. <a href="#learned">배운 점 바로가기 ↓</a></p>{{ end }}
+  {{ with .Resources.GetMatch "learned.md" }}<p class="learned-flag"><span class="badge">{{ i18n "learnedBadge" }}</span>{{ i18n "learnedFlag" }} <a href="#learned">{{ i18n "learnedJump" }}</a></p>{{ end }}
   <div class="chips"><span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></span>{{ range .Params.tags }}<span>{{ . }}</span>{{ end }}</div>
 </header>
 <div class="note-layout">
   <article class="prose">{{ .Content }}
     {{ with .Resources.GetMatch "learned.md" }}
     <section id="learned" class="learned" aria-labelledby="h-learned">
-      <header><h2 id="h-learned">직접 정리한 배운 점</h2><span class="badge">직접 작성</span></header>
+      <header><h2 id="h-learned">{{ i18n "learnedTitle" }}</h2><span class="badge">{{ i18n "learnedBadge" }}</span></header>
       <div class="learned-body">{{ .Content }}</div>
     </section>
     {{ end }}
@@ -20,16 +20,16 @@
     {{ $sib := sort (where (where site.RegularPages "Section" "notes") "Params.projects" "intersect" (slice $pslug)) "Params.step" }}
     {{ $prev := false }}{{ $next := false }}{{ $found := false }}
     {{ range $sib }}{{ if $found }}{{ if not $next }}{{ $next = . }}{{ end }}{{ else if eq .RelPermalink $.RelPermalink }}{{ $found = true }}{{ else }}{{ $prev = . }}{{ end }}{{ end }}
-    <nav class="pager" aria-label="이전·다음 단계">
-      {{ with $prev }}<a class="prev" href="{{ .RelPermalink }}"><small>← 이전 단계</small><strong>{{ .Title }}</strong></a>{{ end }}
-      {{ with $next }}<a class="next" href="{{ .RelPermalink }}"><small>다음 단계 →</small><strong>{{ .Title }}</strong></a>{{ end }}
+    <nav class="pager" aria-label="{{ i18n "pagerLabel" }}">
+      {{ with $prev }}<a class="prev" href="{{ .RelPermalink }}"><small>{{ i18n "pagerPrev" }}</small><strong>{{ .Title }}</strong></a>{{ end }}
+      {{ with $next }}<a class="next" href="{{ .RelPermalink }}"><small>{{ i18n "pagerNext" }}</small><strong>{{ .Title }}</strong></a>{{ end }}
     </nav>
     {{ end }}
   </article>
   <aside class="note-side">
-    {{ with .Params.troubleshooting }}<section class="box"><h2>트러블슈팅 {{ len . }}건</h2><ol class="ts-list">{{ range . }}<li>{{ . }}</li>{{ end }}</ol></section>{{ end }}
+    {{ with .Params.troubleshooting }}<section class="box"><h2>{{ i18n "tsCount" (len .) }}</h2><ol class="ts-list">{{ range . }}<li>{{ . }}</li>{{ end }}</ol></section>{{ end }}
     {{ if strings.Contains .TableOfContents "<li" }}
-    <details class="box toc" open><summary><b>목차</b></summary>{{ .TableOfContents }}{{ with .Resources.GetMatch "learned.md" }}<p class="toc-learned"><a href="#learned">직접 정리한 배운 점</a></p>{{ end }}</details>
+    <details class="box toc" open><summary><b>{{ i18n "toc" }}</b></summary>{{ .TableOfContents }}{{ with .Resources.GetMatch "learned.md" }}<p class="toc-learned"><a href="#learned">{{ i18n "learnedTitle" }}</a></p>{{ end }}</details>
     {{ end }}
   </aside>
 </div>

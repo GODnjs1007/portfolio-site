@@ -1,0 +1,147 @@
+# 사이트 화면에 나오는 고정 문구를 전부 여기 모아뒀다.
+# 문구를 고치려면 이 파일의 따옴표 안만 바꾸면 된다. 키 이름(대괄호 안)은 건드리지 말 것.
+# {{ .Count }} 자리에는 숫자가 들어간다.
+
+# ── 공통 ─────────────────────────────
+[skipToContent]
+other = "본문으로 건너뛰기"
+[mainMenu]
+other = "주 메뉴"
+[footer]
+other = "이 사이트는 Hugo로 만들어, 제 방 미니PC의 Proxmox VM에서 직접 운영합니다. 상태 표시는 실시간 조회가 아니라 직접 갱신하는 기록입니다."
+
+# ── 홈 ───────────────────────────────
+[homeMap]
+other = "프로젝트 지도"
+[homeList]
+other = "목록으로 보기"
+[homeToAbout]
+other = "역량별로 보기 →"
+[homeRecent]
+other = "최근 기록"
+[homeAllNotes]
+other = "기록 전체 보기 →"
+[homeAbout]
+other = "소개"
+[homeAboutLink]
+other = "역량과 근거 보기"
+
+# ── 지도 범례 ─────────────────────────
+[legendProject]
+other = "프로젝트"
+[legendHere]
+other = "지금 이 사이트"
+[legendPreview]
+other = "진행 중 · 상세 준비 중"
+[nodeHere]
+other = "지금 이 사이트"
+
+# ── 프로젝트 목록 ─────────────────────
+[projectsMap]
+other = "지도"
+[projectsList]
+other = "목록"
+[colProject]
+other = "프로젝트"
+[colCategory]
+other = "분류"
+[colRole]
+other = "내 역할"
+[colStatus]
+other = "상태"
+[colPeriod]
+other = "기간"
+[previewNote]
+other = "상세 준비 중"
+
+# ── 프로젝트 상세 ─────────────────────
+[crumbProjects]
+other = "프로젝트"
+[briefTitle]
+other = "30초 요약"
+[briefDid]
+other = "내가 한 일"
+[briefVerified]
+other = "직접 확인한 결과"
+[archTitle]
+other = "시스템 구조"
+[archVisitor]
+other = "방문자 · 내 기기"
+[archHost]
+other = "물리 서버 1대"
+[archManual]
+other = "직접 표시"
+[archLearned]
+other = "배운 점"
+[stepsTitle]
+other = "진행 단계"
+[nextTitle]
+other = "다음 작업"
+[relatedNotes]
+other = "관련 기록 {{ .Count }}개"
+[tsCount]
+other = "트러블슈팅 {{ .Count }}건"
+
+# ── 기록 ─────────────────────────────
+[crumbNotes]
+other = "기록"
+[notesTagHint]
+other = "주황색 태그는 그 글에 담긴 트러블슈팅 사례입니다."
+[viewSwitch]
+other = "보기 전환"
+[viewAll]
+other = "전체 기록"
+[viewLearned]
+other = "배운 점만 보기"
+[statNotes]
+other = "기록"
+[statTs]
+other = "트러블슈팅 사례"
+[groupCount]
+other = "{{ .Count }}개 기록"
+[toc]
+other = "목차"
+[pagerLabel]
+other = "이전·다음 단계"
+[pagerPrev]
+other = "← 이전 단계"
+[pagerNext]
+other = "다음 단계 →"
+
+# ── 직접 정리한 배운 점 ───────────────
+[learnedBadge]
+other = "직접 작성"
+[learnedBadgeSmall]
+other = "배운 점"
+[learnedFlag]
+other = "이 단계에서 배운 점은 제가 직접 정리했습니다."
+[learnedJump]
+other = "배운 점 바로가기 ↓"
+[learnedTitle]
+other = "직접 정리한 배운 점"
+[learnedHint]
+other = "단계 제목만 보고 먼저 떠올려본 다음, 펼쳐서 확인하는 용도로 씁니다."
+[learnedStepCount]
+other = "{{ .Count }}개 단계"
+[learnedToNote]
+other = "이 단계의 진행 과정 보기 →"
+
+# ── 소개 ─────────────────────────────
+[aboutStatsLabel]
+other = "기록 현황"
+[aboutStatProjects]
+other = "공개 프로젝트"
+[aboutStatNotes]
+other = "단계별 기록"
+[aboutStatTs]
+other = "트러블슈팅 사례"
+[aboutSkills]
+other = "할 수 있는 일과 근거"
+[aboutColArea]
+other = "분야"
+[aboutColWhat]
+other = "직접 해본 것"
+[aboutColProof]
+other = "근거 기록"
+[aboutLinks]
+other = "링크"
