@@ -98,7 +98,7 @@ def main():
         is_authored = f in authored
         for no, line in lines_outside_code(f):
             where = f"{rel(f)}:{no}"
-            if "�" in line:
+            if "\ufffd" in line and not any(a in line for a in ALLOW_BROKEN):
                 broken.append((where, line.strip()))
             for bad, good in TYPOS:
                 m = re.search(bad, line)
