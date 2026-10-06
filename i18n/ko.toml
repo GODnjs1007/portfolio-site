@@ -121,6 +121,10 @@ other = "다음 단계 →"
 # ── 직접 정리한 배운 점 ───────────────
 [learnedBadge]
 other = "직접 작성"
+[rowParts]
+other = "이 글에 담긴 것"
+[rowLearned]
+other = "직접 쓴 배운 점"
 [learnedBadgeSmall]
 other = "배운 점"
 [learnedFlag]

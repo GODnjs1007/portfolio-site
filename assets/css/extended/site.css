@@ -303,3 +303,7 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .learned-flag{display:block;max-width:820px;background:#F3FAF5;border-left:4px solid #1E6B43;padding:10px 14px;line-height:1.7}
 .learned-flag .badge{margin-right:8px}
 .learned-flag a{white-space:nowrap}
+.note-rows .parts{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.note-rows .part{font-size:12px;padding:1px 8px;border:1px solid #AEB8BD;color:var(--muted);background:var(--node)}
+.note-rows .part.ts-n{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.note-rows .part.mine{border-color:#1E6B43;color:#fff;background:#1E6B43;font-weight:700}
