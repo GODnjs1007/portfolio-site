@@ -20,6 +20,9 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
+# 일부러 쓴 깨진 문자(트러블슈팅 증상 그 자체)는 여기 넣어 검사에서 뺀다
+ALLOW_BROKEN = ["물음표(\ufffd)"]
+
 # 오타 후보: (정규식, 고칠 글자 제안)
 TYPOS = [
     (r"설지\b|설지$", "설치"),
