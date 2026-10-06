@@ -4,7 +4,7 @@ summary: "Hugo로 만든 정적 사이트를 홈랩 VM의 Docker Nginx 컨테이
 role: "개인 프로젝트"
 status: "진행 중"
 category: "인프라"
-stack: ["Hugo", "PaperMod", "Docker", "Nginx", "GitHub"]
+stack: ["Hugo", "PaperMod", "Docker", "Nginx", "GitHub", "Cloudflare Tunnel"]
 period: "2026.10 ~"
 featured: true
 weight: 3
@@ -17,12 +17,14 @@ brief:
     - "Hugo로 사이트 구성, GitHub 저장소로 관리"
     - "VM 100에서 빌드 결과를 Nginx 컨테이너가 읽기 전용으로 서빙"
     - "프로젝트·기록을 Markdown 파일만 추가하면 목록과 지도에 반영되는 구조로 설계"
+    - "Cloudflare Tunnel로 ihaewon.com에 HTTPS 공개"
 steps:
   - { name: "Hugo 사이트 구성과 GitHub 업로드", status: "완료", note: "homelab-03-site-deploy" }
   - { name: "VM 100 Docker Nginx 배포", status: "완료", note: "homelab-03-site-deploy" }
-  - { name: "사이트 구조·디자인 개편", status: "진행 중" }
-  - { name: "도메인·HTTPS 외부 공개", status: "예정" }
-next: "도메인과 HTTPS를 붙이고, push하면 자동으로 다시 배포되게 만듭니다."
+  - { name: "사이트 구조·디자인 개편", status: "완료" }
+  - { name: "도메인·HTTPS 외부 공개 (ihaewon.com)", status: "완료" }
+  - { name: "push하면 자동 배포", status: "예정" }
+next: "push하면 자동으로 다시 배포되게 만듭니다."
 draft: false
 ---
 

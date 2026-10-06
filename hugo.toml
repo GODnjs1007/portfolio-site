@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://ihaewon.com/"
 locale = "ko-KR"
 defaultContentLanguage = "ko"
 title = "이해원 | Cloud Infra Portfolio"
