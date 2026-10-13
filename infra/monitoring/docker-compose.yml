@@ -1,0 +1,64 @@
+# 홈랩 통합 모니터링 (portfolio VM에서 실행)
+#
+#   cd ~/portfolio-site/infra/monitoring
+#   GRAFANA_PASSWORD=비밀번호 docker compose up -d
+#
+# 화면: http://100.117.220.8:3000 (admin / GRAFANA_PASSWORD)
+# Tailscale 내부망에서만 접속. Cloudflare Tunnel에 3000을 연결하지 말 것.
+# 다른 서버(paper, ecg, Proxmox 호스트)는 node-exporter만 설치하고 여기서 긁어온다.
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: hl-prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=30d   # 30일 보관
+    volumes:
+      - ./prometheus:/etc/prometheus:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    container_name: hl-grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "${GRAFANA_PASSWORD:?GRAFANA_PASSWORD를 지정하세요}"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on: [prometheus]
+    restart: unless-stopped
+
+  # portfolio VM 자체 CPU·메모리·디스크
+  node-exporter:
+    image: prom/node-exporter:v1.8.2
+    container_name: hl-node-exporter
+    command: ["--path.rootfs=/host"]
+    pid: host
+    volumes:
+      - /:/host:ro,rslave
+    restart: unless-stopped
+
+  # portfolio VM의 컨테이너별 CPU·메모리 (사이트 Nginx 등)
+  # Docker 29(containerd 이미지 저장소)에서는 cAdvisor의 Docker 연동이 컨테이너를 빠뜨려서
+  # Docker 소켓을 안 보여주고 cgroup(docker-<ID>.scope)으로 직접 읽게 한다 (산학 서버에서 겪은 문제)
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    container_name: hl-cadvisor
+    privileged: true
+    devices: ["/dev/kmsg"]
+    volumes:
+      - /sys:/sys:ro
+      - /dev/disk/:/dev/disk:ro
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+  grafana-data:
