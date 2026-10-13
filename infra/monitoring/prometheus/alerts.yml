@@ -1,0 +1,31 @@
+# 알림 규칙. 지금은 Prometheus 화면(:9090/alerts)에서 확인만 하고, 알림 전송은 다음 단계
+groups:
+  - name: homelab
+    rules:
+      - alert: 서버다운
+        expr: up{job="node"} == 0
+        for: 2m
+        labels: { severity: critical }
+        annotations:
+          summary: "{{ $labels.name }} 응답 없음 2분 이상"
+
+      - alert: 디스크부족
+        expr: 100 * (1 - node_filesystem_avail_bytes{mountpoint="/",fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{mountpoint="/",fstype!~"tmpfs|overlay"}) > 85
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "{{ $labels.name }} 디스크 {{ $value | printf \"%.0f\" }}% 사용"
+
+      - alert: 메모리부족
+        expr: 100 * (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) > 90
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "{{ $labels.name }} 메모리 {{ $value | printf \"%.0f\" }}% 사용"
+
+      - alert: CPU과부하
+        expr: 100 * (1 - avg by (name) (rate(node_cpu_seconds_total{mode="idle"}[5m]))) > 90
+        for: 10m
+        labels: { severity: warning }
+        annotations:
+          summary: "{{ $labels.name }} CPU {{ $value | printf \"%.0f\" }}% 10분 이상"

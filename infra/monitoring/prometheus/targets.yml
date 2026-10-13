@@ -1,0 +1,10 @@
+# 서버 목록. 이름(name)은 대시보드 범례에 그대로 나옴
+# portfolio는 같은 도커 네트워크라 컨테이너 이름으로, 나머지는 Tailscale IP로 접근
+- targets: ["node-exporter:9100"]
+  labels: { name: portfolio }
+- targets: ["100.115.5.66:9100"]
+  labels: { name: paper }
+- targets: ["100.68.22.113:9100"]
+  labels: { name: ecg }
+- targets: ["100.124.238.61:9100"]
+  labels: { name: proxmox }
