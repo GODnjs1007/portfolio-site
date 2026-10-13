@@ -8,6 +8,9 @@ tags: ["구축", "컨테이너", "트러블슈팅"]
 troubleshooting:
   - "hugo --minify 빌드 실패"
   - "ssh-keygen 키 저장 실패"
+  - "VM에서 hugo 빌드 실패 (Hugo 버전 차이)"
+  - "명령어를 엉뚱한 터미널에서 실행"
+  - "데스크톱에서 VM SSH 접속 timeout"
 draft: false
 ---
 
@@ -166,6 +169,66 @@ git push -u origin main
 
 - 저장소 주인 계정으로는 맥북이나 GitHub 웹에서도 수정 가능. Deploy key는 VM에만 준 출입증
 
+## C. 사이트 개편과 배포 흐름 정리
+
+### 목표
+
+테스트용으로 띄운 Hugo 사이트를 실제 포트폴리오 구조로 개편하고, 수정 → GitHub → VM 반영까지의 배포 흐름을 정리한다.
+
+### 1. 디자인 선택
+
+- 시안 3개(A 기술 매거진 / B 시스템 지도 / C 엔지니어 작업실) 중 **B 시스템 지도** 선택
+  - 프로젝트끼리의 연결(AWS → 홈랩 → 그 위의 서비스)을 지도로 보여주는 구조
+- PaperMod 테마 원본은 수정하지 않고 `layouts/`(템플릿 덮어쓰기)와 `assets/css/extended/`(CSS)로만 변경
+
+### 2. 콘텐츠 구조
+
+- 메뉴: 홈 / 프로젝트 / 기록 / 소개
+- 프로젝트: `content/projects/<이름>/index.md` 파일 하나 = 프로젝트 하나
+  - 상단 "30초 요약"(왜 / 내가 한 일 / 직접 확인한 결과) → 면접관이 여기만 읽어도 되게
+  - 진행 중이라 상세가 없는 프로젝트는 지도에 점선 칸으로만 표시 (`preview: true`)
+  - 숨길 것은 `draft: true` → 빌드에서 아예 제외
+- 기록: 노션 실습 로그(AWS 1~9단계, 홈랩 1~3단계)를 옮김. IP·계정 ID 등 민감정보는 자리표시로 치환
+- 소개: 역량 → 근거 기록 표
+- 기존 주소(`/posts/proxmox-homelab/`)는 새 주소로 자동 이동(aliases)
+
+### 3. 배포 흐름
+
+```plain text
+수정 → (데스크톱) git push → GitHub → (VM) git pull → hugo → Nginx가 public/ 서빙
+```
+
+- VM에서 한 줄로 반영
+
+```bash
+ssh <사용자>@<portfolio Tailscale IP> "cd ~/portfolio-site && git pull && hugo"
+```
+
+- Nginx 컨테이너는 `public/`을 읽기 전용으로 바로 보여주기 때문에 재시작 필요 없음
+
+### 4. 데스크톱 접속 환경 추가
+
+- 데스크톱에 Tailscale 설치, SSH 키(`desktop-haewon`) 생성
+- 맥북으로 VM에 접속해 데스크톱 공개키를 `~/.ssh/authorized_keys`에 추가
+
+```bash
+echo '<데스크톱 공개키>' >> ~/.ssh/authorized_keys
+```
+
+- `>>` : 기존 키 뒤에 덧붙이기 (`>` 하나면 기존 맥북 키가 지워짐)
+
+### 5. 접속 세션 점검
+
+- `w` : 현재 VM에 로그인한 세션 목록
+- Proxmox 웹 콘솔(tty1)에 4일째 로그인된 세션 발견 → 종료
+
+```bash
+sudo pkill -KILL -t tty1
+```
+
+- 그냥 `pkill`은 종료 요청만 보내서 로그인 셸(bash)이 무시함 → `-KILL`로 강제 종료
+- 로그아웃일 뿐이라 VM·사이트에는 영향 없음
+
 ## 트러블슈팅
 
 ### 1. hugo --minify 빌드 실패
@@ -196,6 +259,34 @@ ssh-keygen -t ed25519 -C "portfolio-vm" -f ~/.ssh/id_ed25519 -N ""
 ```
 
 - **재발 방지**: 질문을 던지는 명령어는 한 줄씩 실행. 가능하면 옵션으로 답을 미리 넘김
+
+### 3. VM에서 hugo 빌드 실패 (Hugo 버전 차이)
+
+- **증상**: 사이트 개편 후 VM에서 `git pull` → `hugo` 실행 시 빌드 실패
+
+```plain text
+ERROR ... _partials/slug.html:2:4 ... at <return>: wrong number of args for return: want 0 got 2
+```
+
+- **원인**: 작업 환경은 Hugo 0.167, VM은 0.165. `with` 블록 안에서 `return`을 쓰는 문법이 0.165에서는 지원되지 않음
+- **해결**: 변수에 값을 담아두고 파일 맨 끝에서 한 번만 `return` 하도록 수정 → VM과 같은 0.165로 빌드 확인 후 배포
+- **재발 방지**: 테스트 환경의 Hugo 버전을 VM(운영)과 맞춤. 배포 전 `hugo version`부터 확인
+
+### 4. 명령어를 엉뚱한 터미널에서 실행
+
+- **증상**: `hugo` 인식 안 됨, `git fetch .\fix.bundle` → `not a git repository`, `del` → command not found
+- **원인**: 윈도우 PowerShell용 명령을 VM(리눅스) 터미널에, VM용 명령을 PowerShell에 입력함
+- **해결**: 프롬프트로 위치 확인 후 다시 실행
+  - `PS C:\Users\...>` → 윈도우
+  - `<사용자>@portfolio:~$` → VM
+- **재발 방지**: 명령 치기 전에 프롬프트 먼저 보기. 원격에서 한 번만 실행할 땐 `ssh 사용자@주소 "명령"` 형태로 접속 없이 실행
+
+### 5. 데스크톱에서 VM SSH 접속 timeout
+
+- **증상**: `ssh: connect to host ... port 22: Connection timed out`
+- **원인**: 데스크톱에 Tailscale이 설치되어 있지 않아 100.x 사설망 주소에 도달 불가
+- **해결**: 데스크톱에 Tailscale 설치·로그인 → 데스크톱 SSH 키 생성 → 맥북으로 VM에 접속해 `authorized_keys`에 공개키 추가(`>>`로 덧붙이기)
+- **참고**: 비밀번호 로그인을 막아둬서, 새 기기는 이미 등록된 기기를 통해서만 키를 추가할 수 있음
 
 ## 3단계 용어
 
