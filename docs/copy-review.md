@@ -17,7 +17,7 @@
 - `content/notes/aws-05-alb-asg/learned.md:8` — **트랙픽** → 트래픽
 - `content/notes/homelab-03-site-deploy/learned.md:31` — **되도** → 돼도
 
-## 3. AI 말투 후보 (사이트 문구만) (20건)
+## 3. AI 말투 후보 (사이트 문구만) (19건)
 
 - `i18n/ko.toml:11` — '직접' 반복. 정말 강조할 곳만 남기기
   > other = "이 사이트는 Hugo로 만들어, 제 방 미니PC의 Proxmox VM에서 직접 운영합니다. 상태 표시는 실시간 조회가 아니라 직접 갱신하는 기록입니다."
@@ -53,18 +53,17 @@
   > why: "만든 것과 겪은 문제를 한곳에 쌓아두고, 그 사이트 자체도 직접 운영하는 서버 위에 올리려고 만들었습니다."
 - `content/projects/portfolio-site/index.md:33` — '~해두었습니다' 반복은 소개문 티가 남
   > 배포 과정은 홈랩 3단계 기록과 같은 작업이라, 자세한 내용은 그 기록에 모아두었습니다.
-- `content/projects/sanhak-ecg/index.md:3` — '직접' 반복. 정말 강조할 곳만 남기기
-  > summary: "산학 프로젝트 팀장으로 팀을 이끌며 서버·백엔드를 맡고 있습니다. 홈랩 VM 101에 팀 개발 서버를 직접 구축해 운영합니다."
 - `content/notes/_index.md:3` — '직접' 반복. 정말 강조할 곳만 남기기
   > summary: "AWS와 홈랩을 직접 구축하면서 단계별로 남긴 실습 로그입니다."
 - `content/learned/_index.md:3` — '직접' 반복. 정말 강조할 곳만 남기기
   > summary: "각 단계를 마치고 제가 직접 정리한 배운 점만 모았습니다. 진행 과정은 기록에, 이해한 내용은 여기에 있습니다."
 
-## 4. [작성 필요] 남은 곳 (0건)
+## 4. [작성 필요] 남은 곳 (2건)
 
-없음
+- `content/notes/sanhak-06-loadtest/index.md:104` — - 재측정: [작성 필요] 서버 교체 후 같은 조건으로 다시 돌린 결과
+- `content/notes/sanhak-06-loadtest/index.md:110` — - 해결: [작성 필요] 환자마다 다른 기록을 보내도록 생성기 수정 예정
 
-## 5. 옮기지 못한 이미지 (110곳)
+## 5. 옮기지 못한 이미지 (122곳)
 
 - `content/notes/aws-02-custom-page/index.md` — 1곳
 - `content/notes/aws-03-troubleshooting/index.md` — 14곳
@@ -78,3 +77,7 @@
 - `content/notes/homelab-02-vm-docker/index.md` — 4곳
 - `content/notes/homelab-02-vm-docker/learned.md` — 1곳
 - `content/notes/homelab-03-site-deploy/index.md` — 3곳
+- `content/notes/homelab-07-monitoring/index.md` — 5곳
+- `content/notes/sanhak-03-tcp-3lead/index.md` — 1곳
+- `content/notes/sanhak-04-receiver-demo/index.md` — 3곳
+- `content/notes/sanhak-06-loadtest/index.md` — 3곳
