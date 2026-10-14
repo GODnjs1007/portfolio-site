@@ -31,7 +31,7 @@ main{max-width:1240px;margin:0 auto}
 .trunk{width:2px;height:24px;background:var(--line);margin:0 auto}
 .branches{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:20px;border-top:2px solid var(--line);padding-top:0;position:relative}
 .col{display:flex;flex-direction:column;gap:12px;min-width:0}
-.col .stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start}
+.col .stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:12px;align-items:start}
 .col>h3{margin:0;align-self:center;font-size:14px;font-weight:700;border:2px solid var(--line);border-top:0;padding:4px 12px;background:var(--ground)}
 .col::before{content:"";width:2px;height:16px;background:var(--line);align-self:center;margin-bottom:-12px}
 .node{border:2px solid var(--ink);background:var(--node);padding:14px 16px;display:grid;gap:4px;text-decoration:none}
@@ -105,13 +105,16 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .progress .now em{color:var(--accent);font-weight:700}
 .draft-text{color:var(--muted);font-style:italic}
 
-@media (max-width:860px){
-  .intro,.notes,.about,.layout{grid-template-columns:1fr}
+/* 지도: 세 갈래가 각각 카드 한 장(약 280px) 폭을 못 받는 화면부터 세로로 접는다 */
+@media (max-width:1080px){
   .branches{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--line);padding-left:16px;margin-left:8px;gap:24px}
   .col>h3{align-self:flex-start;border:2px solid var(--line)}
   .col::before{display:none}
   .trunk{margin-left:8px}
   .root{justify-content:flex-start}
+}
+@media (max-width:860px){
+  .intro,.notes,.about,.layout{grid-template-columns:1fr}
   .vms{grid-template-columns:1fr}
   table{min-width:0;font-size:14px}
   th,td{padding:10px 8px}
