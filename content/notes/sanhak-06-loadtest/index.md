@@ -38,6 +38,29 @@ SHARDS=3 GRAFANA_PASSWORD=... \
   docker compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d
 ```
 
+```yaml
+global:
+  scrape_interval: 5s      # 부하테스트는 짧게 끝나서 5초 간격으로 모음
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs: [{ targets: ["localhost:9090"] }]
+  - job_name: node
+    static_configs: [{ targets: ["node-exporter:9100"] }]
+  - job_name: cadvisor
+    static_configs: [{ targets: ["cadvisor:8080"] }]
+  - job_name: redis
+    static_configs: [{ targets: ["redis-exporter:9121"] }]
+  - job_name: patients
+    static_configs: [{ targets: ["host.docker.internal:9101"] }]
+```
+
+- `monitoring/prometheus.yml` : 프로메테우스가 어디서 숫자를 가져올지 적은 목록
+- `scrape_interval: 5s` : 5초마다 가져감
+- `job_name` : 수집 대상 이름 / `targets` : 그 대상의 주소:포트
+- `node-exporter:9100` : 같은 도커 네트워크 안이라 컨테이너 이름으로 찾아감
+- `host.docker.internal:9101` : 환자 상태 화면(D)은 컨테이너 밖(VM)에서 돌아서 VM 쪽 주소로 붙음
+- 프로메테우스가 각 주소의 `/metrics` 페이지를 직접 가져가는 방식. exporter가 보내주는 게 아님
 - 접속은 Tailscale 내부망에서만. 공유기 포트는 열지 않음
 - 캡처: 대시보드 전체
 
@@ -84,6 +107,23 @@ SHARDS=3 GRAFANA_PASSWORD=... \
 - 확인: cAdvisor 로그에 `failed to identify the read-write layer ID ... mount-id: no such file or directory`
 - 원인: VM의 Docker 29가 이미지 저장 방식을 containerd로 바꿔서 예전 경로가 없음. cAdvisor의 Docker 연동이 컨테이너를 통째로 건너뜀
 - 해결: cAdvisor에 Docker 소켓을 안 보여주고 리눅스 cgroup(커널이 컨테이너별 자원 사용을 세는 곳, `docker-<ID>.scope`)을 직접 읽게 바꿈. 범례는 컨테이너 ID 앞 12자리라 `container_names.sh`로 이름 대조
+
+```yaml
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    container_name: ecg-cadvisor
+    privileged: true
+    devices: ["/dev/kmsg"]
+    volumes:
+      - /sys:/sys:ro
+      - /dev/disk/:/dev/disk:ro
+    restart: unless-stopped
+```
+
+- `docker-compose.monitoring.yml`의 cAdvisor 부분
+- 보통 예제는 `volumes`에 `/var/run/docker.sock`(Docker 소켓)을 붙여서 Docker에게 컨테이너 정보를 물어봄. 그게 Docker 29에서 실패해서 일부러 뺌
+- `/sys:/sys:ro` : 리눅스가 cgroup별 자원 사용량을 적어두는 곳. 소켓 없이 여기서 바로 읽음. `ro`는 읽기 전용
+- `privileged: true` : 시스템 정보를 읽을 권한
 - 다른 방법: Docker 저장 방식을 예전(overlay2)으로 되돌리기. 이미지·컨테이너를 다시 받아야 해서 팀 서버에선 보류
 - 캡처: 고치기 전 No data / cAdvisor 에러 로그 / 고친 뒤
 

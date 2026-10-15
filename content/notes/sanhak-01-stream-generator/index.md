@@ -29,19 +29,68 @@ draft: false
 
 ```python
 import wfdb
-rec = wfdb.rdrecord("s20011", pn_dir="ltstdb", sampto=250 * 60)
+
+# LTSTDB의 s20011 기록에서 처음 2500개(10초)만 읽기
+record = wfdb.rdrecord("s20011", pn_dir="ltstdb", sampto=2500)
+
+print("샘플링 레이트:", record.fs)
+print("채널 수:", record.n_sig)
+print("채널 이름:", record.sig_name)
+print("데이터 모양:", record.p_signal.shape)
+print("처음 5개 값:")
+print(record.p_signal[:5])
 ```
 
 - `wfdb` : PhysioNet 파일을 읽는 파이썬 도구
 - `"s20011"` : 읽을 사람(기록) 이름
 - `pn_dir` : PhysioNet에서 바로 읽어옴 (파일 다운로드 불필요)
-- `sampto` : 앞 1분만 읽음. 기록 하나가 21\~24시간이라 전부 읽으면 무거움
-  - 250 × 60 = 15,000개 = 1분 분량
+- `sampto` : 몇 번째 샘플까지 읽을지. 기록 하나가 21\~24시간이라 전부 읽으면 무거움
+  - 여기선 2,500개 = 10초만 읽어서 파일 모양만 확인
+  - B·C에서 실제로 재생할 때는 `sampto=FS * 60` = 15,000개 = 1분
+- `record.fs` : 샘플링 레이트 (250)
+- `record.n_sig`, `record.sig_name` : 리드 수와 리드 이름 (s20011은 2리드)
+- `record.p_signal` : 측정값 표. 모양 (2500, 2) = 2,500줄 × 2리드
+- `[:5]` : 앞 5줄만
 
 ## B. 환자 1명 — `stream_one.py`
 
 - 0.1초마다 25샘플씩 잘라서 내보내는 구조만 확인
   - 보내는 곳 없이 화면에 찍기만 함. 0.1초 박자대로 잘 나오는지 보는 단계
+
+```python
+FS = 250               # 초당 샘플 수
+CHUNK = 25             # 한 번에 보내는 개수 (0.1초 분량)
+INTERVAL = CHUNK / FS  # 0.1초
+
+# 1분 분량 읽어두고 반복 재생
+record = wfdb.rdrecord("s20011", pn_dir="ltstdb", sampto=FS * 60)
+signal = record.p_signal
+
+def send(patient_id, chunk):
+    pass  # 나중에 서버(큐)로 보내는 코드가 들어갈 자리
+
+pos = 0
+start = time.perf_counter()
+next_tick = start
+
+while time.perf_counter() - start < 10:
+    chunk = signal[pos:pos + CHUNK]
+    send(0, chunk)
+    pos = (pos + CHUNK) % len(signal)
+
+    next_tick += INTERVAL
+    time.sleep(max(0, next_tick - time.perf_counter()))
+```
+
+- `CHUNK = 25` : 상자 하나에 담는 샘플 수. 250 × 0.1초
+- `INTERVAL` : 25 / 250 = 0.1초. 상자 보내는 간격
+- `send()` : 아직 비어 있음(`pass`). 3단계에서 TCP 전송으로 채움
+- `time.perf_counter()` : 시간 재는 용도의 정밀한 시계
+- `while ... < 10` : 10초 동안 반복
+- `signal[pos:pos + CHUNK]` : pos번째부터 25개 잘라내기
+- `% len(signal)` : 1분 끝까지 가면 0으로 돌아가 처음부터 다시 재생
+- 마지막 두 줄이 next_tick 방식 (F-3)
+- 실제 파일에는 1초마다 누적 개수를 화면에 찍는 줄이 더 있음 (여기선 생략)
 
 ## C. 환자 N명 — `stream_multi.py`
 
@@ -52,6 +101,45 @@ rec = wfdb.rdrecord("s20011", pn_dir="ltstdb", sampto=250 * 60)
   - sleep: 정해진 시간만큼 멈춰 기다리는 것
 - 목표 개수, 실제 개수, 최대 지각을 출력해서 생성기 자체가 늦지 않은지 확인
   - 최대 지각: 정해둔 시각보다 가장 늦게 보낸 정도. 이게 커지면 생성기가 박자를 못 따라가는 것
+
+```python
+N = int(sys.argv[1]) if len(sys.argv) > 1 else 6   # 환자 수
+DURATION = 10                                     # 측정 시간(초)
+
+# 환자마다 시작 위치를 다르게
+positions = [random.randrange(0, len(signal), CHUNK) for _ in range(N)]
+
+sent = 0
+max_late = 0.0
+start = time.perf_counter()
+next_tick = start
+
+while time.perf_counter() - start < DURATION:
+    for pid in range(N):
+        p = positions[pid]
+        chunk = signal[p:p + CHUNK]
+        send(pid, chunk)
+        sent += len(chunk)
+        positions[pid] = (p + CHUNK) % len(signal)
+
+    next_tick += INTERVAL
+    wait = next_tick - time.perf_counter()
+    if wait < 0:
+        max_late = max(max_late, -wait)
+    time.sleep(max(0, wait))
+
+elapsed = time.perf_counter() - start
+print(f"환자 {N}명 | 목표 초당 {N * FS}개 | 실제 초당 {round(sent / elapsed)}개 | 최대 지각 {max_late * 1000:.1f}ms")
+```
+
+- `sys.argv[1]` : 실행 인자. `python stream_multi.py 20`의 `20`. 안 주면 6명
+- `positions` : 환자마다 시작 위치를 난수로 뽑음 (F-4). `CHUNK` 간격으로 뽑아서 상자 경계에 맞춤
+- `for pid in range(N)` : 0.1초마다 환자 N명 상자를 차례로 만듦
+- `sent` : 지금까지 만든 샘플 수. 마지막에 초당 개수 계산용
+- `wait` : 다음 박자까지 남은 시간
+- `wait < 0` : 정해둔 시각이 이미 지남 = 지각. 그중 가장 큰 값이 최대 지각
+- `max(0, wait)` : 지각했으면 안 자고 바로 다음 박자로
+- 마지막 줄이 D 결과 출력 (목표 / 실제 / 최대 지각)
 
 ## D. 결과
 
