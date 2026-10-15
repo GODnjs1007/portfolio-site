@@ -36,7 +36,7 @@ other = "진행 중 · 상세 준비 중"
 [nodeHere]
 other = "지금 이 사이트"
 [nodeRef]
-other = "바로가기"
+other = "→ {{ .cat }} 칸 '{{ .name }}' 카드와 같은 페이지"
 
 # ── 프로젝트 목록 ─────────────────────
 [projectsMap]

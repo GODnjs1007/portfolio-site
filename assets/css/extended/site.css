@@ -41,6 +41,8 @@ a.node:hover h4{text-decoration:underline}
 .node .id{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .node.draft{border-style:dashed;border-color:var(--draft);color:var(--muted)}
 .node.draft h4{font-weight:500}
+.node.ref,.host>.inner>.node.ref{border-width:1px}
+.node.ref h4{font-weight:600}
 .rel{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .rel span{font-size:12px;border:1px solid var(--accent);color:var(--accent);padding:2px 8px;background:var(--accent-bg)}
 .host{border:2px solid var(--ink);padding:10px;display:grid;gap:8px;background:var(--ground)}
