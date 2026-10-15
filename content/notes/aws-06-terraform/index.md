@@ -106,7 +106,7 @@ terraform init
 - `.terraform/` 디렉토리와 `.terraform.lock.hcl` 생성
 - `Terraform has been successfully initialized!` 확인
 
-<!-- 이미지: terraform init 실행 결과 (hashicorp/aws v5.100.0 설치, successfully initialized) -->
+![terraform init 실행 결과 (hashicorp/aws v5.100.0 설치, successfully initialized)](img-index-01.webp)
 
 #### terraform plan
 
@@ -130,7 +130,7 @@ plan은 **data를 먼저 처리하고 그 다음 resource를 계산**한다. res
 
 이것이 plan이 AWS에 아무 변경을 주지 않는 이유다.
 
-<!-- 이미지: terraform plan 실행 결과 (Changes to Outputs, without changing any real infrastructure) -->
+![terraform plan 실행 결과 (Changes to Outputs, without changing any real infrastructure)](img-index-02.webp)
 
 #### terraform apply
 
@@ -143,7 +143,7 @@ terraform apply
 - 결과: `Apply complete! Resources: 0 added, 0 changed, 0 destroyed.`
 - `terraform.tfstate` 생성됨
 
-<!-- 이미지: terraform apply 실행 결과 (Resources: 0 added, 0 changed, 0 destroyed) -->
+![terraform apply 실행 결과 (Resources: 0 added, 0 changed, 0 destroyed)](img-index-03.webp)
 
 ### 생성된 파일과 관리 기준
 
@@ -323,7 +323,7 @@ terraform plan
 - `(known after apply)` — `arn`, `id`, `vpc_id`, `owner_id`는 AWS가 생성 시 부여하는 값이므로 아직 알 수 없다
 - 직접 작성하지 않은 항목(`ipv6_cidr_blocks`, `self`, `prefix_list_ids` 등)도 함께 표시된다. Terraform이 기본값을 채운 것으로, 콘솔에서는 보이지 않던 설정까지 모두 드러난다
 
-<!-- 이미지: 보안 그룹 terraform plan 결과 (Plan: 1 to add, known after apply 항목) -->
+![보안 그룹 terraform plan 결과 (Plan: 1 to add, known after apply 항목)](img-index-04.webp)
 
 ### apply
 
@@ -341,7 +341,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 plan에서 `(known after apply)`였던 ID가 실제 값으로 채워졌다.
 
-<!-- 이미지: 보안 그룹 terraform apply 결과 (Resources: 1 added) -->
+![보안 그룹 terraform apply 결과 (Resources: 1 added)](img-index-05.webp)
 
 ### 콘솔 확인
 
@@ -355,7 +355,7 @@ EC2 → 네트워크 및 보안 → 보안 그룹
 
 VPC를 코드에 명시하지 않았지만 기본 VPC(`vpc-0a554abdad04c9620`)에 자동 생성됐다. plan에서 `vpc_id = (known after apply)`로 표시되던 부분이다.
 
-<!-- 이미지: EC2 콘솔 보안 그룹 목록에서 tf-web-sg 생성 확인 -->
+![EC2 콘솔 보안 그룹 목록에서 tf-web-sg 생성 확인](img-index-06.webp)
 
 ### destroy
 
@@ -372,8 +372,8 @@ terraform destroy
 
 삭제 후 콘솔에는 기존 보안 그룹 3개(`default`, `alb-sg`, `launch-wizard-1`)만 남았다. Terraform은 **자신의 state에 기록된 리소스만** 삭제하며, 콘솔로 만든 다른 리소스는 건드리지 않는다.
 
-<!-- 이미지: terraform destroy 실행 결과 (Resources: 1 destroyed) -->
-<!-- 이미지: 삭제 후 콘솔 보안 그룹 목록 (default, alb-sg, launch-wizard-1만 남음) -->
+![terraform destroy 실행 결과 (Resources: 1 destroyed)](img-index-07.webp)
+![삭제 후 콘솔 보안 그룹 목록 (default, alb-sg, launch-wizard-1만 남음)](img-index-08.webp)
 
 ### 작업 사이클
 
@@ -523,8 +523,8 @@ Terraform will perform the following actions:
 - `vpc_security_group_ids = (known after apply)` — 보안 그룹이 아직 생성되지 않아 ID를 알 수 없는 상태
 - `instance_public_ip = (known after apply)` — EC2 생성 시 AWS가 부여하는 값
 
-<!-- 이미지: EC2 terraform plan 결과 — data 조회와 aws_instance 생성 계획 -->
-<!-- 이미지: EC2 terraform plan 결과 — Plan: 2 to add, known after apply 항목 -->
+![EC2 terraform plan 결과 — data 조회와 aws_instance 생성 계획](img-index-09.webp)
+![EC2 terraform plan 결과 — Plan: 2 to add, known after apply 항목](img-index-10.webp)
 
 ### apply
 
@@ -553,7 +553,7 @@ instance_public_ip = "<퍼블릭 IP>"
 **보안 그룹 → EC2** 순서로 생성됐다. 코드에 순서를 명시하지 않았지만, EC2가 `aws_security_group.web.id`를 참조하므로 Terraform이 보안 그룹을 먼저 만들어야 함을 판단한 것이다.
 콘솔에서 수동으로 작업할 때는 사용자가 순서를 기억해야 했던 부분이다.
 
-<!-- 이미지: EC2 terraform apply 결과 (보안 그룹 → EC2 순서로 생성, Resources: 2 added) -->
+![EC2 terraform apply 결과 (보안 그룹 → EC2 순서로 생성, Resources: 2 added)](img-index-11.webp)
 
 ### 콘솔 확인
 
@@ -567,7 +567,7 @@ EC2 → 인스턴스
 둘 다 동일한 t3.micro이지만 생성 방식이 다르다. 인스턴스 ID와 퍼블릭 DNS가 apply 출력과 일치한다.
 배포된 웹서버가 없으므로 브라우저로 접속해도 응답하지 않는다. 보안 그룹이 80번 포트를 열어두었지만 서버 내부에 Nginx가 설치되어 있지 않기 때문이다. 이번 단계는 "EC2가 코드로 생성되었는가"까지를 확인한다.
 
-<!-- 이미지: EC2 콘솔 인스턴스 목록 (my_first_nginx 중지됨, tf-web-server 실행 중) -->
+![EC2 콘솔 인스턴스 목록 (my_first_nginx 중지됨, tf-web-server 실행 중)](img-index-12.webp)
 
 ### destroy
 
@@ -593,7 +593,7 @@ Destroy complete! Resources: 2 destroyed.
 Terraform은 참조 관계를 보고 생성 순서를 정한 뒤, 삭제 시에는 그 역순으로 진행한다.
 소요 시간도 다르다 — EC2는 실제 서버를 종료하므로 30초, 보안 그룹은 1초.
 
-<!-- 이미지: EC2 terraform destroy 결과 (EC2 → 보안 그룹 순서로 삭제, Resources: 2 destroyed) -->
+![EC2 terraform destroy 결과 (EC2 → 보안 그룹 순서로 삭제, Resources: 2 destroyed)](img-index-13.webp)
 
 ### 과금 관리
 

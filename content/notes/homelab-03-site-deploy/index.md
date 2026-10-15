@@ -51,7 +51,7 @@ docker run -d --name site -p 80:80 -v ~/site:/usr/share/nginx/html:ro --restart 
 
 - 맥북 브라우저에서 `http://<Tailscale IP>` → 테스트 페이지 표시
 
-<!-- 이미지: 2-3A-01 맥북에서 Tailscale 주소로 portfolio VM의 웹 페이지 접속 -->
+![2-3A-01 맥북에서 Tailscale 주소로 portfolio VM의 웹 페이지 접속](img-index-01.webp)
 
 ### 현재 접근 범위
 
@@ -112,7 +112,7 @@ docker run -d --name site -p 80:80 -v ~/portfolio-site/public:/usr/share/nginx/h
 - A에서 띄운 컨테이너를 지우고, Nginx가 `public/`을 보여주도록 다시 실행
 - `--minify` 옵션은 빌드 오류가 나서 제외함 (트러블슈팅 1)
 
-<!-- 이미지: 2-3B-01 Hugo + PaperMod로 만든 포트폴리오 사이트 첫 화면 -->
+![2-3B-01 Hugo + PaperMod로 만든 포트폴리오 사이트 첫 화면](img-index-02.webp)
 
 - 이후 글 추가 방법: `content/posts/`에 .md 파일을 넣고 `hugo` 실행. 컨테이너는 다시 띄울 필요 없음
 
@@ -158,7 +158,7 @@ git remote add origin git@github.com:<GitHub 계정>/portfolio-site.git
 git push -u origin main
 ```
 
-<!-- 이미지: 2-3B-02 GitHub portfolio-site 저장소에 원본 코드 업로드 완료 -->
+![2-3B-02 GitHub portfolio-site 저장소에 원본 코드 업로드 완료](img-index-03.webp)
 
 ### 정리: 열쇠 두 개
 

@@ -29,8 +29,8 @@ draft: false
 - 이미지 이름: `nginx-base-ami`
 - 상태가 `available`이 되어야 사용 가능
 
-<!-- 이미지: 인스턴스에서 이미지 생성 화면 (nginx-base-ami) -->
-<!-- 이미지: AMI 목록에서 nginx-base-ami 상태 available 확인 -->
+![인스턴스에서 이미지 생성 화면 (nginx-base-ami)](img-index-01.webp)
+![AMI 목록에서 nginx-base-ami 상태 available 확인](img-index-02.webp)
 
 ### 대상 그룹 생성
 
@@ -61,7 +61,7 @@ ALB가 주기적으로 이 경로로 요청을 보내 서버가 응답하는지 
 
 ASG가 서버를 만들 때 자동으로 명단에 등록해 주기 때문이다. 손으로 등록하면 ASG가 서버를 교체할 때마다 다시 손으로 고쳐야 한다.
 
-<!-- 이미지: 대상 그룹 nginx-tg 생성 결과 (등록된 대상 없음) -->
+![대상 그룹 nginx-tg 생성 결과 (등록된 대상 없음)](img-index-03.webp)
 
 ## B. ALB 구성 및 보안 그룹 재설정
 
@@ -83,7 +83,7 @@ A에서 서버를 찍어낼 틀(AMI)과 서버 명단(대상 그룹)을 만들�
 ALB는 EC2와 별개의 리소스이므로 자기 방화벽이 따로 필요하다. EC2의 보안 그룹을 공유하지 않는다.
 그리고 ALB는 이제 사이트 방문자를 직접 받는 입구이므로 인바운드 80을 전체(`0.0.0.0/0`)에 열어야 한다. 여기를 좁히면 아무도 사이트에 들어올 수 없다.
 
-<!-- 이미지: alb-sg 보안 그룹 인바운드 규칙 (HTTP 80, 0.0.0.0/0) -->
+![alb-sg 보안 그룹 인바운드 규칙 (HTTP 80, 0.0.0.0/0)](img-index-04.webp)
 
 ### ALB 생성
 
@@ -106,8 +106,8 @@ ALB는 EC2와 별개의 리소스이므로 자기 방화벽이 따로 필요하�
 ALB 자체도 소프트웨어이므로 어딘가에서 돌아가야 한다. 만약 ALB가 AZ 한 곳에만 있으면, 그 AZ가 죽었을 때 **뒤에 서버가 아무리 많아도 입구가 사라져 서비스가 멈춘다.**
 즉 서버를 여러 AZ에 나누는 이유와 동일한 이유가 ALB에도 적용된다. AWS가 이를 강제하기 때문에 2개 미만으로는 생성 자체가 되지 않는다.
 
-<!-- 이미지: 로드 밸런서 생성 설정 화면 (가용 영역 2a·2b, alb-sg, 리스너 HTTP:80 → nginx-tg) -->
-<!-- 이미지: nginx-alb 생성 후 상태 active 확인 -->
+![로드 밸런서 생성 설정 화면 (가용 영역 2a·2b, alb-sg, 리스너 HTTP:80 → nginx-tg)](img-index-05.webp)
+![nginx-alb 생성 후 상태 active 확인](img-index-06.webp)
 
 ### 리스너가 하는 일
 
@@ -144,7 +144,7 @@ ALB는 내부적으로 여러 IP를 사용하고, 그 IP는 AWS가 필요에 따
 보안 그룹으로 지정하면 "이 그룹에 속한 것"이라는 관계로 판단하므로, IP가 바뀌든 ALB가 확장되든 규칙을 손댈 필요가 없다.
 이는 4단계에서 SSH를 내 IP(`<퍼블릭 IP>/32`)로 제한했을 때와 대비된다. 그때는 IP가 바뀌면 규칙을 다시 고쳐야 한다는 한계가 있었다.
 
-<!-- 이미지: launch-wizard-1 인바운드 규칙 편집 (HTTP 80 소스를 alb-sg로 변경) -->
+![launch-wizard-1 인바운드 규칙 편집 (HTTP 80 소스를 alb-sg로 변경)](img-index-07.webp)
 
 ### 이 단계에서 바뀐 구조
 
@@ -201,8 +201,8 @@ ASG는 "서버를 몇 대 유지할지"만 관리한다. 그런데 서버를 새
 **서브넷을 지정하지 않은 이유**
 서버를 어느 AZ에 배치할지는 ASG가 결정한다. Launch Template은 "무엇을 만들지"만 담당하고, "어디에 놓을지"는 ASG가 담당하도록 역할을 나눈 것이다.
 
-<!-- 이미지: 시작 템플릿 생성 화면 (nginx-launch-template, AMI nginx-base-ami) -->
-<!-- 이미지: 시작 템플릿 인스턴스 유형·키 페어·보안 그룹 설정 -->
+![시작 템플릿 생성 화면 (nginx-launch-template, AMI nginx-base-ami)](img-index-08.webp)
+![시작 템플릿 인스턴스 유형·키 페어·보안 그룹 설정](img-index-09.webp)
 
 ---
 
@@ -229,7 +229,7 @@ ASG는 "서버를 몇 대 유지할지"만 관리한다. 그런데 서버를 새
 
 희망을 2로 둔 순간 ASG는 즉시 서버 두 대를 만들기 시작했다. 실제로 인스턴스 목록에 `2a`, `2b`에 한 대씩 생성된 것을 확인했다.
 
-<!-- 이미지: Auto Scaling 그룹 nginx-asg 생성 결과 (희망 2 / 최소 2 / 최대 4) -->
+![Auto Scaling 그룹 nginx-asg 생성 결과 (희망 2 / 최소 2 / 최대 4)](img-index-10.webp)
 
 ---
 
@@ -285,7 +285,7 @@ AMI                 ← 어떤 상태로 만들지
 - 인스턴스가 자동으로 2대 생성되어 `2a`, `2b`에 각각 배치됨
 - 기존 `my_first_nginx`(2c)를 포함해 총 3대 실행 중
 
-<!-- 이미지: 인스턴스 목록 — ASG가 만든 2대(2a, 2b)와 기존 my_first_nginx(2c) 총 3대 실행 중 -->
+![인스턴스 목록 — ASG가 만든 2대(2a, 2b)와 기존 my_first_nginx(2c) 총 3대 실행 중](img-index-11.webp)
 
 ## D. 검증 및 리소스 정리
 
@@ -314,10 +314,10 @@ sudo vi /usr/share/nginx/html/index.html
 **확인**: ALB 주소에서 강제 새로고침(`Ctrl+Shift+R`)을 반복하니 A와 B가 번갈아 표시됐다.
 주소창은 계속 `nginx-alb-...elb.amazonaws.com`으로 동일한데 응답하는 서버만 바뀐다. 이것이 로드 밸런싱이다. 사용자는 뒤에 서버가 몇 대인지, 어느 서버가 응답했는지 알 필요가 없다.
 
-<!-- 이미지: 서버 A(2a) index.html 수정 -->
-<!-- 이미지: 서버 B(2b) index.html 수정 -->
-<!-- 이미지: ALB 주소 접속 시 "서버 A(AZ-2a)" 표시 -->
-<!-- 이미지: 새로고침 후 "서버 B(AZ-2b)" 표시 -->
+![서버 A(2a) index.html 수정](img-index-12.webp)
+![서버 B(2b) index.html 수정](img-index-13.webp)
+![ALB 주소 접속 시 "서버 A(AZ-2a)" 표시](img-index-14.webp)
+![새로고침 후 "서버 B(AZ-2b)" 표시](img-index-15.webp)
 
 #### 검증 ② 장애 자동 복구
 
@@ -350,15 +350,15 @@ Launching a new EC2 instance: i-0be041dc89b603c6f
 AWS가 직접 "ELB 헬스체크 실패로 서비스에서 제외했고, 교체가 필요해 새 인스턴스를 생성했다"고 기록했다.
 **이 과정에 사람이 개입한 지점이 없다.** 3단계는 장애를 사람이 진단하고 고치는 것이었다면, 5단계는 시스템이 스스로 고치는 구조를 만든 것이다.
 
-<!-- 이미지: Nginx 중지 후 ALB 주소에서 502 Bad Gateway 표시 -->
+![Nginx 중지 후 ALB 주소에서 502 Bad Gateway 표시](img-index-16.webp)
 
 - 대상 그룹 상태 변화 확인
   - 서버 A → `Draining`
   - 서버 B → `Healthy`
   - 새로 생성된 인스턴스 → `Healthy`
 
-<!-- 이미지: 대상 그룹 nginx-tg 상태 — 서버 A Draining, 서버 B Healthy -->
-<!-- 이미지: 대상 그룹 nginx-tg 상태 — 새로 생성된 인스턴스 Healthy 합류 -->
+![대상 그룹 nginx-tg 상태 — 서버 A Draining, 서버 B Healthy](img-index-17.webp)
+![대상 그룹 nginx-tg 상태 — 새로 생성된 인스턴스 Healthy 합류](img-index-18.webp)
 
 - ASG 작업 기록 확인
 
@@ -416,8 +416,8 @@ Launching a new EC2 instance: i-0be041dc89b603c6f
 
 **순서가 중요한 이유**: ASG를 남겨둔 채 인스턴스만 종료하면, ASG가 희망 용량을 맞추기 위해 즉시 새 인스턴스를 만든다. 반드시 ASG를 먼저 제거해야 한다.
 
-<!-- 이미지: Auto Scaling 그룹 삭제 -->
-<!-- 이미지: 리소스 정리 후 인스턴스 목록 (my_first_nginx 중지됨) -->
+![Auto Scaling 그룹 삭제](img-index-19.webp)
+![리소스 정리 후 인스턴스 목록 (my_first_nginx 중지됨)](img-index-20.webp)
 
 ## 5단계 용어
 

@@ -50,7 +50,7 @@ ssh <사용자>@<VM의 Tailscale 주소>
 - 처음 접속 시 호스트 확인 질문에 `yes`
 - 이후 작업은 맥북 터미널에서 진행
 
-<!-- 이미지: 2-2A-01 맥북에서 Tailscale 주소로 산학 VM(101) SSH 접속 성공 -->
+![2-2A-01 맥북에서 Tailscale 주소로 산학 VM(101) SSH 접속 성공](img-index-01.webp)
 
 ### 접속 주소 정리
 
@@ -74,7 +74,7 @@ ssh <사용자>@<VM의 Tailscale 주소>
 curl -fsSL https://get.docker.com | sudo sh
 ```
 
-<!-- 이미지: 2-2B-01 get.docker.com 스크립트로 Docker Engine 29.8.2 설치 -->
+![2-2B-01 get.docker.com 스크립트로 Docker Engine 29.8.2 설치](img-index-02.webp)
 
 ### 2. sudo 없이 쓰도록 권한 부여
 
@@ -163,7 +163,7 @@ ssh -o PubkeyAuthentication=no <사용자>@<Tailscale IP>
 
 - 키를 쓰지 않고 접속을 시도하면 `Permission denied (publickey)`로 거부됨. portfolio도 동일
 
-<!-- 이미지: 2-2D-01 키 없이 접속 시 비밀번호를 묻지 않고 바로 거부됨 -->
+![2-2D-01 키 없이 접속 시 비밀번호를 묻지 않고 바로 거부됨](img-index-03.webp)
 
 - 참고
   - 현재 키가 등록된 기기는 맥북뿐. 다른 기기는 그 기기의 공개키를 `authorized_keys`에 추가해야 접속 가능
@@ -184,7 +184,7 @@ ssh -o PubkeyAuthentication=no <사용자>@<Tailscale IP>
 - RAM을 뺀 이유: 실행 중인 메모리까지 저장하면 용량이 커지고 느려짐. 디스크 상태만 있으면 충분함
 - 저장 위치: local-lvm(LVM-thin)에 `snap_vm-100-disk-0_base_setup` 형태로 생성됨
 
-<!-- 이미지: 2-2D-02 portfolio VM의 스냅샷 목록. base_setup 아래 NOW가 현재 상태 -->
+![2-2D-02 portfolio VM의 스냅샷 목록. base_setup 아래 NOW가 현재 상태](img-index-04.webp)
 
 ### 3. QEMU Guest Agent 설치
 
