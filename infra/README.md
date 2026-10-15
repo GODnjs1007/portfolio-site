@@ -35,7 +35,7 @@ sudo apt update && sudo apt install -y prometheus-node-exporter
 curl -s localhost:9100/metrics | head -3     # 숫자가 나오면 성공
 ```
 
-2) `infra/monitoring/prometheus/targets.yml`에 각 서버 Tailscale IP 넣기
+2) `infra/monitoring/prometheus/targets.example.yml`을 `targets.local.yml`로 복사하고 각 서버 Tailscale IP 넣기 (깃에 안 올라감)
 
 3) portfolio VM에서 중앙 띄우기
 ```bash
@@ -44,11 +44,11 @@ GRAFANA_PASSWORD=비밀번호 docker compose up -d
 ```
 
 4) 확인
-- `http://100.117.220.8:9090/targets` → node 4개 모두 UP
-- `http://100.117.220.8:3000` → Dashboards → Homelab → 홈랩 서버 전체
+- `http://<portfolio Tailscale IP>:9090/targets` → node 4개 모두 UP
+- `http://<portfolio Tailscale IP>:3000` → Dashboards → Homelab → 홈랩 서버 전체
 
 ### 서버 추가
-`targets.yml`에 한 줄 추가하면 30초 안에 반영 (재시작 불필요)
+`targets.local.yml`에 한 줄 추가하면 30초 안에 반영 (재시작 불필요)
 
 ### 컨테이너 이름 대조
 cAdvisor가 컨테이너 ID 앞 12자리로 보여줌 → `sh infra/monitoring/container_names.sh`

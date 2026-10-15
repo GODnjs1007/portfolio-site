@@ -3,7 +3,7 @@
 #   cd ~/portfolio-site/infra/monitoring
 #   GRAFANA_PASSWORD=비밀번호 docker compose up -d
 #
-# 화면: http://100.117.220.8:3000 (admin / GRAFANA_PASSWORD)
+# 화면: http://<portfolio Tailscale IP>:3000 (admin / GRAFANA_PASSWORD)
 # Tailscale 내부망에서만 접속. Cloudflare Tunnel에 3000을 연결하지 말 것.
 # 다른 서버(paper, ecg, Proxmox 호스트)는 node-exporter만 설치하고 여기서 긁어온다.
 
