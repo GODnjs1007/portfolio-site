@@ -1,0 +1,8 @@
+{{- /* 다른 칸에 있는 카드로 가는 바로가기 상자. front matter alsoOn: { host, label, title } */ -}}
+{{- $p := . -}}
+{{- $a := $p.Params.alsoOn -}}
+<a class="node ref" href="{{ $p.RelPermalink }}">
+  {{ with $a.label }}<span class="id">{{ . }}</span>{{ end }}
+  <h4>{{ $a.title | default $p.Title }}</h4>
+  <p>{{ $p.Params.status }}{{ with $p.Params.period }} · {{ . }}{{ end }} · {{ i18n "nodeRef" }}</p>
+</a>

@@ -15,10 +15,11 @@
       {{ range .pages }}
         {{ $slug := partial "slug.html" . }}
         {{ $children := where $projects "Params.runsOn" $slug }}
-        {{ if $children }}
+        {{ $refs := where $projects "Params.alsoOn.host" $slug }}
+        {{ if or $children $refs }}
           <div class="host">
             {{ partial "node.html" . }}
-            <div class="inner">{{ range $children.ByWeight }}{{ partial "node.html" . }}{{ end }}</div>
+            <div class="inner">{{ range $children.ByWeight }}{{ partial "node.html" . }}{{ end }}{{ range $refs.ByWeight }}{{ partial "node-ref.html" . }}{{ end }}</div>
           </div>
         {{ else }}
           {{ partial "node.html" . }}
