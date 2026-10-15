@@ -9,10 +9,10 @@ scrape_configs:
   - job_name: prometheus
     static_configs: [{ targets: ["localhost:9090"], labels: { name: monitoring } }]
 
-  # 서버별 CPU·메모리·디스크·네트워크. 서버 추가는 targets.yml만 고치면 됨 (재시작 불필요)
+  # 서버별 CPU·메모리·디스크·네트워크. 서버 추가는 targets.local.yml만 고치면 됨 (재시작 불필요)
   - job_name: node
     file_sd_configs:
-      - files: [/etc/prometheus/targets.yml]
+      - files: [/etc/prometheus/targets.local.yml]
         refresh_interval: 30s
 
   - job_name: cadvisor
