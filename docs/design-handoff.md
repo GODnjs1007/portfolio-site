@@ -68,3 +68,8 @@
 - 이미지: 노션에서 내보내 `content/notes/<slug>/`에 넣고 주석 자리를 `![설명](파일명.png)`로 교체
 - 소개: 자격·수상·이력서는 확정된 것만 추가
 - 배포: VM에서 `git pull` 후 `hugo`
+
+## 지도 바로가기 상자 (alsoOn)
+
+- 카드는 한 칸에만 놓이고(`category` 또는 `runsOn`), 다른 칸에도 보여야 하면 front matter `alsoOn: { host, label, title }`로 바로가기 상자를 만든다.
+- 예: 논문 ② 카드는 연구 칸에 두고, 홈랩 밑에 `vm 102` 바로가기 상자로 같은 페이지를 연결 (`layouts/_partials/node-ref.html`).

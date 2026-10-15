@@ -8,6 +8,10 @@ stack: ["Proxmox VM", "Ubuntu", "Tailscale", "Python", "cron", "Gemini API", "Op
 period: "2026.10"
 weight: 41
 mapLabel: "논문"
+alsoOn:
+  host: "homelab"
+  label: "vm 102"
+  title: "LLM API 논문 실측 서버"
 relations: ["실측 → 홈랩 VM", "추계학술대회"]
 brief:
   why: "논문 데이터를 모으는 일을 사람이 손대지 않아도 계속 도는 운영 자동화로 구성해보려고 했습니다."
