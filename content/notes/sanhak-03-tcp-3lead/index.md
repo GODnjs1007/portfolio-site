@@ -180,7 +180,7 @@ python server/stream/stream_tcp.py 100 --seconds 10
 
 - 한계: 보내는 구간만 잰 값. 큐·워커 처리 시간은 빠져 있어서 실제 부하테스트는 워커 붙인 뒤 다시 잼
 
-<!-- 이미지: 측정용 수신기(measure_recv.py) 환자 수별 측정 결과 화면 -->
+![측정용 수신기(measure_recv.py) 환자 수별 측정 결과 화면](img-index-01.webp)
 
 ## E. 자세히 보기 (공부용)
 

@@ -27,7 +27,7 @@ draft: false
   `<!DOCTYPE html> <html> <head> <meta charset="UTF-8"> <title>내 첫 서버</title> </head> <body> <h1>안녕하세요, 제 첫 EC2 서버입니다</h1> <p>AWS EC2 + Nginx로 배포했습니다.</p> </body> </html> `
 - 브라우저 새로고침해서 확인
 
-<!-- 이미지: 브라우저 새로고침 후 직접 만든 HTML 페이지("안녕하세요, 제 첫 EC2 서버입니다")가 표시된 화면 -->
+![브라우저 새로고침 후 직접 만든 HTML 페이지("안녕하세요, 제 첫 EC2 서버입니다")가 표시된 화면](img-index-01.webp)
 
 ## 트러블슈팅
 

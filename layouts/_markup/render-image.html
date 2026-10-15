@@ -1,0 +1,11 @@
+{{- /* 기록 글 캡처: 번들 안 이미지 경로를 절대 경로로 바꿔 /learned/ 모아보기에서도 보이게 하고, 눌러서 원본 크기로 볼 수 있게 함 */ -}}
+{{- $src := .Destination -}}{{- $w := 0 -}}{{- $h := 0 -}}
+{{- with .PageInner.Resources.Get .Destination -}}
+  {{- $src = .RelPermalink -}}{{- $w = .Width -}}{{- $h = .Height -}}
+{{- else -}}
+  {{- if and (not (strings.Contains $src "://")) (not (strings.HasPrefix $src "/")) .Page.File -}}
+    {{- $src = path.Join "/" .Page.File.Dir $src | relURL -}}
+  {{- end -}}
+{{- end -}}
+<a class="shot" href="{{ $src }}"><img src="{{ $src }}" alt="{{ .PlainText }}"{{ with $w }} width="{{ . }}"{{ end }}{{ with $h }} height="{{ . }}"{{ end }} loading="lazy" decoding="async"></a>
+{{- /**/ -}}

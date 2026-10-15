@@ -62,8 +62,8 @@ GRAFANA_PASSWORD=... docker compose up -d
 - `http://<Tailscale IP>:3000` → Dashboards → Homelab → 홈랩 서버 전체
 - 캡처: 대시보드
 
-<!-- 이미지: Grafana 홈랩 서버 전체 대시보드 -->
-<!-- 이미지: C1 Prometheus targets 화면 (전부 UP) -->
+![Grafana 홈랩 서버 전체 대시보드](img-index-01.webp)
+![C1 Prometheus targets 화면 (전부 UP)](img-index-02.webp)
 
 ### D. 대시보드와 알림 규칙
 
@@ -108,9 +108,9 @@ sync && reboot
 - 원인: `ls /home`으로 보니 paper 계정 이름이 다른 VM(<사용자>)과 달랐음. 계정 이름이 틀려도 "비번 틀림"과 같은 메시지가 나와서 비번 문제로 착각함
 - 캡처: GRUB 메뉴, Recovery Menu, `ls /home` 결과
 
-<!-- 이미지: T1 GRUB 메뉴 -->
-<!-- 이미지: T2 Recovery Menu -->
-<!-- 이미지: T3 ls /home 결과 -->
+![T1 GRUB 메뉴](img-index-03.webp)
+![T2 Recovery Menu](img-index-04.webp)
+![T3 ls /home 결과](img-index-05.webp)
 
 ### 복구 모드에서 Proxmox 재부팅 버튼이 안 먹힘
 

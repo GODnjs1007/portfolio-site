@@ -142,7 +142,7 @@ Status: Downloaded newer image for nginx:latest
 76cd5b955cf2...                               생성된 컨테이너 ID
 ```
 
-<!-- 이미지: 8A-01 nginx 이미지 pull 화면 (터미널) -->
+![8A-01 nginx 이미지 pull 화면 (터미널)](img-index-01.webp)
 
 ↑ 8A-01 이미지 pull 화면 (터미널)
 
@@ -193,7 +193,7 @@ CONTAINER ID   IMAGE   STATUS         PORTS                  NAMES
 | PORTS | -p 로 뚫은 길. 0.0.0.0은 내 맥의 모든 주소 |
 | COMMAND | 컨테이너가 실행 중인 명령. 이 명령이 끝나면 컨테이너도 종료된다 |
 
-<!-- 이미지: 8A-02 docker ps 출력 화면 -->
+![8A-02 docker ps 출력 화면](img-index-02.webp)
 
 ↑ 8A-02 docker ps 출력
 
@@ -205,7 +205,7 @@ COMMAND 칸이 중요하다. 컨테이너는 가상 서버가 아니라 **격리
 
 `localhost`는 내 맥 자신을 가리키는 주소이므로 인터넷을 거치지 않는다.
 
-<!-- 이미지: 8A-03 브라우저에 표시된 Welcome to nginx! 화면 -->
+![8A-03 브라우저에 표시된 Welcome to nginx! 화면](img-index-03.webp)
 
 ↑ 8A-03 브라우저 Welcome to nginx! 화면
 
@@ -287,7 +287,7 @@ EOF
 
 **EXPOSE는 함정이다.** 실제로 길을 뚫는 것은 `docker run -p 8080:80`의 `-p`다. `EXPOSE`를 지워도 `-p`만 있으면 정상 동작한다. 그럼에도 적어 두는 이유는 이 이미지를 받은 사람이 어떤 포트를 쓰는지 알 수 있고, ECS 같은 곳에서 이 정보를 참고하기 때문이다.
 
-<!-- 이미지: 8A-05 작업 폴더 파일 목록과 Dockerfile 내용 터미널 화면 -->
+![8A-05 작업 폴더 파일 목록과 Dockerfile 내용 터미널 화면](img-index-04.webp)
 
 ↑ 8A-05 작업 폴더 파일 목록과 Dockerfile 내용
 
@@ -324,7 +324,7 @@ docker build -t myweb:1.0 .
 | 단계가 1/2, 2/2 두 개뿐 | Dockerfile은 세 줄인데 층은 두 개다. EXPOSE는 층을 만들지 않는다 |
 | 0.2초 | 268MB짜리 이미지를 만들었지만 새로 생긴 것은 302바이트뿐이다 |
 
-<!-- 이미지: 8A-06 docker build 출력과 docker images 목록 터미널 화면 -->
+![8A-06 docker build 출력과 docker images 목록 터미널 화면](img-index-05.webp)
 
 ↑ 8A-06 docker build 출력과 docker images 목록
 
@@ -349,7 +349,7 @@ Images   3       1        9.556GB   205.9MB (2%)
 
 `myweb`은 `nginx` 위에 얹혀 있으므로 아래 층은 한 벌만 저장된다. **층 공유가 숫자로 확인된 지점이다.**
 
-<!-- 이미지: 8A-07 docker system df 출력 화면 -->
+![8A-07 docker system df 출력 화면](img-index-06.webp)
 
 ↑ 8A-07 docker system df 출력
 
@@ -370,13 +370,13 @@ docker ps
 
 `docker ps`의 `IMAGE` 칸이 `myweb:1.0`으로 나오면 성공이다.
 
-<!-- 이미지: 8A-08 docker ps 화면 — IMAGE 칸이 myweb:1.0 -->
+![8A-08 docker ps 화면 — IMAGE 칸이 myweb:1.0](img-index-07.webp)
 
 ↑ 8A-08 docker ps — IMAGE 칸이 myweb:1.0
 
 브라우저에서 `localhost:8080`에 접속하면 `Welcome to nginx!`가 아니라 직접 작성한 페이지가 표시된다.
 
-<!-- 이미지: 8A-08b 브라우저에 표시된 직접 만든 페이지 -->
+![8A-08b 브라우저에 표시된 직접 만든 페이지](img-index-08.webp)
 
 ↑ 8A-08b 브라우저에 표시된 내 페이지
 
@@ -474,7 +474,7 @@ bf7af0229701: Pushed
 
 마지막 `digest` 줄이 성공 표시다.
 
-<!-- 이미지: 8B-01 ECR 콘솔 — myweb 리포지토리에 1.0 태그 이미지가 올라간 상태 -->
+![8B-01 ECR 콘솔 — myweb 리포지토리에 1.0 태그 이미지가 올라간 상태](img-index-09.webp)
 
 ↑ 8B-01 ECR 콘솔 — myweb 리포지토리에 1.0 태그 이미지가 올라간 상태
 
@@ -708,11 +708,11 @@ apply 직후 접속하면 `503 Service Temporarily Unavailable`가 나올 수 �
 
 ECS 콘솔에서 태스크 2개가 실행 중이고 서비스가 `2/2`로 표시된다.
 
-<!-- 이미지: 8C-01 ECS 콘솔 — 태스크 2개 실행 중 -->
+![8C-01 ECS 콘솔 — 태스크 2개 실행 중](img-index-10.webp)
 
 ↑ 8C-01 ECS 태스크 2개 실행 중
 
-<!-- 이미지: 8C-02 ECS 서비스 목록 — 2/2 태스크 -->
+![8C-02 ECS 서비스 목록 — 2/2 태스크](img-index-11.webp)
 
 ↑ 8C-02 ECS 서비스 목록 — 2/2 태스크
 
@@ -720,7 +720,7 @@ ECS 콘솔에서 태스크 2개가 실행 중이고 서비스가 `2/2`로 표시
 
 `alb_dns` 주소로 접속하면 A에서 이미지 안에 넣었던 페이지가 그대로 표시된다. 파일을 서버에 올린 적이 없고, **로컬에서 만든 이미지가 ECR을 거쳐 AWS에서 그대로 실행된 것이다.**
 
-<!-- 이미지: 8C-03 ALB 주소로 접속해 직접 만든 페이지가 표시된 브라우저 화면 -->
+![8C-03 ALB 주소로 접속해 직접 만든 페이지가 표시된 브라우저 화면](img-index-12.webp)
 
 ↑ 8C-03 ALB 주소로 접속 성공
 
@@ -728,7 +728,7 @@ ECS 콘솔에서 태스크 2개가 실행 중이고 서비스가 `2/2`로 표시
 
 서비스 상태 화면의 로드 밸런서 대상 상태가 **2 정상 / 0 비정상**으로 표시된다. 타겟 그룹에 등록된 것은 EC2 인스턴스가 아니라 컨테이너의 프라이빗 IP다.
 
-<!-- 이미지: 8C-04 로드 밸런서 대상 상태 — 2 정상 / 0 비정상 -->
+![8C-04 로드 밸런서 대상 상태 — 2 정상 / 0 비정상](img-index-13.webp)
 
 ↑ 8C-04 로드 밸런서 대상 상태 — 2 정상 / 0 비정상
 
@@ -738,7 +738,7 @@ ECS 콘솔에서 태스크 2개가 실행 중이고 서비스가 `2/2`로 표시
 
 ECS 콘솔 → 태스크 탭 → 실행 중인 태스크 하나 선택 → 중지
 
-<!-- 이미지: 8C-05 ECS 콘솔에서 태스크를 중지한 직후 화면 -->
+![8C-05 ECS 콘솔에서 태스크를 중지한 직후 화면](img-index-14.webp)
 
 ↑ 8C-05 태스크 중지 직후
 
@@ -750,7 +750,7 @@ ECS 콘솔 → 태스크 탭 → 실행 중인 태스크 하나 선택 → 중�
 372d2486...   비활성화 중   ← 의도적으로 중지시킨 태스크
 ```
 
-<!-- 이미지: 8C-06 태스크 자동 교체 — 중지된 태스크와 새 태스크가 동시에 보이는 화면 -->
+![8C-06 태스크 자동 교체 — 중지된 태스크와 새 태스크가 동시에 보이는 화면](img-index-15.webp)
 
 ↑ 8C-06 태스크 자동 교체 — 죽은 태스크와 새 태스크가 동시에 존재
 
@@ -802,7 +802,7 @@ docker 명령어  →  docker.sock  →  Docker 데몬
                   (없음)
 ```
 
-<!-- 이미지: 8A-00 docker.sock 연결 실패 에러가 출력된 터미널 화면 -->
+![8A-00 docker.sock 연결 실패 에러가 출력된 터미널 화면](img-index-16.webp)
 
 ↑ 8A-00 docker.sock 에러 터미널 화면
 
@@ -824,7 +824,7 @@ Docker Desktop을 실행하고 메뉴바 아이콘이 running 상태가 된 뒤 
 
 브라우저에서 `사이트에 연결할 수 없음 / localhost에서 연결을 거부했습니다 / ERR_CONNECTION_REFUSED`
 
-<!-- 이미지: 8A-04 주소창에 localhost:8000을 입력해 ERR_CONNECTION_REFUSED가 뜬 브라우저 화면 -->
+![8A-04 주소창에 localhost:8000을 입력해 ERR_CONNECTION_REFUSED가 뜬 브라우저 화면](img-index-17.webp)
 
 ↑ 8A-04 브라우저 ERR_CONNECTION_REFUSED 화면 (주소창에 localhost:8000)
 
@@ -865,7 +865,7 @@ The container name "/myweb-test" is already in use by container
 You have to remove (or rename) that container to be able to reuse that name.
 ```
 
-<!-- 이미지: 8A-09 이름 충돌로 실패한 docker run 터미널 화면 -->
+![8A-09 이름 충돌로 실패한 docker run 터미널 화면](img-index-18.webp)
 
 ↑ 8A-09 포트 점유로 실패한 docker run
 
@@ -875,7 +875,7 @@ You have to remove (or rename) that container to be able to reuse that name.
 - 그런데 에러는 그 이름이 **이미 쓰이고 있다**고 한다 → 실행 중이 아닌 컨테이너가 존재한다
 - `docker ps -a` 로 확인하니 `myweb-test`가 있었다
 
-<!-- 이미지: 8A-10 test 컨테이너가 8080 포트를 점유 중인 docker ps 화면 -->
+![8A-10 test 컨테이너가 8080 포트를 점유 중인 docker ps 화면](img-index-19.webp)
 
 ↑ 8A-10 test 컨테이너가 8080을 점유 중인 docker ps
 

@@ -41,7 +41,7 @@ logConfiguration = {
 
 ECS 콘솔 → 서비스 → 로그 탭에서 확인했다.
 
-<!-- 이미지: 9A-01 ECS 컨테이너 로그 — ELB-HealthChecker 요청이 쌓이는 화면 -->
+![9A-01 ECS 컨테이너 로그 — ELB-HealthChecker 요청이 쌓이는 화면](img-index-01.webp)
 
 #### 관찰한 것
 
@@ -74,9 +74,9 @@ apply 직후에는 메일이 오지 않고 **구독 확인 메일이 먼저 온�
 
 이 절차가 있는 이유는 **아무나 타인의 이메일을 SNS에 등록해 스팸을 보낼 수 없게 하기 위해서**다. 본인이 수락해야만 메일 발송이 시작된다.
 
-<!-- 이미지: 9A-02 SNS 구독 확인 메일 -->
+![9A-02 SNS 구독 확인 메일](img-index-02.webp)
 
-<!-- 이미지: 9A-03 Subscription confirmed 화면 -->
+![9A-03 Subscription confirmed 화면](img-index-03.webp)
 
 #### 실제로 겪은 문제
 
@@ -144,11 +144,11 @@ aws cloudwatch set-alarm-state \
 
 1~2분 안에 ALARM 메일이 수신되었고, 실제 CPU 사용률이 임계값보다 낮으므로 곷 자동으로 OK 상태로 돌아오며 OK 메일이 한 통 더 왔다.
 
-<!-- 이미지: 9A-04 ALARM 메일 수신 (State Change: OK → ALARM) -->
+![9A-04 ALARM 메일 수신 (State Change: OK → ALARM)](img-index-04.webp)
 
-<!-- 이미지: 9A-05 OK 메일 수신 (State Change: ALARM → OK, 실제 CPU 0.0039%) -->
+![9A-05 OK 메일 수신 (State Change: ALARM → OK, 실제 CPU 0.0039%)](img-index-05.webp)
 
-<!-- 이미지: 9A-06 CloudWatch 경보 — 두 알람 모두 정상 상태 -->
+![9A-06 CloudWatch 경보 — 두 알람 모두 정상 상태](img-index-06.webp)
 
 #### 확인한 것
 
@@ -172,7 +172,7 @@ aws_vpc.main: Destruction complete after 0s
 Destroy complete! Resources: 26 destroyed.
 ```
 
-<!-- 이미지: 9A-07 terraform destroy 완료 — 26개 리소스 삭제 -->
+![9A-07 terraform destroy 완료 — 26개 리소스 삭제](img-index-07.webp)
 
 **ECS 서비스 삭제에 7분 13초가 걸렸다.** 실행 중인 태스크를 정리하고 ALB 타겟 그룹에서 등록을 해제하는 과정이 포함되기 때문이다. 인터넷 게이트웨이도 ALB가 완전히 삭제될 때까지 대기했다.
 

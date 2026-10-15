@@ -70,7 +70,7 @@ nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
 
-<!-- 이미지: 세미콜론 추가 후 sudo nginx -t 문법 검사 성공 화면 -->
+![세미콜론 추가 후 sudo nginx -t 문법 검사 성공 화면](img-index-01.webp)
 
 ```bash
 sudo systemctl restart nginx
@@ -100,7 +100,7 @@ curl localhost
 
 → 정상적으로 HTML 응답 (서버 자체는 문제없음)
 
-<!-- 이미지: 서버 내부에서 curl localhost 실행 시 HTML 정상 응답 화면 -->
+![서버 내부에서 curl localhost 실행 시 HTML 정상 응답 화면](img-index-02.webp)
 
 외부 브라우저 접속 시도:
 
@@ -110,7 +110,7 @@ http://[퍼블릭IP]
 
 → 연결 실패, `ERR_CONNECTION_TIMED_OUT`
 
-<!-- 이미지: 외부 브라우저 접속 시 ERR_CONNECTION_TIMED_OUT 화면 -->
+![외부 브라우저 접속 시 ERR_CONNECTION_TIMED_OUT 화면](img-index-03.webp)
 
 **원인**
 
@@ -126,7 +126,7 @@ http://[퍼블릭IP]
 
 브라우저에서 `http://[퍼블릭IP]` 재접속 → 정상적으로 페이지 뜨는 것 확인
 
-<!-- 이미지: HTTP 규칙 재추가 후 브라우저에서 페이지 정상 표시 화면 -->
+![HTTP 규칙 재추가 후 브라우저에서 페이지 정상 표시 화면](img-index-04.webp)
 
 **재발 방지**
 
@@ -143,7 +143,7 @@ http://[퍼블릭IP]
 ls -l /usr/share/nginx/html/index.html
 ```
 
-<!-- 이미지: ls -l로 index.html 파일 권한 확인 화면 -->
+![ls -l로 index.html 파일 권한 확인 화면](img-index-05.webp)
 
 권한 제거
 
@@ -151,7 +151,7 @@ ls -l /usr/share/nginx/html/index.html
 sudo chmod 000 /usr/share/nginx/html/index.html
 ```
 
-<!-- 이미지: chmod 000으로 index.html 권한 제거 화면 -->
+![chmod 000으로 index.html 권한 제거 화면](img-index-06.webp)
 
 브라우저 재접속 → 403 Forbidden 확인
 
@@ -160,7 +160,7 @@ sudo chmod 000 /usr/share/nginx/html/index.html
 nginx/1.30.3
 ```
 
-<!-- 이미지: 브라우저에 403 Forbidden 표시 화면 -->
+![브라우저에 403 Forbidden 표시 화면](img-index-07.webp)
 
 원인: 파일 권한이 000(권한 없음)으로 설정되어 Nginx가 파일을 읽지 못해 접근 거부됨. 이전 장애(타임아웃)와 달리 이번엔 403 에러 발생 → 요청은 서버에 도달했으나 내부에서 거부된 케이스
 
@@ -170,7 +170,7 @@ nginx/1.30.3
 sudo chmod 644 /usr/share/nginx/html/index.html
 ```
 
-<!-- 이미지: chmod 644로 index.html 권한 복구 화면 -->
+![chmod 644로 index.html 권한 복구 화면](img-index-08.webp)
 
 브라우저 새로고침 → 페이지 정상 표시 확인
 
@@ -191,7 +191,7 @@ sudo systemctl status nginx
 
 → `active (running)` 확인
 
-<!-- 이미지: systemctl status nginx로 active (running) 확인 화면 -->
+![systemctl status nginx로 active (running) 확인 화면](img-index-09.webp)
 
 서비스 중지
 
@@ -206,7 +206,7 @@ sudo systemctl stop nginx
 ERR_CONNECTION_REFUSED
 ```
 
-<!-- 이미지: Nginx 중지 후 브라우저 ERR_CONNECTION_REFUSED 화면 -->
+![Nginx 중지 후 브라우저 ERR_CONNECTION_REFUSED 화면](img-index-10.webp)
 
 원인 진단 — 서비스 상태 및 포트 리스닝 확인
 
@@ -217,9 +217,9 @@ sudo ss -lntp
 
 → 상태는 `inactive (dead)`, `ss -lntp` 목록에서 80번 포트가 사라지고 22번(SSH)만 남아있음
 
-<!-- 이미지: systemctl status nginx 결과 inactive (dead) 화면 -->
+![systemctl status nginx 결과 inactive (dead) 화면](img-index-11.webp)
 
-<!-- 이미지: ss -lntp 결과 22번 포트만 리스닝 중인 화면 -->
+![ss -lntp 결과 22번 포트만 리스닝 중인 화면](img-index-12.webp)
 
 복구 및 재확인
 
@@ -233,7 +233,7 @@ sudo ss -lntp
 
 부팅 후 자동 시작 설정 확인
 
-<!-- 이미지: Nginx 재시작 후 active (running) 및 80번 포트 리스닝 확인 화면 -->
+![Nginx 재시작 후 active (running) 및 80번 포트 리스닝 확인 화면](img-index-13.webp)
 
 ```bash
 sudo systemctl is-enabled nginx
@@ -241,7 +241,7 @@ sudo systemctl is-enabled nginx
 
 → `enabled` 확인 (서버 재부팅 시에도 자동 실행됨)
 
-<!-- 이미지: systemctl is-enabled nginx 결과 enabled 화면 -->
+![systemctl is-enabled nginx 결과 enabled 화면](img-index-14.webp)
 
 ---
 

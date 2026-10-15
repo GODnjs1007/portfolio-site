@@ -390,7 +390,7 @@ terraform init
 
 새 폴더라 provider를 처음부터 받는다. step6은 lock 파일이 있어 `Reusing`이 떴지만, 여기서는 `Finding ... versions matching`으로 시작한다.
 
-<!-- 이미지: terraform init 실행 결과 터미널 화면 (provider를 새로 받는 출력) -->
+![terraform init 실행 결과 터미널 화면 (provider를 새로 받는 출력)](img-index-01.webp)
 
 ### plan
 
@@ -421,7 +421,7 @@ AZ 조회와 AMI 조회 같은 `data` 블록은 **만드는 것이 아니라 조
 - `vpc_id = (known after apply)` — VPC가 아직 없어 ID를 모른다. 참조 관계상 VPC가 가장 먼저 생성된다
 - **비밀번호가 출력 어디에도 보이지 않는다** — `sensitive = true` 적용 확인
 
-<!-- 이미지: terraform plan 결과 터미널 화면 (Plan: 12 to add, 비밀번호가 가려진 출력) -->
+![terraform plan 결과 터미널 화면 (Plan: 12 to add, 비밀번호가 가려진 출력)](img-index-02.webp)
 
 ## B. 배포 및 접속 검증
 
@@ -470,7 +470,7 @@ RDS는 IP가 아니라 **도메인 형태의 엔드포인트**를 받는다.
 
 RDS는 5분 7초, EC2는 13초가 걸렸다. RDS는 실제 DB 엔진을 설치·초기화하는 과정이 포함되기 때문이다.
 
-<!-- 이미지: terraform apply 결과 터미널 화면 (Apply complete! Resources: 12 added와 output) -->
+![terraform apply 결과 터미널 화면 (Apply complete! Resources: 12 added와 output)](img-index-03.webp)
 
 ### 2. 검증 ① 외부에서 접속 — 실패해야 정상
 
@@ -502,7 +502,7 @@ nc: connectx to ... port 3306 (tcp) failed: Operation timed out
 
 3단계 장애 진단에서 본 차이와 같다.
 
-<!-- 이미지: 노트북에서 nc로 RDS 3306 접속 시도 시 Operation timed out 결과 터미널 화면 -->
+![노트북에서 nc로 RDS 3306 접속 시도 시 Operation timed out 결과 터미널 화면](img-index-04.webp)
 
 ### 3. 검증 ② EC2에서 접속 — 성공해야 정상
 
@@ -540,7 +540,7 @@ MySQL [(none)]>
 
 코드에는 `engine_version = "8.0"`으로 **메이저 버전만** 지정했고, 마이너 버전(`.46`)은 AWS가 당시 기본값으로 채운 것이다. 마이너까지 고정하지 않으면 이후 apply 시점에 버전이 올라가 코드와 실제 상태가 어긋날 수 있다.
 
-<!-- 이미지: EC2 Instance Connect에서 mysql로 RDS 접속에 성공한 화면 -->
+![EC2 Instance Connect에서 mysql로 RDS 접속에 성공한 화면](img-index-05.webp)
 
 #### 검증 결과 정리
 
@@ -594,7 +594,7 @@ SELECT * FROM users;
 
 CREATE → INSERT → SELECT까지 가야 **DB가 실제 데이터를 저장하고 반환한다**는 것이 증명된다. 8단계에서 앱을 붙일 때 이 구조가 그대로 이어진다.
 
-<!-- 이미지: RDS에서 CREATE TABLE·INSERT 후 SELECT 결과가 출력된 화면 -->
+![RDS에서 CREATE TABLE·INSERT 후 SELECT 결과가 출력된 화면](img-index-06.webp)
 
 ### 5. destroy — 정리
 
@@ -624,7 +624,7 @@ RDS 삭제에 1분 51초가 걸렸다. `skip_final_snapshot = true`로 두었기
 
 이 설정이 없었다면 기본값이 `false`이므로 최종 스냅샷 이름을 요구하며 삭제가 실패한다.
 
-<!-- 이미지: terraform destroy 결과 터미널 화면 (Destroy complete! Resources: 12 destroyed) -->
+![terraform destroy 결과 터미널 화면 (Destroy complete! Resources: 12 destroyed)](img-index-07.webp)
 
 ## 7단계 용어
 

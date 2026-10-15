@@ -64,7 +64,7 @@ scrape_configs:
 - 접속은 Tailscale 내부망에서만. 공유기 포트는 열지 않음
 - 캡처: 대시보드 전체
 
-<!-- 이미지: Grafana "ECG 서버 자원" 대시보드 전체 -->
+![Grafana "ECG 서버 자원" 대시보드 전체](img-index-01.webp)
 
 ## B. 환자 수별 측정
 
@@ -102,7 +102,7 @@ scrape_configs:
 - 100명 띄워서 그리드 확인
 - 캡처: 환자 그리드(빨간 카드 있을 때), Grafana 상태 타임라인
 
-<!-- 이미지: 환자 그리드(빨간 카드 있을 때)와 Grafana "ECG 환자 상태 (시연)" 상태 타임라인 -->
+![환자 그리드(빨간 카드 있을 때)와 Grafana "ECG 환자 상태 (시연)" 상태 타임라인](img-index-02.webp)
 
 ## 트러블슈팅
 
@@ -132,7 +132,7 @@ scrape_configs:
 - 다른 방법: Docker 저장 방식을 예전(overlay2)으로 되돌리기. 이미지·컨테이너를 다시 받아야 해서 팀 서버에선 보류
 - 캡처: 고치기 전 No data / cAdvisor 에러 로그 / 고친 뒤
 
-<!-- 이미지: 컨테이너별 그래프 고치기 전 No data / cAdvisor 에러 로그 / 고친 뒤 -->
+![컨테이너별 그래프 고치기 전 No data / cAdvisor 에러 로그 / 고친 뒤](img-index-03.webp)
 
 ### 적체·중복 숫자가 실제와 다름
 

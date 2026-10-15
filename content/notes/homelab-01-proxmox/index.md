@@ -61,7 +61,7 @@ draft: false
 - No valid subscription 창은 유료 지원 안내일 뿐 기능 제한 없음
 - 이후 모니터·키보드는 분리. 네트워크 설정이 꼬여 웹 접속이 안 될 때만 다시 연결
 
-<!-- 이미지: 2-1A-01 Proxmox 웹 UI. VM 2개(portfolio, 산학 VM) 실행 중 -->
+![2-1A-01 Proxmox 웹 UI. VM 2개(portfolio, 산학 VM) 실행 중](img-index-01.webp)
 
 ### 5. 저장소 설정과 업데이트
 
