@@ -45,6 +45,55 @@ python server/stream/stream_tcp.py 환자수 --host 127.0.0.1 --port 8000 --reco
   - sendall: 가진 데이터를 끝까지 다 보낼 때까지 보내는 함수
 - 받는 쪽이 끊기면 멈추고 보낸 개수 출력
 
+```python
+sock = socket.create_connection((args.host, args.port))
+
+start = time.time()
+next_tick = start
+ticks = round(args.seconds / INTERVAL)
+
+for _ in range(ticks):
+    lines = []
+    for i in range(args.n):
+        p = pos[i]
+        if p + CHUNK > total:   # 1분 끝나면 처음부터
+            p = 0
+        chunk = signal[p:p + CHUNK]
+        msg = {
+            "channel_id": i,
+            "seq": seq[i],
+            "t_start": round(seq[i] * INTERVAL, 1),
+            "sent_at": time.time(),
+            "fs": FS,
+            "duration": INTERVAL,
+            "leads": leads,
+            "samples": [[round(float(v), 3) for v in chunk[:, k]] for k in range(len(leads))],
+        }
+        lines.append(json.dumps(msg) + "\n")
+        pos[i] = p + CHUNK
+        seq[i] += 1
+    sock.sendall("".join(lines).encode())
+    sent += args.n
+
+    worst_late = max(worst_late, time.time() - next_tick)
+    next_tick += INTERVAL
+    wait = next_tick - time.time()
+    if wait > 0:
+        time.sleep(wait)
+```
+
+- 1단계 `stream_multi.py`의 비어 있던 `send()` 자리를 TCP 전송으로 채운 것
+- `ticks` : 반복 횟수. 10초면 100번. 시간 대신 횟수로 돌림 (트러블슈팅 1)
+- `msg` : 상자 하나. 칸 뜻은 2단계 E-4
+- `seq[i]` : 환자별 송장 번호. 보낼 때마다 1씩 늘림
+- `"sent_at": time.time()` : 보낸 시각. 받는 쪽에서 빼서 지연 계산
+- `chunk[:, k]` : k번째 리드의 25개. 리드 3개면 `samples`가 3줄
+- `round(..., 3)` : 소수 셋째 자리까지만. 글자 수 줄이려고
+- `json.dumps(msg) + "\n"` : 상자를 글자로 바꾸고 줄바꿈 붙이기 (NDJSON)
+- `"".join(lines).encode()` : 환자 N명 줄을 이어 붙여 바이트로 바꿈 → `sendall` 한 번에 전송
+- `worst_late` : 최대 지각. 1단계와 같은 방식
+- 실제 파일에는 실행 인자 읽기, 연결 끊김 처리, 끝나고 출력하는 부분이 더 있음
+
 ## C. 확인
 
 - 가짜 수신 서버로 테스트: 환자 100명 × 3초 → 3,000개 보내고 3,000개 받음, 최대 지각 18ms
@@ -74,6 +123,46 @@ python server/stream/stream_tcp.py 10 --seconds 5
   - p50 / p95 / 최대: 중간값 / 100개 중 느린 순서 5번째 / 가장 느린 것
 - 지연 = 받은 시각 − `sent_at`. 생성기와 같은 VM에서 돌려야 시계가 같아서 값이 맞음
 - 유실 = 채널별로 `seq`가 빠진 개수
+
+```python
+async def handle(reader, writer):
+    while True:
+        line = await reader.readline()
+        if not line:
+            break
+        now = time.time()
+        msg = json.loads(line)
+        ch = msg['channel_id']
+        seq = msg['seq']
+        sent_at = msg['sent_at']
+
+        stats.received += 1
+        stats.latencies.append(now - sent_at)
+
+        seen = stats.seen.setdefault(ch, set())
+        if seq in seen:
+            stats.duplicate += 1
+        seen.add(seq)
+
+        prev = stats.last_seq.get(ch)
+        if prev is not None and seq < prev:
+            stats.out_of_order += 1
+        stats.last_seq[ch] = seq
+
+def report():
+    lost = 0
+    for seqs in stats.seen.values():
+        lost += (max(seqs) + 1) - len(seqs)
+```
+
+- `async` / `await` : 기다리는 동안 다른 일을 할 수 있게 하는 파이썬 방식. 여기선 연결이 끊길 때까지 계속 읽음
+- `reader.readline()` : 줄바꿈까지 읽기. NDJSON이라 한 줄 = 메시지 1개
+- `if not line: break` : 빈 값이면 연결이 끊긴 것
+- `now - sent_at` : 받은 시각 − 보낸 시각 = 지연. 모아두었다가 마지막에 정렬해서 p50, p95, 최대 계산
+- `stats.seen` : 환자별로 받은 seq 모음. `set`은 중복 없는 모음이라 같은 번호가 또 오면 중복으로 셈
+- `seq < prev` : 직전 번호보다 작으면 순서 뒤바뀜
+- `(max(seqs) + 1) - len(seqs)` : 0번부터 마지막 번호까지면 원래 max+1개가 와야 함. 실제 받은 개수를 빼면 빠진 개수 = 유실
+- 실제 파일에는 형식 오류 처리, 처리량 계산, 마지막 연결이 끊기고 1초 지나면 종료하는 부분이 더 있음
 
 ```bash
 # 탭1: 받는 쪽
