@@ -55,6 +55,16 @@ cd infra/monitoring
 GRAFANA_PASSWORD=... docker compose up -d
 ```
 
+- 수집 대상 목록 분리 (10.15) : 사이트 저장소가 공개라서, 실제 Tailscale IP가 든 수집 대상 파일을 깃에서 뺌
+
+| 파일 | 깃 | 내용 |
+| --- | --- | --- |
+| `targets.example.yml` | 올라감 | IP 자리에 `<paper Tailscale IP>` 같은 자리표시 |
+| `targets.local.yml` | 안 올라감 (.gitignore) | VM에서 실제로 읽는 IP 목록 |
+
+- 서버 추가·삭제는 `targets.local.yml`만 고치면 30초 안에 반영 (재시작 불필요)
+- Prometheus만 재시작할 땐 `docker restart hl-prometheus`. `docker compose restart`는 `GRAFANA_PASSWORD`가 없으면 에러 남
+
 ### C. 확인
 
 - `http://<Tailscale IP>:9090/targets`: node 4개, cAdvisor, Prometheus 전부 UP

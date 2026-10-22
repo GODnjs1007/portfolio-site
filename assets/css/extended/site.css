@@ -148,8 +148,11 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .prose h4,.prose h5{font-size:16px;margin:24px 0 6px}
 .prose p,.prose li{max-width:44em}
 .prose a{color:var(--accent)}
+.prose mark{background:#D6E8F5;color:inherit;padding:0 2px;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .prose code{font-family:var(--mono);font-size:.88em;background:var(--node);border:1px solid #D3DADD;padding:1px 5px;word-break:break-word}
 .prose pre{background:#13202A;color:#E6ECEF;padding:16px;overflow-x:auto;font-size:13.5px;line-height:1.6;border:0}
+.prose pre,.prose .highlight{max-width:100%;box-sizing:border-box}
+.prose p,.prose li,.prose td{overflow-wrap:anywhere}
 .prose pre code{background:none;border:0;padding:0;color:inherit;word-break:normal}
 .prose table{min-width:0;font-size:14px;display:block;overflow-x:auto;border-width:1px}
 .prose th{white-space:nowrap}
@@ -255,6 +258,8 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .switch a[aria-current]{background:var(--ink);color:#fff}
 .learned-hint{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--muted);margin:0 0 28px}
 .learned-list{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:12px}
+.note-groups>*,.learned-list>*,.learned-item>.learned-body{min-width:0;max-width:100%}
+.learned-body pre,.learned-body table{max-width:100%}
 .learned-item{border:2px solid #1E6B43;background:#F3FAF5}
 .learned-item>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:3em minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:12px 16px}
 .learned-item>summary::-webkit-details-marker{display:none}
