@@ -4,7 +4,7 @@ date: 2026-10-14
 projects: ["capstone-game"]
 step: 1
 summary: "Godot 4.6 환경에서 GodotSteam(Steam 연동 GDExtension)이 실제로 동작하는지, Steam 로그인·로비 생성까지 되는지 확인해 검증 보고서를 쓴다."
-tags: ["트러블슈팅"]
+tags: ["구축", "트러블슈팅"]
 troubleshooting:
   - "GodotSteam이 Asset Library에 안 뜸"
   - "macOS \"앱이 손상되었기 때문에 열 수 없습니다\""
@@ -16,37 +16,71 @@ draft: false
 
 Godot 4.6 환경에서 GodotSteam(Steam 연동 GDExtension)이 실제로 동작하는지, Steam 로그인·로비 생성까지 되는지 확인해 검증 보고서를 쓴다.
 
-## A. GodotSteam 설치 찾기
+## 진행 과정
 
-Godot 내장 Asset Library에서 "GodotSteam" 검색이 0건으로 나왔다.
+### A. GodotSteam 설치 찾기
 
-- **원인**: GodotSteam이 2026-09-04에 GitHub에서 Codeberg([codeberg.org/godotsteam/godotsteam](https://codeberg.org/godotsteam/godotsteam))로 이전하면서, GitHub 저장소가 archived 되고 Asset Library 연동이 깨졌음
-- **대응**: Asset Library를 거치지 않고 Codeberg Releases 페이지에서 직접 다운로드
+- Asset Library에서 GodotSteam 검색이 안 돼서 Codeberg Releases 페이지([codeberg.org/godotsteam/godotsteam](https://codeberg.org/godotsteam/godotsteam))에서 빌드 파일을 직접 받음 (트러블슈팅 1번)
+  - Asset Library: Godot 에디터 안에서 애드온을 검색·설치하는 기능. 각 애드온의 저장소 주소를 등록해두고 거기서 받아옴
+  - 저장소: 코드와 배포 파일을 모아두는 곳 (GitHub, Codeberg)
+  - archived: 관리 종료, 읽기 전용 상태
+  - Releases: 완성본 파일을 버전별로 올려두는 곳
 
-## B. 버전 선택
+### B. 버전 선택
 
-Release에는 macos-g452(「4.5.2 이상」 호환), macos-g472(「4.7.2 이상」 호환) 두 종류만 있었고, 내 프로젝트 엔진(4.6.2)에 정확히 맞는 버전이 없었다.
+- Godot 4.6.2에 맞는 빌드로 g452 선택. Releases에는 macos-g452(4.5.2 이상 호환), macos-g472(4.7.2 이상 호환) 두 종류만 있었음
+  - GDExtension: Godot 엔진에 기능을 붙이는 확장 모듈. `compatibility_minimum` 값으로 "이 엔진 버전 이상이면 돌아간다"는 최소 기준을 갖고 빌드됨
+  - 하위호환: 최소 기준이 엔진 버전보다 낮으면 로딩됨. 높으면 로딩 실패
+- g452(4.5.2 기준)는 4.6.2에서 돌고, g472(4.7.2 기준)는 안 돎
 
-- **g452로 결정**: GDExtension은 당기보다 낮은 최소호환버전으로 만든 것은 상위 엔진에서도 로딩된다(하위호환). g472는 요건이 4.6.2보다 높아서 로딩에 실패한다
+### C. macOS Gatekeeper 차단 돌파
 
-## C. macOS Gatekeeper 차단 돌파
+- 직접 받은 Steam 설치 파일을 macOS가 막아서 Homebrew로 설치함: `brew install --cask steam --force` (트러블슈팅 2번)
+  - Gatekeeper: 애플이 서명(확인)하지 않은 프로그램을 막는 macOS 보안 기능
+  - 격리 속성: 인터넷에서 받은 파일에 붙는 표시. 붙어 있으면 더 엄격하게 검사받음
+  - Homebrew: 맥에서 터미널 명령으로 프로그램을 설치하는 도구. 검증된 경로로 설치해서 차단을 피함
+  - `--cask`: 창이 있는 앱(Steam 같은)을 설치하는 옵션
 
-GodotSteam 에디터 앱과 Steam 설치 파일을 다운로드했을 때 "앱이 손상됨" 에러가 반복됐다.
+### D. Steam 초기화·로비 생성 검증
 
-- xattr -cr, sudo spctl --master-disable 시도했지만 실패
-- 최종 해결: Homebrew cask 설치(`brew install --cask steam --force`) — 이전에 깨진 /Applications/Steam.app가 있어서 `--force` 필요했음
+- 테스트용 앱ID 480을 `steam_appid.txt`에 적고, 아래 스크립트로 Steam 로그인부터 로비 생성까지 확인함
+  - 앱ID 480: 밸브가 개발자 테스트용으로 공개한 앱(Spacewar)
 
-## D. Steam 초기화·로비 생성 검증
+```gdscript
+extends Node
 
-스팀 테스트 앱ID 480(Spacewar)을 steam_appid.txt에 기록하고, Steam 초기화 → 연결 확인 → 공개 로비(최대 4명) 생성 순서로 확인하는 GDScript를 작성했다.
+func _ready():
+	var init_result = Steam.steamInit()
+	print("Steam 초기화 결과: ", init_result)
 
-- `_process`에서 `Steam.run_callbacks()`를 매 프레임 돌려줘야 한다. 안 그러면 `lobby_created` 같은 비동기 콜백이 전혀 오지 않음
+	if Steam.isSteamRunning():
+		print("Steam 연결 성공! 로그인 계정: ", Steam.getPersonaName())
+	else:
+		print("Steam 연결 실패")
+		return
 
-## 검증 기록 (실제 테스트 결과)
+	Steam.lobby_created.connect(_on_lobby_created)
+	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, 4)
 
-- **개발환경**: Godot v4.5.2.4.5.2-stable.custom_build (GodotSteam 번들 에디터), Steam 테스트 앱ID 480
-- **출력**: `Steam 초기화 결과: true` / `✅ Steam 연결 성공!` / `로그인 계정: <Steam 계정>` / `✅ 로비 생성 성공! 로비 ID: <로비 ID>`
-- **결론**: GodotSteam은 Godot 4.6에서 단일 프로세스 기준으로는 정상 동작함. MultiplayerPeer(멀티플레이 연결 전용 모듈)는 조건부 지원 — 별도 저장소의 최신 릴리스가 Godot 4.5.1까지만 공식 태그됐고, 이후 커밋 14개가 더 쌓여 4.6 호환은 아직 정식 태그 전 상태임
+func _on_lobby_created(connect_result, lobby_id):
+	if connect_result == 1:
+		print("로비 생성 성공! 로비 ID: ", lobby_id)
+	else:
+		print("로비 생성 실패, 코드: ", connect_result)
+
+func _process(delta):
+	Steam.run_callbacks()
+```
+
+- 스크립트에 쓴 함수
+  - `Steam.steamInit()`: Steam 클라이언트와 연결 시작
+  - `Steam.isSteamRunning()` / `Steam.getPersonaName()`: 로그인 여부·계정명 확인
+  - `Steam.createLobby()`: 멀티플레이용 로비(방) 생성 요청
+  - `lobby_created`: 로비 생성이 끝나면 오는 콜백(비동기 알림)
+  - `Steam.run_callbacks()`: Steam 쪽에서 일어난 일을 게임에 넘겨줌. 매 프레임 불러야 해서 `_process()`에 넣음 (트러블슈팅 3번)
+- 결과: `Steam 초기화 결과: true` / `로그인 계정: <Steam 계정>` / `로비 생성 성공! 로비 ID: <로비 ID>`
+- 단일 프로세스 기준으로 GodotSteam은 Godot 4.6에서 정상 동작
+  - MultiplayerPeer: 멀티플레이 연결 전용 모듈. 공식 태그가 Godot 4.5.1까지라 4.6은 조건부 지원
 
 ## 트러블슈팅
 

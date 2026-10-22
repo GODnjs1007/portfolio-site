@@ -15,7 +15,7 @@
 - `content/notes/aws-09-cloudwatch/index.md:145` — **곷** → 곧
 - `content/notes/aws-01-ec2-nginx/learned.md:9` — **설지** → 설치
 - `content/notes/aws-05-alb-asg/learned.md:8` — **트랙픽** → 트래픽
-- `content/notes/homelab-03-site-deploy/learned.md:31` — **되도** → 돼도
+- `content/notes/homelab-03-site-deploy/learned.md:35` — **되도** → 돼도
 
 ## 3. AI 말투 후보 (사이트 문구만) (23건)
 
@@ -70,21 +70,5 @@
 
 없음
 
-## 5. 옮기지 못한 이미지 (122곳)
+## 5. 옮기지 못한 이미지 (0곳)
 
-- `content/notes/aws-02-custom-page/index.md` — 1곳
-- `content/notes/aws-03-troubleshooting/index.md` — 14곳
-- `content/notes/aws-04-vpc-security/index.md` — 20곳
-- `content/notes/aws-05-alb-asg/index.md` — 20곳
-- `content/notes/aws-06-terraform/index.md` — 13곳
-- `content/notes/aws-07-private-rds/index.md` — 7곳
-- `content/notes/aws-08-docker-ecs/index.md` — 19곳
-- `content/notes/aws-09-cloudwatch/index.md` — 7곳
-- `content/notes/homelab-01-proxmox/index.md` — 1곳
-- `content/notes/homelab-02-vm-docker/index.md` — 4곳
-- `content/notes/homelab-02-vm-docker/learned.md` — 1곳
-- `content/notes/homelab-03-site-deploy/index.md` — 3곳
-- `content/notes/homelab-07-monitoring/index.md` — 5곳
-- `content/notes/sanhak-03-tcp-3lead/index.md` — 1곳
-- `content/notes/sanhak-04-receiver-demo/index.md` — 3곳
-- `content/notes/sanhak-06-loadtest/index.md` — 3곳

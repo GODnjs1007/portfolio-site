@@ -27,8 +27,7 @@ steps:
   - { name: "서버 연결 방식 설계", status: "완료", note: "sanhak-02-protocol-design" }
   - { name: "TCP 전송과 3리드 데이터", status: "완료", note: "sanhak-03-tcp-3lead" }
   - { name: "수신부 연결과 전체 시연", status: "완료", note: "sanhak-04-receiver-demo" }
-  - { name: "지연·유실 측정 스크립트", status: "완료" }
-  - { name: "환자 수별 부하테스트와 모니터링", status: "완료", note: "sanhak-06-loadtest" }
+  - { name: "환자 수별 부하테스트와 모니터링", status: "완료", note: "sanhak-05-loadtest" }
   - { name: "병목 찾기와 최적화", status: "예정" }
 next: "테스트 서버에서 실제 분석 기준으로 다시 측정하고, 병목을 찾아 개선할 계획입니다."
 draft: false
