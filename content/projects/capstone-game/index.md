@@ -20,9 +20,9 @@ brief:
     - "Godot 4.6.2 HTTPRequest로 이벤트 10개 전송 → 저장·목록·다운로드 세 요청 모두 200, 10줄 그대로 내려받기"
 steps:
   - { name: "GodotSteam 검증", status: "완료", note: "capstone-01-godotsteam" }
-  - { name: "플레이 기록 수집 서버", status: "진행 중", note: "capstone-02-telemetry" }
+  - { name: "플레이 기록 수집 서버", status: "완료", note: "capstone-02-telemetry" }
   - { name: "빌드·배포 자동화", status: "예정" }
-next: "플레이 기록 수집 서버는 구현·로컬 검증과 저장소 정리까지 마쳤고, 팀장에게 저장소를 넘기는 일만 남았습니다(10.26 납기). 다음은 빌드·배포 자동화입니다."
+next: "다음은 빌드·배포 자동화입니다."
 draft: false
 ---
 
