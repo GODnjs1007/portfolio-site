@@ -7,6 +7,7 @@ summary: "사람이 손대지 않아도 10분마다 측정이 돌게 하고, 기
 tags: ["리눅스", "모니터링", "트러블슈팅"]
 troubleshooting:
   - "OpenAI 400 (max_tokens)"
+  - "Gemini 402 (선불 크레딧 소진)"
 draft: false
 ---
 
@@ -62,3 +63,12 @@ grep -v "G1 200 .*G2 200 .*O 200" ~/probe/logs/cron.log | grep "^2026"
 - 확인한 것: `grep -c "max_tokens"` 결과 5 → 실패 5회 전부 같은 원인
 - 원인: `probe.py`의 `max_completion_tokens: 256`이 OpenAI 답 길이보다 작을 때가 있음 (OpenAI 답은 약 250토큰, Gemini는 약 10토큰)
 - 서비스 장애가 아니라 측정 설정 문제
+
+### 2. Gemini 402 (선불 크레딧 소진)
+
+- 증상: 10.14 02:00부터 Gemini 호출이 전부 `402`, `Your prepayment credits are depleted`. OpenAI는 정상
+- 발견: 10.21 데이터를 받아 집계하다가 발견 → **7일 동안 모름**
+- 원인: Gemini 선불 크레딧이 바닥남 (AI Studio 상태 "크레딧 없음")
+- 해결: 10.21 크레딧 충전 → `probe.py` 수동 실행으로 200 확인 → cron 다시 등록
+- 데이터 처리: 402 구간(10.14 02:00 ~ 10.21 10:10)은 서비스 장애가 아니라 결제 문제라 분석에서 제외
+- 재발 방지: 실패율이 일정 수준을 넘으면 알림을 보내는 감시가 필요. 수집만 자동화하고 확인을 사람에게 맡기면 이런 일이 생김
