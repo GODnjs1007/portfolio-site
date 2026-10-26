@@ -5,7 +5,8 @@ projects: ["homelab"]
 step: 4
 summary: "Tailscale 사설망에서만 보이던 포트폴리오 사이트를 도메인(ihaewon.com)으로 외부에 공개한다. 공유기 포트는 열지 않고 Cloudflare Tunnel로 연결하며, HTTPS를 적용한다."
 tags: ["구축", "네트워크", "보안"]
-troubleshooting: []
+troubleshooting:
+  - "하위 페이지가 http로 넘어감"
 draft: false
 ---
 
@@ -83,6 +84,28 @@ systemctl status cloudflared --no-pager
 ## D. 검증
 
 - 근로처 컴퓨터(Tailscale 없음, 외부 네트워크)에서 `https://ihaewon.com` 접속 성공
+
+## 트러블슈팅
+
+### 하위 페이지가 http로 넘어감
+
+- 증상: 메인은 https로 열리는데, `https://ihaewon.com/projects`처럼 끝에 `/`가 없는 주소로 들어가면 `http://ihaewon.com/projects/`로 돌려보냄 → 자물쇠 사라짐 (10.26)
+- 확인
+    - 사이트 안 링크는 전부 끝에 `/`가 붙어 있어서 메뉴로 이동할 땐 안 생김. 주소를 직접 치거나 `/` 없이 공유한 링크에서만 생김
+    - VM에서 `curl -sI http://localhost/projects` → `Location: http://...`
+- 원인: Nginx는 `/projects`를 폴더로 보고 `/projects/`로 주소를 고쳐 돌려보냄. Nginx는 Cloudflare Tunnel 안쪽에서 http로만 요청을 받기 때문에, 돌려보내는 주소도 `http://`로 만듦
+- 해결
+    - Nginx 설정에 `absolute_redirect off;` 추가 → `http://` 없이 경로(`/projects/`)만 돌려보내서 브라우저가 https 유지. 설정 파일은 저장소 `infra/nginx/site.conf`에 두고 컨테이너에 연결
+
+```bash
+docker rm -f site
+docker run -d --name site -p 80:80 -v ~/portfolio-site/public:/usr/share/nginx/html:ro -v ~/portfolio-site/infra/nginx/site.conf:/etc/nginx/conf.d/default.conf:ro --restart unless-stopped nginx
+docker exec site nginx -t
+curl -sI http://localhost/projects | grep -i location     # Location: /projects/
+```
+
+- Cloudflare SSL/TLS → Edge Certificates → Always Use HTTPS 켜기 → `http://`로 들어와도 https로 넘어감
+- 재발 방지: 프록시 뒤에 서버를 둘 땐 서버가 만드는 리다이렉트 주소가 http인지 확인. 배포 후 메인만 보지 말고 `/` 없는 하위 주소도 열어보기
 
 ## 남은 작업
 
