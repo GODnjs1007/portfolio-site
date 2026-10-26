@@ -6,7 +6,7 @@ status: "주제 선정 중"
 category: "서비스"
 stack: []
 period: "2026 2학기"
-weight: 24
+weight: 29
 preview: true
 build:
   render: never
