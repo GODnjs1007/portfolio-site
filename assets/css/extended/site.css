@@ -90,6 +90,8 @@ footer{max-width:1240px;margin:0 auto;padding-block:20px 40px;border-top:2px sol
 .vms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .vm{border:2px solid var(--ink);background:var(--ground)}
 .vm>summary b{font-size:17px}
+.vm.off,.node.ref.off{opacity:.55;border-style:dashed}
+.vm.off:hover,.vm.off[open],.node.ref.off:hover,.node.ref.off:focus-visible{opacity:1}
 .vm-body,.host-learn{padding:0 16px 14px;font-size:14px;color:var(--muted)}
 .vm-body p,.host-learn p{margin:0}
 .hint{font-size:12px;font-weight:700;color:var(--accent)}

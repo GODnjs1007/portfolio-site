@@ -161,3 +161,6 @@ other = "직접 해본 것"
 other = "근거 실습 로그"
 [aboutLinks]
 other = "링크"
+
+[vmOff]
+other = "사용 종료"

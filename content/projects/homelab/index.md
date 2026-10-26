@@ -35,7 +35,7 @@ servers:
   vms:
     - { id: "VM 100", name: "portfolio", spec: "4코어 / RAM 4GB / 디스크 38GB", role: "이 사이트를 Docker Nginx로 서빙", here: true }
     - { id: "VM 101", name: "산학 서버", spec: "4코어 / RAM 6GB / 디스크 39GB", role: "산학 프로젝트 서버. 팀원은 이 VM에만 접속" }
-    - { id: "VM 102", name: "paper", spec: "2코어 / RAM 1GB / 디스크 20GB", role: "논문 실측 데이터 수집 (cron). 10.26 수집 종료 후 중지" }
+    - { id: "VM 102", name: "paper", spec: "2코어 / RAM 1GB / 디스크 20GB", role: "논문 실측 데이터 수집 (cron). 10.26 수집 종료 후 중지", off: true }
 steps:
   - { name: "Proxmox 설치와 원격 접속", status: "완료", note: "homelab-01-proxmox" }
   - { name: "VM 원격 접속과 Docker", status: "완료", note: "homelab-02-vm-docker" }
