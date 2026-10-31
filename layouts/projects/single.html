@@ -55,7 +55,8 @@
       <ol class="progress">
         {{ range . }}
         {{ $cls := "" }}{{ if eq .status "완료" }}{{ $cls = "done" }}{{ else if eq .status "진행 중" }}{{ $cls = "now" }}{{ end }}
-        <li class="{{ $cls }}">{{ with .note }}{{ with site.GetPage (printf "/notes/%s" .) }}<a href="{{ .RelPermalink }}">{{ end }}{{ end }}{{ .name }}{{ with .note }}{{ with site.GetPage (printf "/notes/%s" .) }}</a>{{ end }}{{ end }}<em>{{ .status }}</em></li>
+        {{ $np := "" }}{{ with .note }}{{ $np = site.GetPage (cond (hasPrefix . "/") . (printf "/notes/%s" .)) }}{{ end }}
+        <li class="{{ $cls }}">{{ with $np }}<a href="{{ .RelPermalink }}">{{ end }}{{ .name }}{{ with $np }}</a>{{ end }}<em>{{ .status }}</em></li>
         {{ end }}
       </ol>
     </section>
