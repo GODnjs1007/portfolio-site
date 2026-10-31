@@ -37,6 +37,7 @@ servers:
     - { id: "VM 101", name: "산학 서버", spec: "4코어 / RAM 6GB / 디스크 39GB", role: "산학 프로젝트 팀 테스트 서버. 팀원은 이 VM에만 접속. 10.28 팀 서버 이전 후 중지. 부하테스트를 해야 해서 portfolio보다 메모리를 6GB로 더 줌. portfolio에서 겪은 걸 반영해 설치 때 LVM을 끄고 처음부터 39GB 전부 사용. 공개 데이터만 두고, 환자 6~100명 부하테스트와 Prometheus·Grafana 모니터링을 이 VM에서 진행.", off: true }
     - { id: "VM 102", name: "paper", spec: "2코어 / RAM 1GB / 디스크 20GB", role: "논문 실측 데이터 수집 (cron). 10.26 수집 종료 후 중지. cron으로 10분마다 API를 부르는 일 하나만 해서 자원을 최소로 배정. 실측 기록이 다른 작업에 섞이지 않게 VM을 따로 둠. 수집을 끝낸 뒤 데이터를 백업하고 중지, 학술대회 발표 후 삭제 예정.", off: true }
     - { id: "VM 103", name: "careernavi", spec: "2코어 / RAM 4GB / 디스크 28GB", role: "커리어 내비 팀 개발 서버. 팀원 계정과 Tailscale 공유는 이 VM 하나만. RAM 4GB는 FastAPI·Nginx·PostgreSQL에 한국어 임베딩 모델(약 2GB)과 여유분을 더해 잡음. 루트가 13.67GB만 잡혀 있어 lvextend로 28GB까지 늘림. docker 그룹이 사실상 관리자 권한이라 이 VM에는 이 프로젝트만 둠.", }
+    - { id: "VM 104", name: "yeoulmok", spec: "2코어 / RAM 4GB / 디스크 28GB", role: "여울목 서버(관측 데이터 수집·경보 판정 API). 디스크를 늘린 뒤 리눅스 파티션도 같이 늘려(LVM 확장) 28GB 사용. Tailscale 기기 이름으로 접속하고, 저장소 하나에만 쓰는 배포 키로 GitHub와 연결. API 키는 VM 안 별도 파일(권한 600)에만 두고 저장소엔 키 이름만 올림." }
     - { id: "VM 105", name: "calendar", spec: "2코어 / RAM 4GB / 디스크 28GB", role: "웹프로젝트 사이 캘린더 서버. calendar.ihaewon.com으로 외부 공개. Qemu Agent와 Discard는 켜고, 우분투에 필요 없는 TPM은 끔. 루트가 14GB만 잡혀 있어 28GB까지 늘리고, 기초 세팅이 끝난 상태를 스냅샷 base-setup으로 저장. 저장소 전용 배포 키를 SSH Host 별칭으로 구분해 한 VM에 여러 저장소 키를 둘 수 있게 함." }
     - { id: "새 VM", name: "모두의 창업", spec: "사양 미정", role: "미용실 사전 상담 서비스 MVP 서버. 다른 서비스처럼 전용 VM으로 분리하고 서브도메인으로 공개할 계획.", planned: true }
 steps:
