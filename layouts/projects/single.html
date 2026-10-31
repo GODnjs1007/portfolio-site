@@ -33,8 +33,8 @@
           <div class="pve-body">
             <div class="vms">
               {{ range .vms }}
-              <details class="vm{{ if .here }} here{{ end }}{{ if .off }} off{{ end }}">
-                <summary><span class="id">{{ .id }}{{ if .off }} · {{ i18n "vmOff" }}{{ end }}</span><b>{{ .name }}</b><span class="id">{{ .spec }}</span><span class="hint"></span></summary>
+              <details class="vm{{ if .here }} here{{ end }}{{ if or .off .planned }} off{{ end }}">
+                <summary><span class="id">{{ .id }}{{ if .off }} · {{ i18n "vmOff" }}{{ else if .planned }} · {{ i18n "vmPlanned" }}{{ end }}</span><b>{{ .name }}</b><span class="id">{{ .spec }}</span><span class="hint"></span></summary>
                 <div class="vm-body"><p>{{ .role }}</p>{{ with .learn }}<p><strong>{{ i18n "archLearned" }}</strong> {{ . }}</p>{{ end }}</div>
               </details>
               {{ end }}
