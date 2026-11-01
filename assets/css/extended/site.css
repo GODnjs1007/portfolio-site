@@ -50,20 +50,13 @@ main{max-width:1240px;margin:0 auto}
 .node.ref,.host>.inner>.node.ref{border-width:1px}
 .node.ref h4{font-weight:600}
 .rel{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.rel span{font-size:12px;border:1px solid var(--accent);color:var(--accent);padding:2px 8px;background:var(--accent-bg)}
-/* VM 번호표: 프로젝트 카드와 VM 상자가 같은 'vm 번호'로 서로를 가리킨다 */
-.vmtag{position:relative;z-index:1;font-size:12px;line-height:1.6;color:var(--ink);text-decoration:none;border:1px solid var(--ink);background:var(--node);padding:1px 8px}
+.rel span{font-size:12px;border:1px solid #C3CED8;color:var(--muted);padding:1px 8px}
+/* VM 번호표: 프로젝트 카드와 VM 상자가 같은 'vm 번호'로 서로를 가리킨다. 짝마다 같은 색으로 채워 한눈에 짝이 보이게 한다 */
+.node{--co:var(--ink)}
+.vmtag{position:relative;z-index:1;font-size:12px;line-height:1.6;font-weight:500;color:#fff;text-decoration:none;background:var(--co);border:1px solid var(--co);padding:1px 8px}
 .vmtag b{font-family:var(--mono);font-weight:400}
-.vmtag:hover{background:var(--ink);color:#fff}
-.node.off .vmtag{border-color:var(--draft);color:var(--muted)}
-/* 도면의 상세 참조 동그라미: 같은 VM을 쓰는 프로젝트 카드와 VM 상자에 같은 번호가 찍힌다 */
-.node.has-co{padding-right:60px}
-.node{--co:var(--bp)}
-.callout{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--co);color:#fff;font-family:var(--mono);font-size:13px;line-height:1;box-shadow:0 0 0 3px var(--node),0 0 0 4px var(--co)}
-.has-co .vmtag{border-color:var(--co);box-shadow:inset 3px 0 0 var(--co)}
-.has-co .vmtag:hover{background:var(--co);border-color:var(--co)}
-.co-off .callout{background:var(--node);color:var(--muted);border:2px dashed var(--draft);box-shadow:none}
-.co-off .vmtag{border-color:var(--draft);box-shadow:none}
+.vmtag:hover{text-decoration:underline}
+.co-off .vmtag{background:var(--node);border-color:var(--draft);color:var(--muted);font-weight:400}
 .node:target{outline-color:var(--co)}
 .host{border:2px solid var(--ink);padding:10px;display:grid;gap:8px;background:var(--ground)}
 .host>.node{border-width:2px}
@@ -423,9 +416,7 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .principles h2{margin:0;font-size:17px;line-height:1.7}
 .principles ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 40px}
 .principles li{padding-left:16px;border-left:4px solid var(--accent);font-size:17px;font-weight:500;word-break:keep-all}
-/* 지도 칸은 모눈종이 */
-.sheet-sec{padding:40px clamp(20px,4vw,48px) 44px;background-color:#F7FAFC;
-  background-image:linear-gradient(rgba(18,59,99,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(18,59,99,.07) 1px,transparent 1px);background-size:24px 24px}
+.sheet-sec{padding:40px clamp(20px,4vw,48px) 44px}
 .sheet .map{border:0;padding:0;margin:0;background:none}
 .sheet .map-more{margin:24px 0 0;text-align:left}
 /* 쓰는 도구: 청사진 패널 위에 브랜드 색 로고 타일 */
@@ -433,10 +424,10 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .bom h2{margin:0 0 20px;font-size:22px}
 /* 쓰는 도구 패널: 홈 부품표와 소개 카드가 같이 쓴다(layouts/_partials/stack-panels.html) */
 .bom-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.bom-panel{background:var(--bp);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:20px 22px 24px}
+.bom-panel{background:var(--bp);color:#fff;border:1px solid rgba(255,255,255,.18);padding:20px 22px 24px}
 .bom-panel h3{margin:0 0 16px;font-size:17px;font-weight:700}
 .bom-panel ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px}
-.bom-panel li{--brand:var(--ink);width:96px;min-height:96px;display:grid;justify-items:center;align-content:center;gap:8px;padding:12px 6px;background:#F1F5F9;border-radius:10px;color:var(--ink);font-size:13px;font-weight:500;line-height:1.3;text-align:center;word-break:keep-all}
+.bom-panel li{--brand:var(--ink);width:96px;min-height:96px;display:grid;justify-items:center;align-content:center;gap:8px;padding:12px 6px;background:#F1F5F9;border-radius:3px;color:var(--ink);font-size:13px;font-weight:500;line-height:1.3;text-align:center;word-break:keep-all}
 .bom-panel .ico{width:36px;height:36px;color:var(--brand)}
 .bom-panel .ico svg{width:100%;height:100%;fill:currentColor;display:block}
 .pstack-panels{padding-top:16px;border-top:1px solid #C9D1D4}
