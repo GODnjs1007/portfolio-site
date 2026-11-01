@@ -1,6 +1,8 @@
 /* 사이트 스타일 (B 시스템 지도). PaperMod 원본 CSS는 쓰지 않고 이 파일만 로드한다 */
 :root{
-  --ground:#EBEFEA; --ink:#142028; --muted:#4A5862; --node:#FFFFFF; --line:#142028; --accent:#B43C0A; --accent-bg:#FBE6DA; --draft:#7C878E;
+  --ground:#E4EBF0; --ink:#0E2A47; --muted:#4B6075; --node:#FFFFFF; --line:#0E2A47; --accent:#C2381F; --accent-bg:#FBE3DD; --draft:#7D8FA0;
+  /* 청사진: 홈 첫 화면·쓰는 도구 바탕, 옅은 청사진: 일하는 방식 띠 */
+  --bp:#14406B; --bp-deep:#0E2F52; --bp-pale:#E3EDF6;
   --sans:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
 }
@@ -380,11 +382,13 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .cover-text>.cover-go{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:28px;color:var(--ink)}
 .cover-go a{font-weight:700}
 .cover-go .btn{background:var(--accent);color:#fff;text-decoration:none;padding:10px 18px}
-/* 첫 화면만 남색으로 깔아 도면의 표지처럼 보이게 한다. 표제란은 흰 종이로 남기고 주황 그림자를 댄다 */
-.ruler{background:var(--ink);border-bottom-color:#3A4A54}
-.ruler span{color:#8E9AA1;border-right-color:#3A4A54}
-.cover{background:var(--ink);color:#fff}
-.cover-text>p{color:#B9C3C8}
+/* 첫 화면은 청사진: 파란 바탕에 흰 모눈(24px 잔눈, 120px 굵은 눈). 표제란은 흰 종이로 남기고 빨간펜 그림자를 댄다 */
+.ruler{background:var(--bp-deep);border-bottom-color:rgba(255,255,255,.18)}
+.ruler span{color:#9DB7D1;border-right-color:rgba(255,255,255,.18)}
+.cover{color:#fff;background-color:var(--bp);
+  background-image:linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-position:-1px -1px}
+.cover-text>p{color:#C9D9E8}
 .cover-text>.cover-go{color:#fff}
 .cover a:focus-visible{outline-color:#F08A5D}
 .cover .tblock{box-shadow:14px 14px 0 var(--accent);margin:0 14px 14px 0;color:var(--ink)}
@@ -407,22 +411,24 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .tblock time{font-family:var(--mono);font-size:13px}
 .tb-links{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0;padding:10px 16px;border-top:1px solid var(--ink);font-size:14px;font-weight:700}
 .tb-links a{color:var(--accent)}
-.principles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:12px 40px;align-items:start;background:var(--accent-bg);border-block:2px solid var(--ink);padding:28px clamp(20px,4vw,48px)}
+.principles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:12px 40px;align-items:start;background:var(--bp-pale);border-block:2px solid var(--ink);padding:28px clamp(20px,4vw,48px)}
 .principles h2{margin:0;font-size:17px;line-height:1.7}
 .principles ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 40px}
 .principles li{padding-left:16px;border-left:4px solid var(--accent);font-size:17px;font-weight:500;word-break:keep-all}
-.sheet-sec{padding:40px clamp(20px,4vw,48px) 44px}
+/* 지도 칸은 모눈종이 */
+.sheet-sec{padding:40px clamp(20px,4vw,48px) 44px;background-color:#F7FAFC;
+  background-image:linear-gradient(rgba(18,59,99,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(18,59,99,.07) 1px,transparent 1px);background-size:24px 24px}
 .sheet .map{border:0;padding:0;margin:0;background:none}
 .sheet .map-more{margin:24px 0 0;text-align:left}
-.bom{border-top:2px solid var(--ink);padding:36px clamp(20px,4vw,48px) 40px}
-.bom h2{margin:0 0 12px;font-size:22px}
-.bom dl{margin:0}
-.bom dl>div{display:grid;grid-template-columns:12em minmax(0,1fr);gap:8px 24px;align-items:center;padding-block:12px;border-top:1px solid #C9D1D4}
-.bom dt{font-size:15px;font-weight:700}
-.bom dd{margin:0}
-.bom ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.bom li{display:flex;align-items:center;gap:8px;padding:5px 12px 5px 10px;border:1px solid var(--ink);font-size:14px;font-weight:500;line-height:1.4}
-.bom .ico{width:18px;height:18px;flex:none}
+/* 쓰는 도구: 청사진 패널 위에 브랜드 색 로고 타일 */
+.bom{border-top:2px solid var(--ink);padding:36px clamp(20px,4vw,48px) 44px;background:var(--bp-deep);color:#fff}
+.bom h2{margin:0 0 20px;font-size:22px}
+.bom-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.bom-panel{background:var(--bp);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:20px 22px 24px}
+.bom-panel h3{margin:0 0 16px;font-size:17px;font-weight:700}
+.bom ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px}
+.bom li{--brand:var(--ink);width:96px;min-height:96px;display:grid;justify-items:center;align-content:center;gap:8px;padding:12px 6px;background:#F1F5F9;border-radius:10px;color:var(--ink);font-size:13px;font-weight:500;line-height:1.3;text-align:center;word-break:keep-all}
+.bom .ico{width:36px;height:36px;color:var(--brand)}
 .bom .ico svg{width:100%;height:100%;fill:currentColor;display:block}
 @media (max-width:860px){
   .ruler{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -433,5 +439,8 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
   .tb-who{grid-template-columns:104px minmax(0,1fr)}
   .tb-name{font-size:24px}
   .principles,.principles ul{grid-template-columns:1fr}
-  .bom dl>div{grid-template-columns:1fr}
+  .bom-grid{grid-template-columns:1fr}
+  .bom-panel{padding:16px 14px 18px}
+  .bom ul{gap:8px}
+  .bom li{width:calc((100% - 16px)/3);min-height:88px}
 }
