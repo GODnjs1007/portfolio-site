@@ -10,14 +10,14 @@
     {{ with $about }}{{ partial "title-block.html" . }}{{ end }}
   </section>
 
-  {{ with $about }}{{ partial "principles.html" . }}{{ end }}
-
   <section class="sheet-sec" aria-labelledby="h-map">
     <div class="sec-head"><h2 id="h-map">{{ i18n "homeMap" }}</h2>
       <p class="legend"><span>{{ i18n "legendProject" }}</span><span class="l-here">{{ i18n "legendHere" }}</span><span class="l-draft">{{ i18n "legendPreview" }}</span></p></div>
     {{ partial "map.html" . }}
     <p class="map-more"><a class="more" href="{{ "/projects/" | relURL }}">{{ i18n "homeToList" }}</a></p>
   </section>
+
+  {{ partial "learned-home.html" . }}
 
   {{ with $about }}{{ partial "bom.html" . }}{{ end }}
 </div>

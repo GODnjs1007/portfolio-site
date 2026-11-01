@@ -1,0 +1,28 @@
+{{- /* 홈 '직접 쓴 배운 점': 일하는 방식(about.md profile.strengths)을 머리말로 두고, 그 근거로 프로젝트마다 가장 최근의 learned.md를 하나씩(최대 4개) 보여준다.
+     목록은 배운 점 페이지(layouts/learned/list.html)와 같은 기준: 공개된(초안·미리보기 아님) 프로젝트에 연결된 실습 로그만 */ -}}
+{{- $about := site.GetPage "/about" -}}
+{{- $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true -}}
+{{- $slugs := slice -}}{{- range $projects }}{{ $slugs = $slugs | append (partial "slug.html" .) }}{{ end -}}
+{{- $with := slice -}}
+{{- range where site.RegularPages "Section" "notes" }}{{ if and (.Resources.GetMatch "learned.md") (intersect .Params.projects $slugs) }}{{ $with = $with | append . }}{{ end }}{{ end -}}
+{{- $picked := slice -}}{{- $seen := slice -}}
+{{- range $with.ByDate.Reverse }}{{ $pj := index .Params.projects 0 }}{{ if and (not (in $seen $pj)) (lt (len $picked) 4) }}{{ $picked = $picked | append . }}{{ $seen = $seen | append $pj }}{{ end }}{{ end -}}
+{{- if $picked }}
+<section class="sheet-sec learned-home" aria-labelledby="h-learned-home">
+  <div class="sec-head"><h2 id="h-learned-home">{{ i18n "rowLearned" }}</h2><span class="badge">{{ i18n "learnedBadge" }}</span></div>
+  {{- with $about }}{{ with .Params.profile.strengths }}
+  <ul class="way" aria-label="{{ i18n "homeWay" }}">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+  {{- end }}{{ end }}
+  <div class="lcards">
+    {{- range $picked }}
+    {{- $pj := site.GetPage (printf "/projects/%s" (index .Params.projects 0)) }}
+    <article class="lcard">
+      <p class="lc-meta">{{ with $pj }}<span>{{ .Title }}</span>{{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></p>
+      <h3><a href="{{ .RelPermalink }}#learned">{{ .Title }}</a></h3>
+      <blockquote>{{ (.Resources.GetMatch "learned.md").Plain | htmlUnescape | strings.TrimSpace | truncate 110 }}</blockquote>
+    </article>
+    {{- end }}
+  </div>
+  <p class="map-more"><a class="more" href="{{ "/learned/" | relURL }}">{{ i18n "homeLearnedAll" (len $with) }}</a></p>
+</section>
+{{- end }}

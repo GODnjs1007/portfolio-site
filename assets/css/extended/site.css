@@ -412,11 +412,22 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .tblock time{font-family:var(--mono);font-size:13px}
 .tb-links{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0;padding:10px 16px;border-top:1px solid var(--ink);font-size:14px;font-weight:700}
 .tb-links a{color:var(--accent)}
-.principles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:12px 40px;align-items:start;background:var(--bp-pale);border-block:2px solid var(--ink);padding:28px clamp(20px,4vw,48px)}
-.principles h2{margin:0;font-size:17px;line-height:1.7}
-.principles ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 40px}
-.principles li{padding-left:16px;border-left:4px solid var(--accent);font-size:17px;font-weight:500;word-break:keep-all}
 .sheet-sec{padding:40px clamp(20px,4vw,48px) 44px}
+/* 직접 쓴 배운 점: 일하는 방식 두 문장을 머리말로, 그 아래 근거가 되는 최근 배운 점 카드. 초록은 사이트 전체에서 '직접 작성' 표시 색 */
+.learned-home{background:var(--bp-pale);border-top:2px solid var(--ink)}
+.learned-home .sec-head{justify-content:flex-start;align-items:center;gap:12px}
+.way{list-style:none;margin:0 0 28px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 40px}
+.way li{padding-left:16px;border-left:4px solid var(--accent);font-size:17px;font-weight:500;word-break:keep-all}
+.lcards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.lcard{position:relative;display:grid;gap:8px;align-content:start;background:var(--node);border:1px solid var(--ink);padding:16px 18px 18px}
+.lc-meta{margin:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 8px;font-size:12px;color:var(--muted)}
+.lc-meta time{font-family:var(--mono)}
+.lcard h3{margin:0;font-size:16px;line-height:1.45;word-break:keep-all}
+.lcard h3 a{text-decoration:none}
+.lcard h3 a::after{content:"";position:absolute;inset:0}
+.lcard:hover h3 a{text-decoration:underline}
+.lcard blockquote{margin:0;padding-left:12px;border-left:3px solid #1E6B43;font-size:14px;line-height:1.65;word-break:keep-all}
+@media (max-width:1080px){.lcards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .sheet .map{border:0;padding:0;margin:0;background:none}
 .sheet .map-more{margin:24px 0 0;text-align:left}
 /* 쓰는 도구: 청사진 패널 위에 브랜드 색 로고 타일 */
@@ -436,7 +447,7 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
   .cover .tblock{box-shadow:10px 10px 0 var(--accent);margin:0 10px 10px 0}
   .tb-who{grid-template-columns:104px minmax(0,1fr)}
   .tb-name{font-size:24px}
-  .principles,.principles ul{grid-template-columns:1fr}
+  .way,.lcards{grid-template-columns:1fr}
   .bom-grid{grid-template-columns:1fr}
   .bom-panel{padding:16px 14px 18px}
   .bom-panel ul{gap:8px}
