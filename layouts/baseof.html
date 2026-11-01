@@ -4,9 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Params.author }}{{ end }}</title>
-<meta name="description" content="{{ with .Summary }}{{ . | plainify | truncate 150 }}{{ else }}{{ site.Params.description }}{{ end }}">
+{{- $desc := site.Params.description }}{{ with .Summary }}{{ $desc = . | plainify | truncate 150 }}{{ end }}
+<meta name="description" content="{{ $desc }}">
+{{- /* 링크 미리보기(카카오톡·슬랙 등). 대표 이미지를 지정하지 않으면 본문의 증명사진을 가져가므로 공유용 이미지를 따로 둔다 */}}
+<meta property="og:site_name" content="{{ site.Title }}">
 <meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ $desc }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with resources.Get "img/og.png" }}<meta property="og:image" content="{{ .Permalink }}">
+<meta property="og:image:width" content="{{ .Width }}">
+<meta property="og:image:height" content="{{ .Height }}">
+<meta name="twitter:card" content="summary_large_image">{{ end }}
 <link rel="canonical" href="{{ .Permalink }}">
 {{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">{{ end }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
