@@ -36,10 +36,14 @@ profile:
     - { label: "교육", value: "연세대 AI부트캠프 의료AI응용 수료 (2026 여름)" }
     - { label: "어학", value: "OPIc IL (2026.09)" }
   stack:
-    - { group: "리눅스·네트워크", items: ["Linux (Ubuntu)", "SSH", "Nginx", "Tailscale", "Cloudflare Tunnel"] }
-    - { group: "AWS", items: ["EC2", "VPC", "ALB", "Auto Scaling", "RDS", "ECS Fargate", "ECR", "CloudWatch"] }
-    - { group: "컨테이너·자동화", items: ["Docker", "Terraform", "Hugo"] }
-    - { group: "가상화·기타", items: ["Proxmox VE", "Redis Streams", "GitHub"] }
+    - group: "리눅스·네트워크"
+      items: [{ n: "Ubuntu", i: "ubuntu" }, { n: "SSH", i: "term" }, { n: "Nginx", i: "nginx" }, { n: "Tailscale", i: "tailscale" }, { n: "Cloudflare Tunnel", i: "cloudflare" }]
+    - group: "AWS"
+      items: [{ n: "EC2", i: "amazonec2" }, { n: "VPC", i: "amazonwebservices" }, { n: "ALB", i: "awselasticloadbalancing" }, { n: "Auto Scaling", i: "amazonwebservices" }, { n: "RDS", i: "amazonrds" }, { n: "ECS Fargate", i: "awsfargate" }, { n: "ECR", i: "amazonwebservices" }, { n: "CloudWatch", i: "amazoncloudwatch" }]
+    - group: "컨테이너·자동화"
+      items: [{ n: "Docker", i: "docker" }, { n: "Terraform", i: "terraform" }, { n: "Hugo", i: "hugo" }]
+    - group: "가상화·기타"
+      items: [{ n: "Proxmox VE", i: "proxmox" }, { n: "Redis Streams", i: "redis" }, { n: "GitHub", i: "github" }]
   activities:
     - { period: "2026.09 ~", title: "AI 산학프로젝트 (팀장)", note: "서버 구조(TCP 수신, Redis Streams, 워커) 설계" }
     - { period: "2026.09 ~", title: "융합캡스톤디자인 (Frozen Stiff)", note: "게임 접속 솔루션 검증, 플레이 기록 수집 서버, 빌드·배포 자동화 담당" }

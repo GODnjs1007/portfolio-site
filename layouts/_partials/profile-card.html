@@ -22,7 +22,7 @@
       <dl class="pfacts">{{ range $p.facts }}<div><dt>{{ .label }}</dt><dd>{{ .value }}</dd></div>{{ end }}</dl>
       <div class="pstack" role="group" aria-label="{{ i18n "profileStack" }}">
         {{- range $p.stack }}
-        <div><span class="g">{{ .group }}</span><ul class="pchips">{{ range .items }}<li>{{ . }}</li>{{ end }}</ul></div>
+        <div><span class="g">{{ .group }}</span><ul class="pchips">{{ range .items }}{{ $svg := "" }}{{ with resources.Get (printf "icons/%s.svg" .i) }}{{ $svg = .Content }}{{ end }}<li><span class="ico" aria-hidden="true">{{ $svg | safeHTML }}</span><span class="nm">{{ .n }}</span></li>{{ end }}</ul></div>
         {{- end }}
       </div>
       {{- if not $detail }}
