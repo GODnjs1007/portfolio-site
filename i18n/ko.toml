@@ -178,6 +178,8 @@ other = "근거 실습 로그"
 [aboutLinks]
 other = "링크"
 
+[vmVia]
+other = "서버"
 [vmOff]
 other = "사용 종료"
 [vmPlanned]

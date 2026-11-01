@@ -11,10 +11,11 @@ weight: 20
 mapLabel: "산학"
 alsoOn:
   host: "homelab"
+  via: "테스트 서버"
   label: "vm 101"
   title: "산학 테스트 서버"
   off: true
-relations: ["테스트 서버 → 홈랩", "산학 논문"]
+relations: ["산학 논문"]
 brief:
   why: "서버 1대가 환자 몇 명까지 지연 없이 버티는지 숫자로 재고, 병목을 찾아 개선하려고 생성기와 부하테스트를 맡았습니다."
   did:

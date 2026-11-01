@@ -8,12 +8,12 @@ stack: []
 period: "2026 2학기"
 alsoOn:
   host: "homelab"
+  via: "서버"
   label: "vm 105"
   title: "MiCAL 서버"
 tone: "#C49A32"
 weight: 29
 mapLabel: "웹프"
-relations: ["서버 → 홈랩"]
 preview: true
 build:
   render: never

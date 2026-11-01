@@ -9,9 +9,9 @@ period: "2026.08 ~"
 tone: "#5E9E6E"
 weight: 22
 mapLabel: "팀 여울목"
-relations: ["서버 → 홈랩"]
 alsoOn:
   host: "homelab"
+  via: "서버"
   label: "vm 104"
   title: "여울목 서버"
 brief:

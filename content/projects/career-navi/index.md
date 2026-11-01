@@ -9,9 +9,10 @@ period: "2026.10 ~ 2026.11"
 tone: "#8C9A3E"
 weight: 25
 mapLabel: "팀 갭스톤"
-relations: ["캡스톤디자인 경진대회", "서버 → 홈랩"]
+relations: ["캡스톤디자인 경진대회"]
 alsoOn:
   host: "homelab"
+  via: "서버"
   label: "vm 103"
   title: "커리어 내비 개발 서버"
 brief:

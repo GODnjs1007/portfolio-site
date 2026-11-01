@@ -8,12 +8,12 @@ stack: []
 period: "2026.09 ~"
 alsoOn:
   host: "homelab"
+  via: "서버"
   label: "vm 106"
   title: "모두의 창업 서버 (생성 예정)"
 tone: "#A0728F"
 weight: 23
 mapLabel: "모두의 창업"
-relations: ["서버 → 홈랩"]
 brief:
   why: "미용사 지인에게 물어보니 손님이 자기 머리 상태를 설명하지 못하는 게 제일 힘들다고 했습니다. 예약과 시술 사이에 비어 있는 시간을 3분짜리 사전 문진으로 채우려고 시작했습니다."
   did:

@@ -36,9 +36,13 @@ main{max-width:1240px;margin:0 auto}
 .col .stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:12px;align-items:start}
 .col>h3{margin:0;align-self:center;font-size:14px;font-weight:700;border:2px solid var(--line);border-top:0;padding:4px 12px;background:var(--ground)}
 .col::before{content:"";width:2px;height:16px;background:var(--line);align-self:center;margin-bottom:-12px}
-.node{border:2px solid var(--ink);background:var(--node);padding:14px 16px;display:grid;gap:4px;text-decoration:none}
-a.node:hover h4{text-decoration:underline}
+.node{position:relative;border:2px solid var(--ink);background:var(--node);padding:14px 16px;display:grid;gap:4px;scroll-margin-top:24px}
 .node h4{margin:0;font-size:17px;line-height:1.4}
+/* 제목 링크를 카드 전체로 넓히고, 번호표 링크만 그 위로 올린다 */
+.node h4 a{text-decoration:none}
+.node h4 a::after{content:"";position:absolute;inset:0}
+.node:hover h4 a{text-decoration:underline}
+.node:target{outline:3px solid var(--accent);outline-offset:3px}
 .node p{margin:0;font-size:14px;color:var(--muted)}
 .node .id{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .node.draft{border-style:dashed;border-color:var(--draft);color:var(--muted)}
@@ -46,12 +50,12 @@ a.node:hover h4{text-decoration:underline}
 .node.ref,.host>.inner>.node.ref{border-width:1px}
 .node.ref h4{font-weight:600}
 .rel{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.node[style*="--tone"]{border-left:6px solid var(--tone)}
-.node.ref[style*="--tone"] .rel span{border-color:var(--tone);color:var(--ink);background:color-mix(in srgb,var(--tone) 16%,#fff)}
-.host>.inner>.node.ref[style*="--tone"]{border-left:6px solid var(--tone)}
-.host>.inner>.node.ref.off[style*="--tone"]{border-left-color:color-mix(in srgb,var(--tone) 45%,#fff)}
-.node.ref.off[style*="--tone"] .rel span{border-color:color-mix(in srgb,var(--tone) 45%,#fff);background:color-mix(in srgb,var(--tone) 8%,#fff)}
 .rel span{font-size:12px;border:1px solid var(--accent);color:var(--accent);padding:2px 8px;background:var(--accent-bg)}
+/* VM 번호표: 프로젝트 카드와 VM 상자가 같은 'vm 번호'로 서로를 가리킨다 */
+.vmtag{position:relative;z-index:1;font-size:12px;line-height:1.6;color:var(--ink);text-decoration:none;border:1px solid var(--ink);background:var(--node);padding:1px 8px}
+.vmtag b{font-family:var(--mono);font-weight:400}
+.vmtag:hover{background:var(--ink);color:#fff}
+.node.off .vmtag{border-color:var(--draft);color:var(--muted)}
 .host{border:2px solid var(--ink);padding:10px;display:grid;gap:8px;background:var(--ground)}
 .host>.node{border-width:2px}
 .host .inner{display:grid;gap:8px;padding-left:14px;border-left:2px solid var(--line);margin-left:8px}
