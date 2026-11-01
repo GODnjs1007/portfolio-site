@@ -8,7 +8,7 @@
   {{- if $p.Params.preview }}
   <p>{{ $p.Params.status }} · {{ $p.Params.role }}</p>
   {{- else }}
-  <p>{{ $p.Params.status }}{{ with $p.Params.period }} · {{ . }}{{ end }}{{ if $p.Params.here }} · {{ i18n "nodeHere" }}{{ end }}</p>
+  <p>{{ $p.Params.status }}{{ with $p.Params.period }} · {{ . }}{{ end }}</p>
   {{- end }}
   {{- if or $p.Params.relations $a.label }}
   <div class="rel">{{ with $a.label }}<a class="vmtag" href="#{{ . | urlize }}">{{ $a.via | default (i18n "vmVia") }} → <b>{{ . }}</b></a>{{ end }}{{ range $p.Params.relations }}<span>{{ . }}</span>{{ end }}</div>

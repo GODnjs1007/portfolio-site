@@ -8,7 +8,7 @@ other = "본문으로 건너뛰기"
 [mainMenu]
 other = "주 메뉴"
 [footer]
-other = "이 사이트는 Hugo로 만들어, 제 방 미니PC의 Proxmox VM에서 직접 운영합니다. 상태 표시는 실시간 조회가 아니라 직접 갱신하는 기록입니다."
+other = "Hugo로 만들어 Proxmox 홈랩 VM 100(Docker Nginx)에서 운영합니다. 상태 표시는 수동으로 갱신합니다."
 
 # ── 홈 ───────────────────────────────
 [homeMap]
@@ -46,11 +46,9 @@ other = "최종 수정"
 [legendProject]
 other = "프로젝트"
 [legendHere]
-other = "지금 이 사이트"
+other = "ihaewon.com"
 [legendPreview]
 other = "진행 중 · 상세 준비 중"
-[nodeHere]
-other = "지금 이 사이트"
 [nodeRef]
 other = "→ {{ .cat }} 칸 '{{ .name }}' 카드와 같은 페이지"
 
@@ -80,7 +78,7 @@ other = "30초 요약"
 [briefDid]
 other = "내가 한 일"
 [briefVerified]
-other = "직접 확인한 결과"
+other = "확인한 결과"
 [archTitle]
 other = "시스템 구조"
 [archVisitor]
@@ -88,7 +86,7 @@ other = "방문자 · 내 기기"
 [archHost]
 other = "물리 서버 1대"
 [archManual]
-other = "직접 표시"
+other = "수동 표시"
 [archLearned]
 other = "배운 점"
 [stepsTitle]
@@ -112,7 +110,7 @@ other = "실습하면서 한 작업과 트러블슈팅을 AI와 함께 정리했
 [notesHowLearned]
 other = "배운 점"
 [notesHowLearnedText]
-other = "정리된 과정을 다시 보면서 제가 이해한 내용을 직접 썼습니다. 초록색 박스로 따로 표시했습니다."
+other = "정리된 과정을 다시 보면서 제가 이해한 내용을 썼습니다. 초록색 상자로 따로 표시했습니다."
 [notesTagHint]
 other = "주황색 태그는 그 글에 담긴 트러블슈팅 사례입니다."
 [viewSwitch]
@@ -150,13 +148,13 @@ other = "진행 과정은 실습 내용을 AI와 함께 정리했고, 배운 점
 [learnedJump]
 other = "배운 점 바로가기 ↓"
 [learnedTitle]
-other = "직접 정리한 배운 점"
+other = "배운 점"
 [learnedHint]
 other = "단계 제목만 보고 먼저 떠올려본 다음, 펼쳐서 확인하는 용도로 씁니다."
 [learnedStepCount]
 other = "{{ .Count }}개 단계"
 [projLearnedJump]
-other = "이 프로젝트에서 직접 쓴 배운 점 {{ .Count }}편 바로가기 ↓"
+other = "배운 점 {{ .Count }}편 바로가기 ↓"
 [learnedCount]
 other = "{{ .Count }}편"
 [homeLearnedAll]
@@ -178,7 +176,7 @@ other = "할 수 있는 일과 근거"
 [aboutColArea]
 other = "분야"
 [aboutColWhat]
-other = "직접 해본 것"
+other = "해본 것"
 [aboutColProof]
 other = "근거 실습 로그"
 [aboutLinks]

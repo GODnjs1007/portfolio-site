@@ -46,7 +46,7 @@ profile:
   activities:
     - { period: "2026.09 ~", title: "AI 산학프로젝트 (팀장)", note: "서버 구조(TCP 수신, Redis Streams, 워커) 설계" }
     - { period: "2026.09 ~", title: "융합캡스톤디자인 (Frozen Stiff)", note: "게임 접속 솔루션 검증, 플레이 기록 수집 서버, 빌드·배포 자동화 담당" }
-    - { period: "2026.09 ~", title: "홈 서버 운영, 이 포트폴리오 사이트", note: "Proxmox 위에 Ubuntu VM을 운영하고, Tailscale 원격 접속과 Docker Nginx·Cloudflare Tunnel로 사이트를 공개" }
+    - { period: "2026.09 ~", title: "Proxmox 홈랩 운영, ihaewon.com 포트폴리오 사이트", note: "Proxmox 위에 Ubuntu VM을 운영하고, Tailscale 원격 접속과 Docker Nginx·Cloudflare Tunnel로 사이트를 공개" }
     - { period: "2026.07 ~", title: "AWS 인프라 구축 실습", note: "EC2·Nginx부터 VPC, ALB, Terraform, ECS Fargate, CloudWatch까지. 장애를 로그로 추적해 기록" }
     - { period: "2026 여름", title: "연세대 AI부트캠프 의료AI응용", note: "비정형데이터분석, AI기반건강보험빅데이터분석, 의료버티컬AI에이전트 수료" }
 links:
