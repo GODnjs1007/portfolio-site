@@ -1,6 +1,6 @@
 ---
-title: "팀 웹 프로젝트"
-summary: "팀 웹 프로젝트에서 백엔드를 맡았습니다. 학교 커뮤니티 캘린더를 만들고 있고, 프론트 시안은 calendar.ihaewon.com에 공개해 두었습니다. 서버는 홈랩의 VM 105에서 돌립니다."
+title: "MiCAL · 학사·학과·장학금 일정 통합 캘린더"
+summary: "웹프로그래밍 조별 과제(웹프)로 MiCAL을 만들고 있고, 백엔드를 맡았습니다. 프론트 시안은 calendar.ihaewon.com에 공개해 두었습니다. 서버는 홈랩의 VM 105에서 돌립니다."
 role: "조원 · 백엔드"
 status: "개발 중"
 category: "서비스"
@@ -9,8 +9,10 @@ period: "2026 2학기"
 alsoOn:
   host: "homelab"
   label: "vm 105"
-  title: "캘린더 서버"
+  title: "MiCAL 서버"
 weight: 29
+mapLabel: "웹프"
+relations: ["서버 → 홈랩"]
 preview: true
 build:
   render: never
