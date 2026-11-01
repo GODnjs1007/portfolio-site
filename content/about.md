@@ -34,7 +34,6 @@ profile:
   facts:
     - { label: "학력", value: "연세대학교 미래캠퍼스 소프트웨어학부 · 2027.02 졸업 예정" }
     - { label: "교육", value: "연세대 AI부트캠프 의료AI응용 수료 (2026 여름)" }
-    - { label: "어학", value: "OPIc IL (2026.09)" }
   stack:
     - group: "리눅스·네트워크"
       items: [{ n: "Ubuntu", i: "ubuntu" }, { n: "SSH", i: "term" }, { n: "Nginx", i: "nginx" }, { n: "Tailscale", i: "tailscale" }, { n: "Cloudflare Tunnel", i: "cloudflare" }]
