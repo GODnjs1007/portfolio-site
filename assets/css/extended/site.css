@@ -114,6 +114,12 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .box{background:var(--node);border:2px solid var(--ink);padding:20px}
 .box h2{margin:0 0 12px;font-size:18px}
 .box p{margin:0 0 10px;font-size:15px}
+/* 프로젝트 상세 맨 위: 이 프로젝트에서 직접 쓴 배운 점 바로가기. 초록은 '직접 작성' 표시 색 */
+.learned-box{border-color:#1E6B43;box-shadow:inset 0 5px 0 #1E6B43;padding-top:24px}
+.learned-box h2{display:flex;align-items:center;gap:8px}
+.learned-box a{color:var(--ink)}
+.learned-box{scroll-margin-top:24px}
+.d-head .learned-flag{margin:4px 0 0}
 .progress{list-style:none;margin:0;padding:0;display:grid;gap:0}
 .progress li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;padding-block:8px;font-size:15px;border-bottom:1px solid #DCE2E4}
 .progress li::before{content:"";width:14px;height:14px;border:2px solid var(--ink);justify-self:center}
@@ -420,12 +426,14 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .way li{padding-left:16px;border-left:4px solid var(--accent);font-size:17px;font-weight:500;word-break:keep-all}
 .lcards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .lcard{position:relative;display:grid;gap:8px;align-content:start;background:var(--node);border:1px solid var(--ink);padding:16px 18px 18px}
-.lc-meta{margin:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 8px;font-size:12px;color:var(--muted)}
-.lc-meta time{font-family:var(--mono)}
+.lc-meta{margin:0;display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.lc-meta span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lc-meta time{flex:none;font-family:var(--mono)}
 .lcard h3{margin:0;font-size:16px;line-height:1.45;word-break:keep-all}
 .lcard h3 a{text-decoration:none}
 .lcard h3 a::after{content:"";position:absolute;inset:0}
 .lcard:hover h3 a{text-decoration:underline}
+.lcard[hidden]{display:none}
 .lcard blockquote{margin:0;padding-left:12px;border-left:3px solid #1E6B43;font-size:14px;line-height:1.65;word-break:keep-all}
 @media (max-width:1080px){.lcards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .sheet .map{border:0;padding:0;margin:0;background:none}

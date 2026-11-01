@@ -155,6 +155,10 @@ other = "직접 정리한 배운 점"
 other = "단계 제목만 보고 먼저 떠올려본 다음, 펼쳐서 확인하는 용도로 씁니다."
 [learnedStepCount]
 other = "{{ .Count }}개 단계"
+[projLearnedJump]
+other = "이 프로젝트에서 직접 쓴 배운 점 {{ .Count }}편 바로가기 ↓"
+[learnedCount]
+other = "{{ .Count }}편"
 [homeLearnedAll]
 other = "배운 점 {{ .Count }}편 전체 보기 →"
 [learnedToNote]

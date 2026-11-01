@@ -1,22 +1,25 @@
-{{- /* 홈 '직접 쓴 배운 점': 일하는 방식(about.md profile.strengths)을 머리말로 두고, 그 근거로 프로젝트마다 가장 최근의 learned.md를 하나씩(최대 4개) 보여준다.
-     목록은 배운 점 페이지(layouts/learned/list.html)와 같은 기준: 공개된(초안·미리보기 아님) 프로젝트에 연결된 실습 로그만 */ -}}
+{{- /* 홈 '직접 쓴 배운 점': 일하는 방식(about.md profile.strengths)을 머리말로 두고, 그 근거로 배운 점 카드 4개를 보여준다.
+     카드는 배운 점 전부를 HTML에 넣어두고, 새로고침할 때마다 아래 스크립트가 무작위로 4개를 고른다(한 프로젝트에서 최대 2개).
+     스크립트가 없으면 프로젝트마다 가장 최근 1편이 보인다.
+     목록 기준은 배운 점 페이지(layouts/learned/list.html)와 같다: 공개된(초안·미리보기 아님) 프로젝트에 연결된 실습 로그만 */ -}}
 {{- $about := site.GetPage "/about" -}}
 {{- $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true -}}
 {{- $slugs := slice -}}{{- range $projects }}{{ $slugs = $slugs | append (partial "slug.html" .) }}{{ end -}}
 {{- $with := slice -}}
 {{- range where site.RegularPages "Section" "notes" }}{{ if and (.Resources.GetMatch "learned.md") (intersect .Params.projects $slugs) }}{{ $with = $with | append . }}{{ end }}{{ end -}}
 {{- $picked := slice -}}{{- $seen := slice -}}
-{{- range $with.ByDate.Reverse }}{{ $pj := index .Params.projects 0 }}{{ if and (not (in $seen $pj)) (lt (len $picked) 4) }}{{ $picked = $picked | append . }}{{ $seen = $seen | append $pj }}{{ end }}{{ end -}}
-{{- if $picked }}
+{{- range $with.ByDate.Reverse }}{{ $pj := index .Params.projects 0 }}{{ if and (not (in $seen $pj)) (lt (len $picked) 4) }}{{ $picked = $picked | append .RelPermalink }}{{ $seen = $seen | append $pj }}{{ end }}{{ end -}}
+{{- if $with }}
 <section class="sheet-sec learned-home" aria-labelledby="h-learned-home">
   <div class="sec-head"><h2 id="h-learned-home">{{ i18n "rowLearned" }}</h2><span class="badge">{{ i18n "learnedBadge" }}</span></div>
   {{- with $about }}{{ with .Params.profile.strengths }}
   <ul class="way" aria-label="{{ i18n "homeWay" }}">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
   {{- end }}{{ end }}
-  <div class="lcards">
-    {{- range $picked }}
-    {{- $pj := site.GetPage (printf "/projects/%s" (index .Params.projects 0)) }}
-    <article class="lcard">
+  <div class="lcards" data-show="4" data-per="2">
+    {{- range $with.ByDate.Reverse }}
+    {{- $slug := index .Params.projects 0 }}
+    {{- $pj := site.GetPage (printf "/projects/%s" $slug) }}
+    <article class="lcard" data-p="{{ $slug }}"{{ if not (in $picked .RelPermalink) }} hidden{{ end }}>
       <p class="lc-meta">{{ with $pj }}<span>{{ .Title }}</span>{{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></p>
       <h3><a href="{{ .RelPermalink }}#learned">{{ .Title }}</a></h3>
       <blockquote>{{ (.Resources.GetMatch "learned.md").Plain | htmlUnescape | strings.TrimSpace | truncate 110 }}</blockquote>
@@ -25,4 +28,16 @@
   </div>
   <p class="map-more"><a class="more" href="{{ "/learned/" | relURL }}">{{ i18n "homeLearnedAll" (len $with) }}</a></p>
 </section>
+<script>
+/* 새로고침마다 배운 점 카드를 무작위로 고른다. 한 프로젝트에서 data-per개까지, 모두 data-show개 */
+(function(){
+  var box=document.querySelector('.lcards');if(!box)return;
+  var cards=[].slice.call(box.querySelectorAll('.lcard')),show=+box.dataset.show,per=+box.dataset.per;
+  for(var i=cards.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=cards[i];cards[i]=cards[j];cards[j]=t}
+  var count={},out=[];
+  cards.forEach(function(c){var p=c.dataset.p;if(out.length<show&&(count[p]||0)<per){count[p]=(count[p]||0)+1;out.push(c)}});
+  cards.forEach(function(c){c.hidden=out.indexOf(c)<0});
+  out.forEach(function(c){box.appendChild(c)});
+})();
+</script>
 {{- end }}
