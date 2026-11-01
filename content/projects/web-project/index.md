@@ -6,6 +6,10 @@ status: "개발 중"
 category: "서비스"
 stack: []
 period: "2026 2학기"
+alsoOn:
+  host: "homelab"
+  label: "vm 105"
+  title: "캘린더 서버"
 weight: 29
 preview: true
 build:

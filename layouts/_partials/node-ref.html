@@ -1,8 +1,16 @@
 {{- /* 다른 칸에 있는 카드로 가는 바로가기 상자. front matter alsoOn: { host, label, title, name } */ -}}
 {{- $p := . -}}
 {{- $a := $p.Params.alsoOn -}}
+{{- if $p.Params.preview -}}
+<div class="node ref draft">
+  {{ with $a.label }}<span class="id">{{ . }}</span>{{ end }}
+  <h4>{{ $a.title | default $p.Title }}</h4>
+  <p>{{ i18n "nodeRef" (dict "cat" $p.Params.category "name" ($a.name | default $p.Title)) }}</p>
+</div>
+{{- else -}}
 <a class="node ref{{ if $a.off }} off{{ end }}" href="{{ $p.RelPermalink }}">
   {{ with $a.label }}<span class="id">{{ . }}{{ if $a.off }} · {{ i18n "vmOff" }}{{ end }}</span>{{ end }}
   <h4>{{ $a.title | default $p.Title }}</h4>
   <p>{{ i18n "nodeRef" (dict "cat" $p.Params.category "name" ($a.name | default $p.Title)) }}</p>
 </a>
+{{- end -}}

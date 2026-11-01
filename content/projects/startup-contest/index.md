@@ -6,6 +6,10 @@ status: "진행 중 · 1라운드"
 category: "서비스"
 stack: []
 period: "2026.09 ~"
+alsoOn:
+  host: "homelab"
+  label: "vm 106"
+  title: "모두의 창업 서버 (생성 예정)"
 weight: 23
 mapLabel: "모두의 창업"
 relations: ["서버 → 홈랩"]

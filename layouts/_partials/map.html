@@ -19,7 +19,7 @@
         {{ if or $children $refs }}
           <div class="host">
             {{ partial "node.html" . }}
-            <div class="inner">{{ range $children.ByWeight }}{{ partial "node.html" . }}{{ end }}{{ range $refs.ByWeight }}{{ partial "node-ref.html" . }}{{ end }}</div>
+            <div class="inner">{{ range $children.ByWeight }}{{ partial "node.html" . }}{{ end }}{{ range sort $refs "Params.alsoOn.label" }}{{ partial "node-ref.html" . }}{{ end }}</div>
           </div>
         {{ else }}
           {{ partial "node.html" . }}
