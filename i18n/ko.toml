@@ -25,6 +25,22 @@ other = "실습 로그 전체 보기 →"
 other = "소개"
 [homeAboutLink]
 other = "역량과 근거 보기"
+[homeGoMap]
+other = "프로젝트 지도 보기"
+[homeGoNotes]
+other = "실습 로그 보기"
+[homeWay]
+other = "일하는 방식"
+[homeTools]
+other = "쓰는 도구"
+
+# ── 홈 표제란 ─────────────────────────
+[tbLabel]
+other = "작성자 정보"
+[tbDrawnBy]
+other = "작성자"
+[tbRev]
+other = "최종 수정"
 
 # ── 지도 범례 ─────────────────────────
 [legendProject]

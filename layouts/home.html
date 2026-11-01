@@ -1,15 +1,26 @@
 {{ define "main" }}
-<section class="intro">
-  <h1>{{ site.Params.intro }}</h1>
-  <p>{{ site.Params.introSub }}</p>
-</section>
+{{ $about := site.GetPage "/about" }}
+<div class="sheet">
+  <div class="ruler" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span></div>
 
-<section aria-labelledby="h-map">
-  <div class="sec-head"><h2 id="h-map">{{ i18n "homeMap" }}</h2>
-    <p class="legend"><span>{{ i18n "legendProject" }}</span><span class="l-here">{{ i18n "legendHere" }}</span><span class="l-draft">{{ i18n "legendPreview" }}</span></p></div>
-  {{ partial "map.html" . }}
-  <p class="map-more"><a class="more" href="{{ "/projects/" | relURL }}">{{ i18n "homeToList" }}</a></p>
-</section>
+  <section class="cover">
+    <div class="cover-text">
+      <h1>{{ site.Params.intro }}</h1>
+      <p>{{ site.Params.introSub }}</p>
+      <p class="cover-go"><a class="btn" href="#h-map">{{ i18n "homeGoMap" }}</a><a href="{{ "/notes/" | relURL }}">{{ i18n "homeGoNotes" }}</a></p>
+    </div>
+    {{ with $about }}{{ partial "title-block.html" . }}{{ end }}
+  </section>
 
-{{ with site.GetPage "/about" }}{{ partial "profile-card.html" (dict "page" . "detail" false) }}{{ end }}
+  {{ with $about }}{{ partial "principles.html" . }}{{ end }}
+
+  <section class="sheet-sec" aria-labelledby="h-map">
+    <div class="sec-head"><h2 id="h-map">{{ i18n "homeMap" }}</h2>
+      <p class="legend"><span>{{ i18n "legendProject" }}</span><span class="l-here">{{ i18n "legendHere" }}</span><span class="l-draft">{{ i18n "legendPreview" }}</span></p></div>
+    {{ partial "map.html" . }}
+    <p class="map-more"><a class="more" href="{{ "/projects/" | relURL }}">{{ i18n "homeToList" }}</a></p>
+  </section>
+
+  {{ with $about }}{{ partial "bom.html" . }}{{ end }}
+</div>
 {{ end }}

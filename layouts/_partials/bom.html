@@ -1,0 +1,11 @@
+{{- /* 홈 부품표: 쓰는 도구를 분류별 한 줄로. 내용은 content/about.md의 profile.stack에서 */ -}}
+{{- with .Params.profile.stack }}
+<section class="bom" aria-labelledby="h-tools">
+  <h2 id="h-tools">{{ i18n "homeTools" }}</h2>
+  <dl>
+    {{- range . }}
+    <div><dt>{{ .group }}</dt><dd><ul>{{ range .items }}{{ $svg := "" }}{{ with resources.Get (printf "icons/%s.svg" .i) }}{{ $svg = .Content }}{{ end }}<li><span class="ico" aria-hidden="true">{{ $svg | safeHTML }}</span>{{ .n }}</li>{{ end }}</ul></dd></div>
+    {{- end }}
+  </dl>
+</section>
+{{- end }}

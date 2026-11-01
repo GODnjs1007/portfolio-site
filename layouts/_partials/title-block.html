@@ -1,0 +1,23 @@
+{{- /* 홈 표제란: 도면 귀퉁이처럼 작성자 정보를 모은다. 내용은 content/about.md의 profile에서 */ -}}
+{{- $p := .Params.profile -}}
+{{- $img := "" -}}
+{{- with resources.Match "img/profile.*" }}{{ $img = index . 0 }}{{ end -}}
+<aside class="tblock" aria-label="{{ i18n "tbLabel" }}">
+  <div class="tb-who{{ if not $img }} no-photo{{ end }}">
+    {{- with $img }}{{ $s := .Resize "280x" }}
+    <img src="{{ $s.RelPermalink }}" width="{{ $s.Width }}" height="{{ $s.Height }}" alt="{{ i18n "profilePhotoAlt" }}">
+    {{- end }}
+    <div>
+      <p class="tb-k">{{ i18n "tbDrawnBy" }}</p>
+      <div>
+        <p class="tb-name"><a href="{{ .RelPermalink }}">{{ $p.name }}</a></p>
+        <p class="tb-role">{{ $p.role }}</p>
+      </div>
+    </div>
+  </div>
+  <dl>
+    {{- range $p.facts }}<div><dt>{{ .label }}</dt><dd>{{ .value }}</dd></div>{{ end }}
+    <div><dt>{{ i18n "tbRev" }}</dt><dd><time datetime="{{ site.Lastmod.Format "2006-01-02" }}">{{ site.Lastmod.Format "2006.01.02" }}</time></dd></div>
+  </dl>
+  <p class="tb-links"><a href="{{ .RelPermalink }}">{{ i18n "profileMore" }}</a>{{ with site.Params.github }}<a href="{{ . }}">GitHub</a>{{ end }}</p>
+</aside>

@@ -73,3 +73,12 @@
 
 - 카드는 한 칸에만 놓이고(`category` 또는 `runsOn`), 다른 칸에도 보여야 하면 front matter `alsoOn: { host, label, title }`로 바로가기 상자를 만든다.
 - 예: 논문 ② 카드는 연구 칸에 두고, 홈랩 밑에 `vm 102` 바로가기 상자로 같은 페이지를 연결 (`layouts/_partials/node-ref.html`).
+
+## 홈: 설계 도면 (2026-11-01, `home-blueprint` 브랜치)
+
+- 피그마 시안 3개(A 진한 첫 화면 / B 잡지형 / C 설계 도면) 중 C를 골랐다. 시안: https://www.figma.com/design/TrbTWjRQoO7l8EljxyfyQf
+- 홈 전체를 테두리 있는 도면 한 장(`.sheet`)으로 묶었다. 순서: 위 눈금(A~F) → 첫 화면(제목 + 오른쪽 표제란) → 일하는 방식 띠 → 프로젝트 지도 → 쓰는 도구(부품표).
+- 새 부분 템플릿: `layouts/_partials/title-block.html`, `principles.html`, `bom.html`. 내용은 모두 `content/about.md`의 `profile`에서 가져온다. 소개 페이지의 `profile-card.html`은 그대로.
+- 표제란의 '최종 수정'은 `site.Lastmod`(가장 최근 글 날짜)로 자동 표시된다.
+- 공식 frontend-design 스킬 기준으로 일반적인 AI 디자인 습관은 뺐다: 순서가 아닌 강점에 01/02 번호, 영문 대문자 꼬리표, 부품표 항목 번호.
+- 확인: `hugo` 빌드 오류 없음, 1440px·390px 가로 넘침 없음. 모바일 소개 영역 높이 약 1,540px → 약 680px.

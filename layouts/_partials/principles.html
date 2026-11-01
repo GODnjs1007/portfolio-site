@@ -1,0 +1,6 @@
+{{- with .Params.profile.strengths }}
+<section class="principles" aria-labelledby="h-way">
+  <h2 id="h-way">{{ i18n "homeWay" }}</h2>
+  <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+</section>
+{{- end }}
