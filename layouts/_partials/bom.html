@@ -1,11 +1,7 @@
-{{- /* 홈 부품표: 쓰는 도구를 분류별 패널로. 내용은 content/about.md의 profile.stack, 로고 색은 data/brand.toml */ -}}
+{{- /* 홈 부품표: 쓰는 도구를 분류별 패널로. 내용은 content/about.md의 profile.stack */ -}}
 {{- with .Params.profile.stack }}
 <section class="bom" aria-labelledby="h-tools">
   <h2 id="h-tools">{{ i18n "homeTools" }}</h2>
-  <div class="bom-grid">
-    {{- range . }}
-    <div class="bom-panel"><h3>{{ .group }}</h3><ul>{{ range .items }}{{ $svg := "" }}{{ with resources.Get (printf "icons/%s.svg" .i) }}{{ $svg = .Content }}{{ end }}<li{{ with index site.Data.brand .i }} style="--brand:{{ . }}"{{ end }}><span class="ico" aria-hidden="true">{{ $svg | safeHTML }}</span>{{ .n }}</li>{{ end }}</ul></div>
-    {{- end }}
-  </div>
+  {{ partial "stack-panels.html" $ }}
 </section>
 {{- end }}

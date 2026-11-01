@@ -30,3 +30,7 @@
     {{ end }}
   </div>
 </div>
+{{- /* 프로젝트 카드나 VM 상자 중 하나에 마우스나 키보드 포커스가 가면 짝도 같이 강조한다. 정보는 번호표 글자에 이미 있고 이건 보조 */ -}}
+{{- with where $projects "Params.alsoOn.label" "!=" nil }}
+<style>{{ range . }}{{ $s := partial "slug.html" . }}{{ $v := .Params.alsoOn.label | urlize }}.map:has(:is(#p-{{ $s }},#{{ $v }}):is(:hover,:focus-within)) :is(#p-{{ $s }},#{{ $v }}){outline:3px solid var(--co);outline-offset:2px}{{ end }}</style>
+{{- end }}

@@ -56,6 +56,15 @@ main{max-width:1240px;margin:0 auto}
 .vmtag b{font-family:var(--mono);font-weight:400}
 .vmtag:hover{background:var(--ink);color:#fff}
 .node.off .vmtag{border-color:var(--draft);color:var(--muted)}
+/* 도면의 상세 참조 동그라미: 같은 VM을 쓰는 프로젝트 카드와 VM 상자에 같은 번호가 찍힌다 */
+.node.has-co{padding-right:60px}
+.node{--co:var(--bp)}
+.callout{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--co);color:#fff;font-family:var(--mono);font-size:13px;line-height:1;box-shadow:0 0 0 3px var(--node),0 0 0 4px var(--co)}
+.has-co .vmtag{border-color:var(--co);box-shadow:inset 3px 0 0 var(--co)}
+.has-co .vmtag:hover{background:var(--co);border-color:var(--co)}
+.co-off .callout{background:var(--node);color:var(--muted);border:2px dashed var(--draft);box-shadow:none}
+.co-off .vmtag{border-color:var(--draft);box-shadow:none}
+.node:target{outline-color:var(--co)}
 .host{border:2px solid var(--ink);padding:10px;display:grid;gap:8px;background:var(--ground)}
 .host>.node{border-width:2px}
 .host .inner{display:grid;gap:8px;padding-left:14px;border-left:2px solid var(--line);margin-left:8px}
@@ -377,9 +386,6 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 
 /* 홈: 도면 한 장. 위 눈금, 표제란, 일하는 방식 띠, 지도, 부품표 순 */
 .sheet{background:var(--node);border:2px solid var(--ink);margin-bottom:56px}
-.ruler{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-bottom:1px solid #C9D1D4}
-.ruler span{font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--draft);padding:2px 10px;border-right:1px solid #C9D1D4}
-.ruler span:last-child{border-right:0}
 .cover{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:40px 56px;align-items:end;padding:56px clamp(20px,4vw,48px)}
 .cover h1{margin:0;font-size:clamp(30px,4.4vw,60px);line-height:1.2;font-weight:700;letter-spacing:-.02em;text-wrap:balance;word-break:keep-all}
 .cover-text>p{margin:20px 0 0;color:var(--muted);font-size:17px;max-width:34em}
@@ -387,8 +393,6 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 .cover-go a{font-weight:700}
 .cover-go .btn{background:var(--accent);color:#fff;text-decoration:none;padding:10px 18px}
 /* 첫 화면은 청사진: 파란 바탕에 흰 모눈(24px 잔눈, 120px 굵은 눈). 표제란은 흰 종이로 남기고 빨간펜 그림자를 댄다 */
-.ruler{background:var(--bp-deep);border-bottom-color:rgba(255,255,255,.18)}
-.ruler span{color:#9DB7D1;border-right-color:rgba(255,255,255,.18)}
 .cover{color:#fff;background-color:var(--bp);
   background-image:linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
   background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-position:-1px -1px}
@@ -427,17 +431,16 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
 /* 쓰는 도구: 청사진 패널 위에 브랜드 색 로고 타일 */
 .bom{border-top:2px solid var(--ink);padding:36px clamp(20px,4vw,48px) 44px;background:var(--bp-deep);color:#fff}
 .bom h2{margin:0 0 20px;font-size:22px}
+/* 쓰는 도구 패널: 홈 부품표와 소개 카드가 같이 쓴다(layouts/_partials/stack-panels.html) */
 .bom-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.bom-panel{background:var(--bp);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:20px 22px 24px}
+.bom-panel{background:var(--bp);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:20px 22px 24px}
 .bom-panel h3{margin:0 0 16px;font-size:17px;font-weight:700}
-.bom ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px}
-.bom li{--brand:var(--ink);width:96px;min-height:96px;display:grid;justify-items:center;align-content:center;gap:8px;padding:12px 6px;background:#F1F5F9;border-radius:10px;color:var(--ink);font-size:13px;font-weight:500;line-height:1.3;text-align:center;word-break:keep-all}
-.bom .ico{width:36px;height:36px;color:var(--brand)}
-.bom .ico svg{width:100%;height:100%;fill:currentColor;display:block}
+.bom-panel ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px}
+.bom-panel li{--brand:var(--ink);width:96px;min-height:96px;display:grid;justify-items:center;align-content:center;gap:8px;padding:12px 6px;background:#F1F5F9;border-radius:10px;color:var(--ink);font-size:13px;font-weight:500;line-height:1.3;text-align:center;word-break:keep-all}
+.bom-panel .ico{width:36px;height:36px;color:var(--brand)}
+.bom-panel .ico svg{width:100%;height:100%;fill:currentColor;display:block}
+.pstack-panels{padding-top:16px;border-top:1px solid #C9D1D4}
 @media (max-width:860px){
-  .ruler{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .ruler span:nth-child(n+4){display:none}
-  .ruler span:nth-child(3){border-right:0}
   .cover{grid-template-columns:1fr;padding-block:32px 40px}
   .cover .tblock{box-shadow:10px 10px 0 var(--accent);margin:0 10px 10px 0}
   .tb-who{grid-template-columns:104px minmax(0,1fr)}
@@ -445,6 +448,6 @@ details[open]>summary .hint::after{content:"접기"}details:not([open])>summary 
   .principles,.principles ul{grid-template-columns:1fr}
   .bom-grid{grid-template-columns:1fr}
   .bom-panel{padding:16px 14px 18px}
-  .bom ul{gap:8px}
-  .bom li{width:calc((100% - 16px)/3);min-height:88px}
+  .bom-panel ul{gap:8px}
+  .bom-panel li{width:calc((100% - 16px)/3);min-height:88px}
 }

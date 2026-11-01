@@ -20,11 +20,7 @@
       </div>
       <ul class="pstrength">{{ range $p.strengths }}<li>{{ . }}</li>{{ end }}</ul>
       <dl class="pfacts">{{ range $p.facts }}<div><dt>{{ .label }}</dt><dd>{{ .value }}</dd></div>{{ end }}</dl>
-      <div class="pstack" role="group" aria-label="{{ i18n "profileStack" }}">
-        {{- range $p.stack }}
-        <div><span class="g">{{ .group }}</span><ul class="pchips">{{ range .items }}{{ $svg := "" }}{{ with resources.Get (printf "icons/%s.svg" .i) }}{{ $svg = .Content }}{{ end }}<li><span class="ico" aria-hidden="true">{{ $svg | safeHTML }}</span><span class="nm">{{ .n }}</span></li>{{ end }}</ul></div>
-        {{- end }}
-      </div>
+      <div class="pstack-panels" role="group" aria-label="{{ i18n "profileStack" }}">{{ partial "stack-panels.html" $page }}</div>
       {{- if not $detail }}
       <p class="plinks"><a class="more" href="{{ $page.RelPermalink }}">{{ i18n "profileMore" }}</a>{{ with site.Params.github }}<a href="{{ . }}">GitHub</a>{{ end }}</p>
       {{- end }}

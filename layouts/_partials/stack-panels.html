@@ -1,0 +1,8 @@
+{{- /* 쓰는 도구 패널(홈 부품표·소개 카드 공통). 넘겨받은 페이지의 profile.stack을 분류별 청사진 패널로, 로고 색은 data/brand.toml */ -}}
+{{- with .Params.profile.stack }}
+<div class="bom-grid">
+  {{- range . }}
+  <div class="bom-panel"><h3>{{ .group }}</h3><ul>{{ range .items }}{{ $svg := "" }}{{ with resources.Get (printf "icons/%s.svg" .i) }}{{ $svg = .Content }}{{ end }}<li{{ with index site.Data.brand .i }} style="--brand:{{ . }}"{{ end }}><span class="ico" aria-hidden="true">{{ $svg | safeHTML }}</span>{{ .n }}</li>{{ end }}</ul></div>
+  {{- end }}
+</div>
+{{- end }}

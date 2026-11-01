@@ -2,7 +2,8 @@
 {{- $p := . -}}
 {{- $a := $p.Params.alsoOn -}}
 {{- $slug := partial "slug.html" $p -}}
-<div class="node{{ if $p.Params.preview }} draft{{ end }}{{ if $p.Params.here }} here{{ end }}" id="p-{{ $slug }}">
+<div class="node{{ if $p.Params.preview }} draft{{ end }}{{ if $p.Params.here }} here{{ end }}{{ if $a.label }} has-co{{ if $a.off }} co-off{{ end }}{{ end }}" id="p-{{ $slug }}"{{ with $a.label }} style="--co:{{ partial "vm-color.html" . }}"{{ end }}>
+  {{ with $a.label }}<span class="callout" aria-hidden="true">{{ replace . "vm " "" }}</span>{{ end }}
   {{ with $p.Params.mapLabel }}<span class="id">{{ . }}</span>{{ end }}
   <h4>{{ if $p.Params.preview }}{{ $p.Title }}{{ else }}<a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>{{ end }}</h4>
   {{- if $p.Params.preview }}

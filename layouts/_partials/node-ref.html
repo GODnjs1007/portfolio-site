@@ -2,7 +2,8 @@
 {{- $p := . -}}
 {{- $a := $p.Params.alsoOn -}}
 {{- $slug := partial "slug.html" $p -}}
-<div class="node ref{{ if $p.Params.preview }} draft{{ end }}{{ if $a.off }} off{{ end }}"{{ with $a.label }} id="{{ . | urlize }}"{{ end }}>
+<div class="node ref has-co{{ if $p.Params.preview }} draft{{ end }}{{ if $a.off }} off co-off{{ end }}"{{ with $a.label }} id="{{ . | urlize }}" style="--co:{{ partial "vm-color.html" . }}"{{ end }}>
+  {{ with $a.label }}<span class="callout" aria-hidden="true">{{ replace . "vm " "" }}</span>{{ end }}
   {{ with $a.label }}<span class="id">{{ . }}{{ if $a.off }} · {{ i18n "vmOff" }}{{ end }}</span>{{ end }}
   <h4>{{ if $p.Params.preview }}{{ $a.title | default $p.Title }}{{ else }}<a href="{{ $p.RelPermalink }}">{{ $a.title | default $p.Title }}</a>{{ end }}</h4>
   <div class="rel"><a class="vmtag" href="#p-{{ $slug }}">↔ {{ $a.name | default $p.Params.mapLabel | default $p.Title }}</a></div>
