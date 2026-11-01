@@ -7,6 +7,7 @@
   <p>{{ .Params.intro }}</p>
 </section>
 <div class="about-page">
+  {{ partial "profile-card.html" (dict "page" . "detail" true) }}
   <section aria-labelledby="h-num">
     <h2 id="h-num" class="sr-only">{{ i18n "aboutStatsLabel" }}</h2>
     <div class="stat-row"><div><b>{{ len $projects }}</b><span>{{ i18n "aboutStatProjects" }}</span></div><div><b>{{ len $notes }}</b><span>{{ i18n "aboutStatNotes" }}</span></div><div><b>{{ $ts }}</b><span>{{ i18n "aboutStatTs" }}</span></div></div>
@@ -21,6 +22,10 @@
       {{ end }}
       </tbody>
     </table>
+  </section>
+  <section aria-labelledby="h-act">
+    <h2 id="h-act">{{ i18n "aboutTimeline" }}</h2>
+    <ol class="timeline">{{ range .Params.profile.activities }}<li><time>{{ .period }}</time><div><b>{{ .title }}</b><p>{{ .note }}</p></div></li>{{ end }}</ol>
   </section>
   {{ with .Content }}<section class="prose">{{ . }}</section>{{ end }}
   <section aria-labelledby="h-link"><h2 id="h-link">{{ i18n "aboutLinks" }}</h2>

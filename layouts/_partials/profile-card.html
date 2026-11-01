@@ -1,0 +1,33 @@
+{{- $page := .page -}}
+{{- $detail := .detail -}}
+{{- $p := $page.Params.profile -}}
+{{- $img := "" -}}
+{{- with resources.Match "img/profile.*" }}{{ $img = index . 0 }}{{ end -}}
+<section class="profile" aria-labelledby="h-profile">
+  {{- if not $detail }}
+  <div class="sec-head"><h2 id="h-profile">{{ i18n "homeAbout" }}</h2></div>
+  {{- else }}
+  <h2 class="sr-only" id="h-profile">{{ i18n "homeAbout" }}</h2>
+  {{- end }}
+  <article class="pcard{{ if not $img }} no-photo{{ end }}">
+    {{- with $img }}{{ $s := .Resize "420x" }}
+    <img class="pphoto" src="{{ $s.RelPermalink }}" width="{{ $s.Width }}" height="{{ $s.Height }}" alt="{{ i18n "profilePhotoAlt" }}">
+    {{- end }}
+    <div class="pbody">
+      <div>
+        <h3>{{ if $detail }}{{ $p.name }}{{ else }}<a href="{{ $page.RelPermalink }}">{{ $p.name }}</a>{{ end }}</h3>
+        <p class="prole">{{ $p.role }}</p>
+      </div>
+      <ul class="pstrength">{{ range $p.strengths }}<li>{{ . }}</li>{{ end }}</ul>
+      <dl class="pfacts">{{ range $p.facts }}<div><dt>{{ .label }}</dt><dd>{{ .value }}</dd></div>{{ end }}</dl>
+      <div class="pstack" role="group" aria-label="{{ i18n "profileStack" }}">
+        {{- range $p.stack }}
+        <div><span class="g">{{ .group }}</span><ul class="pchips">{{ range .items }}<li>{{ . }}</li>{{ end }}</ul></div>
+        {{- end }}
+      </div>
+      {{- if not $detail }}
+      <p class="plinks"><a class="more" href="{{ $page.RelPermalink }}">{{ i18n "profileMore" }}</a>{{ with site.Params.github }}<a href="{{ . }}">GitHub</a>{{ end }}</p>
+      {{- end }}
+    </div>
+  </article>
+</section>

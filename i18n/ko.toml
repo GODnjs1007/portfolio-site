@@ -166,3 +166,15 @@ other = "링크"
 other = "사용 종료"
 [vmPlanned]
 other = "생성 예정"
+
+# ── 소개 카드 ─────────────────────────
+[homeToList]
+other = "목록으로 보기 →"
+[profilePhotoAlt]
+other = "이해원 프로필 사진"
+[profileMore]
+other = "자세히 보기 →"
+[profileStack]
+other = "기술 스택"
+[aboutTimeline]
+other = "활동"
