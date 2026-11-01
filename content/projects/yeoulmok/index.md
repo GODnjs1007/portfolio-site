@@ -34,7 +34,9 @@ brief:
     - "기상청 관측값은 요청 시각보다 약 4분 늦게 올라오고 결측은 -99.9로 온다는 것 확인 → 수집은 현재 시각보다 몇 분 앞을 기준으로 하고, 결측은 0이 아니라 판정 불가로 처리"
 steps:
   - { name: "서비스 설계와 경보 기준 정의", status: "완료" }
-  - { name: "개발 서버 구성과 API 연동 확인", status: "완료" }
+  - { name: "개발 서버 구성과 API 연동 확인", status: "완료", note: "yeoulmok-01-github-setup" }
+  - { name: "기능 정의와 API 명세", status: "진행 중", note: "yeoulmok-02-api-spec" }
+  - { name: "관측 데이터 수집과 DB", status: "진행 중", note: "yeoulmok-03-data-collect" }
   - { name: "지점–관측소 물길 연결 매핑", status: "예정" }
   - { name: "API 수집·적재와 스케줄링", status: "예정" }
   - { name: "두 단계 경보 판정 엔진", status: "예정" }

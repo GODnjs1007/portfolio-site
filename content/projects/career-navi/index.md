@@ -2,7 +2,7 @@
 title: "커리어 내비 · 채용공고 기반 역량 갭 진단"
 summary: "학생이 목표로 하는 채용공고를 기준으로 부족한 역량을 찾고, 교내 교과목·비교과·현장실습으로 졸업 전에 채우도록 학기별 경로를 안내하는 AI 웹 서비스입니다. 2026학년도 캡스톤디자인 경진대회에 2인 팀으로 신청할 예정이고, 웹 서비스와 배포·운영을 맡습니다."
 role: "팀원 · 웹 서비스(서버·DB·화면), 배포·운영"
-status: "신청 예정"
+status: "개발 중"
 category: "서비스"
 stack: ["FastAPI", "React", "LLM API", "벡터 DB", "자체 서버(Proxmox)"]
 period: "2026.10 ~ 2026.11"
@@ -25,11 +25,11 @@ brief:
   verified:
     - "아직 만든 화면이나 서버는 없고, 신청서와 설계까지 진행"
 steps:
-  - { name: "신청서 작성과 제출", status: "진행 중" }
+  - { name: "신청서 작성과 제출", status: "완료", note: "careernavi-01-application" }
+  - { name: "개발 환경과 프로젝트 뼈대", status: "완료", note: "careernavi-02-dev-env" }
+  - { name: "웹 서비스 MVP (진단 리포트, 자원 추천, What-If, 로드맵)", status: "진행 중", note: "careernavi-03-web-mvp" }
   - { name: "데이터 구축 (NCS 직무 정보, 교과목·비교과 역량 사전)", status: "예정" }
-  - { name: "핵심 엔진 (경험 카드화, 공고 역량 추출, 갭 판정)", status: "예정" }
-  - { name: "웹 서비스 MVP (진단 리포트, 자원 추천, What-If, 로드맵)", status: "예정" }
-  - { name: "검증 (공고 50건 정확도, 사용성 테스트)", status: "예정" }
+  - { name: "시연 준비와 검증 (공고 50건 정확도, 사용성 테스트)", status: "예정" }
 next: "신청서를 제출한 뒤 첫 주에 진단 결과 JSON 형식을 팀원과 맞추고, 예시 JSON으로 서버와 화면부터 만듭니다. 11월 중순까지 시연 가능한 MVP를 완성하는 일정입니다. 개발·시연 서버는 홈랩 미니PC에 서비스용 VM을 따로 만들어 올릴 계획입니다."
 draft: false
 ---

@@ -39,7 +39,7 @@ steps:
   - { name: "수신부 연결과 전체 시연", status: "완료", note: "sanhak-04-receiver-demo" }
   - { name: "환자 수별 부하테스트와 모니터링", status: "완료", note: "sanhak-05-loadtest" }
   - { name: "MQTT 송신 추가", status: "완료" }
-  - { name: "기준 AI 모델 학습과 모델 비교", status: "완료" }
+  - { name: "기준 AI 모델 학습과 모델 비교", status: "완료", note: "sanhak-07-base-model" }
   - { name: "실제 기기 조건(1리드)으로 재학습과 외부 평가", status: "진행 중" }
   - { name: "AI 모델을 넣은 100명 부하테스트와 병목 개선", status: "예정" }
   - { name: "산학 논문 작성", status: "예정", note: "/projects/sanhak-paper" }

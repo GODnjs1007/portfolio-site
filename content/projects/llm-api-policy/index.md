@@ -35,7 +35,7 @@ steps:
   - { name: "측정 스크립트 작성", status: "완료", note: "paper-03-probe-script" }
   - { name: "cron 자동 실행과 수집 확인", status: "완료", note: "paper-04-cron" }
   - { name: "정책 시뮬레이션과 결과", status: "완료", note: "paper-05-sim" }
-  - { name: "수집 중지 → 데이터 백업 → 학술대회 투고", status: "완료" }
+  - { name: "수집 중지 → 데이터 백업 → 학술대회 투고", status: "완료", note: "paper-06-wrapup" }
   - { name: "API 키 폐기 → 심사 결과 → 포스터 발표", status: "예정" }
 next: "API 키를 폐기하고, 11.3 심사 결과를 확인한 뒤 11.20~21 학술대회에서 포스터로 발표합니다."
 draft: false
