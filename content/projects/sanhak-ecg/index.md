@@ -6,6 +6,7 @@ status: "진행 중"
 category: "인프라"
 stack: ["Python", "TCP", "MQTT", "Redis Streams", "Docker", "Prometheus", "Grafana", "PyTorch", "PhysioNet"]
 period: "2026.09 ~"
+tone: "#5B84B1"
 weight: 20
 mapLabel: "산학"
 alsoOn:

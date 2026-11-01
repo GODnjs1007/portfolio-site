@@ -6,6 +6,7 @@ status: "개발 중"
 category: "서비스"
 stack: ["FastAPI", "React", "LLM API", "벡터 DB", "자체 서버(Proxmox)"]
 period: "2026.10 ~ 2026.11"
+tone: "#8C9A3E"
 weight: 25
 mapLabel: "팀 갭스톤"
 relations: ["캡스톤디자인 경진대회", "서버 → 홈랩"]

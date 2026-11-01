@@ -10,6 +10,7 @@ alsoOn:
   host: "homelab"
   label: "vm 105"
   title: "MiCAL 서버"
+tone: "#C49A32"
 weight: 29
 mapLabel: "웹프"
 relations: ["서버 → 홈랩"]

@@ -44,6 +44,11 @@ a.node:hover h4{text-decoration:underline}
 .node.ref,.host>.inner>.node.ref{border-width:1px}
 .node.ref h4{font-weight:600}
 .rel{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.node[style*="--tone"]{border-left:6px solid var(--tone)}
+.node.ref[style*="--tone"] .rel span{border-color:var(--tone);color:var(--ink);background:color-mix(in srgb,var(--tone) 16%,#fff)}
+.host>.inner>.node.ref[style*="--tone"]{border-left:6px solid var(--tone)}
+.host>.inner>.node.ref.off[style*="--tone"]{border-left-color:color-mix(in srgb,var(--tone) 45%,#fff)}
+.node.ref.off[style*="--tone"] .rel span{border-color:color-mix(in srgb,var(--tone) 45%,#fff);background:color-mix(in srgb,var(--tone) 8%,#fff)}
 .rel span{font-size:12px;border:1px solid var(--accent);color:var(--accent);padding:2px 8px;background:var(--accent-bg)}
 .host{border:2px solid var(--ink);padding:10px;display:grid;gap:8px;background:var(--ground)}
 .host>.node{border-width:2px}

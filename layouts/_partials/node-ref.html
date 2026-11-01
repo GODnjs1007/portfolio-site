@@ -2,13 +2,13 @@
 {{- $p := . -}}
 {{- $a := $p.Params.alsoOn -}}
 {{- if $p.Params.preview -}}
-<div class="node ref draft">
+<div class="node ref draft"{{ with $p.Params.tone }} style="--tone:{{ . }}"{{ end }}>
   {{ with $a.label }}<span class="id">{{ . }}</span>{{ end }}
   <h4>{{ $a.title | default $p.Title }}</h4>
   <div class="rel"><span>↔ {{ $a.name | default $p.Params.mapLabel | default $p.Title }}</span></div>
 </div>
 {{- else -}}
-<a class="node ref{{ if $a.off }} off{{ end }}" href="{{ $p.RelPermalink }}">
+<a class="node ref{{ if $a.off }} off{{ end }}" href="{{ $p.RelPermalink }}"{{ with $p.Params.tone }} style="--tone:{{ . }}"{{ end }}>
   {{ with $a.label }}<span class="id">{{ . }}{{ if $a.off }} · {{ i18n "vmOff" }}{{ end }}</span>{{ end }}
   <h4>{{ $a.title | default $p.Title }}</h4>
   <div class="rel"><span>↔ {{ $a.name | default $p.Params.mapLabel | default $p.Title }}</span></div>

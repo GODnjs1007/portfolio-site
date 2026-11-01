@@ -10,6 +10,7 @@ alsoOn:
   host: "homelab"
   label: "vm 106"
   title: "모두의 창업 서버 (생성 예정)"
+tone: "#A0728F"
 weight: 23
 mapLabel: "모두의 창업"
 relations: ["서버 → 홈랩"]

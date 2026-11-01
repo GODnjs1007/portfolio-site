@@ -6,6 +6,7 @@ status: "학술대회 투고 완료 · 11월 심사 결과 발표"
 category: "연구"
 stack: ["Proxmox VM", "Ubuntu", "Tailscale", "Python", "cron", "Gemini API", "OpenAI API"]
 period: "2026.10"
+tone: "#3F9A94"
 weight: 41
 mapLabel: "논문"
 alsoOn:
