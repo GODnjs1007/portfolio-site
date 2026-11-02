@@ -8,7 +8,7 @@ enableRobotsTXT = true
 [params]
   author = "이해원"
   description = "클라우드·인프라 운영을 준비하는 이해원의 프로젝트와 기록"
-  intro = "AWS\u00a0인프라 · Proxmox\u00a0홈랩 · 팀\u00a0프로젝트\u00a0서버"
+  intro = "세우고, 지키고, 기록합니다"
   introSub = "클라우드·인프라 운영 직무를 준비하고 있습니다. AWS 인프라 실습 뒤 Proxmox 홈랩을 만들어 팀 프로젝트 서버를 올리고 있습니다."
   github = "https://github.com/GODnjs1007"
   categories = ["인프라", "서비스", "연구"]
