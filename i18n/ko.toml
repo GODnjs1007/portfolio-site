@@ -32,7 +32,7 @@ other = "실습 로그 보기"
 [homeWay]
 other = "일하는 방식"
 [homeTools]
-other = "쓰는 도구"
+other = "기술스택"
 
 # ── 홈 표제란 ─────────────────────────
 [tbLabel]
@@ -189,9 +189,9 @@ other = "활동"
 
 # ── 화면 색·맨 위로 ───────────────────
 [themeToDark]
-other = "어둡게"
+other = "dark"
 [themeToLight]
-other = "밝게"
+other = "light"
 [backToTop]
 other = "↑ 맨 위로"
 
