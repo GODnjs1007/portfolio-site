@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>HW</title>
+  <rect width="32" height="32" fill="#0E2A47"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="miter" stroke-linecap="butt">
+    <path d="M5.2 8V24M12.8 8V24M5.2 16H12.8"/>
+    <path d="M16.2 8L19.2 24L22.4 12.5L25.6 24L28.8 8" stroke-miterlimit="4"/>
+  </g>
+  <rect x="3" y="27" width="26" height="2" fill="#C2381F"/>
+</svg>

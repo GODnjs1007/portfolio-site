@@ -1,6 +1,15 @@
 {{ define "main" }}
+{{- /* 배운 점 모아보기: 단계마다 제목과 배운 점을 펼쳐서 한 페이지에. 오른쪽에 모든 단계의 목차를 붙여 둔다(좁은 화면에서는 위쪽 접이식).
+       프로젝트와 단계는 front matter를 읽어 만들어서, 프로젝트나 단계가 늘어도 이 파일은 고치지 않는다 */ -}}
 {{ $notes := where site.RegularPages "Section" "notes" }}
 {{ $with := slice }}{{ range $notes }}{{ if .Resources.GetMatch "learned.md" }}{{ $with = $with | append . }}{{ end }}{{ end }}
+{{ $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true }}
+{{ $groups := slice }}
+{{ range $projects.ByWeight }}
+  {{ $slug := partial "slug.html" . }}
+  {{ $mine := where $with "Params.projects" "intersect" (slice $slug) }}
+  {{ if $mine }}{{ $groups = $groups | append (dict "p" . "slug" $slug "mine" (sort $mine "Params.step") "all" (len (where $notes "Params.projects" "intersect" (slice $slug)))) }}{{ end }}
+{{ end }}
 <section class="intro">
   <h1>{{ .Title }}</h1>
   <p>{{ .Params.summary }}</p>
@@ -8,27 +17,49 @@
 {{ partial "how-written.html" . }}
 <nav class="switch" aria-label="{{ i18n "viewSwitch" }}"><a href="{{ "/notes/" | relURL }}">{{ i18n "viewAll" }}</a><a href="{{ "/learned/" | relURL }}" aria-current="page">{{ i18n "viewLearned" }}</a></nav>
 <p class="learned-hint">{{ i18n "learnedHint" }} <span class="badge">{{ i18n "learnedBadge" }}</span></p>
-<div class="note-groups">
-{{ $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true }}
-{{ range $projects.ByWeight }}
-  {{ $p := . }}
-  {{ $slug := partial "slug.html" . }}
-  {{ $mine := where $with "Params.projects" "intersect" (slice $slug) }}
-  {{ if $mine }}
-  <section class="note-group" aria-labelledby="l-{{ $slug }}">
-    <h2 id="l-{{ $slug }}"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
-    <p>{{ i18n "learnedStepCount" (len $mine) }}</p>
-    <div class="learned-list">
-    {{ range sort $mine "Params.step" }}
-      <details class="learned-item">
-        <summary><span class="no">{{ with .Params.step }}{{ printf "%02d" . }}{{ end }}</span><span class="t">{{ .Title }}</span><span class="hint"></span></summary>
-        <div class="learned-body prose">{{ (.Resources.GetMatch "learned.md").Content }}
-          <p class="src"><a href="{{ .RelPermalink }}">{{ i18n "learnedToNote" }}</a></p></div>
-      </details>
+<div class="learned-layout">
+<aside class="learned-toc" aria-label="{{ i18n "toc" }}">
+  <details class="toc-box" open>
+    <summary><b>{{ i18n "toc" }}</b><span class="hint"></span></summary>
+    <ol class="toc-projects">
+    {{ range $groups }}
+      <li><a class="tp" href="#l-{{ .slug }}">{{ .p.Title }}<span>{{ i18n "learnedOf" (dict "n" (len .mine) "all" .all) }}</span></a>
+        <ol>{{ range .mine }}<li><a href="#s-{{ .File.ContentBaseName }}" data-s="s-{{ .File.ContentBaseName }}"><span class="no">{{ with .Params.step }}{{ printf "%02d" . }}{{ end }}</span>{{ .Title }}</a></li>{{ end }}</ol>
+      </li>
     {{ end }}
-    </div>
+    </ol>
+  </details>
+</aside>
+<div class="note-groups">
+{{ range $groups }}
+  {{ $p := .p }}{{ $slug := .slug }}{{ $mine := .mine }}
+  <section class="note-group" id="l-{{ $slug }}" aria-labelledby="lh-{{ $slug }}">
+    <h2 id="lh-{{ $slug }}"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
+    <p>{{ i18n "learnedOf" (dict "n" (len $mine) "all" .all) }}</p>
+    {{ range $mine }}
+    <article class="learned-step" id="s-{{ .File.ContentBaseName }}">
+      <h3>{{ .Title }}</h3>
+      <div class="learned-body prose">{{ (.Resources.GetMatch "learned.md").Content }}</div>
+      <p class="src"><a href="{{ .RelPermalink }}">{{ i18n "learnedToNote" }}</a></p>
+    </article>
+    {{ end }}
   </section>
-  {{ end }}
 {{ end }}
 </div>
+</div>
+<script>
+/* 목차: 지금 읽는 단계를 표시하고, 좁은 화면에서는 목차를 접어 둔다 */
+(function(){
+  var box=document.querySelector('.toc-box');if(!box)return;
+  if(window.matchMedia('(max-width:1000px)').matches)box.open=false;
+  var links={};[].forEach.call(box.querySelectorAll('a[data-s]'),function(a){links[a.dataset.s]=a});
+  var steps=[].slice.call(document.querySelectorAll('.learned-step'));
+  if(!('IntersectionObserver' in window)||!steps.length)return;
+  var cur=null;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){if(cur)cur.removeAttribute('aria-current');cur=links[e.target.id];if(cur){cur.setAttribute('aria-current','true');if(box.open&&window.matchMedia('(min-width:1001px)').matches){var r=cur.getBoundingClientRect(),b=box.getBoundingClientRect(),sc=box.closest('.learned-toc');if(r.top<120||r.bottom>window.innerHeight-20){sc.scrollTop+=r.top-window.innerHeight/2}}}}});
+  },{rootMargin:'-90px 0px -70% 0px'});
+  steps.forEach(function(s){io.observe(s)});
+})();
+</script>
 {{ end }}

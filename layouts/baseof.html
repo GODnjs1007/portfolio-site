@@ -17,6 +17,11 @@
 <meta property="og:image:height" content="{{ .Height }}">
 <meta name="twitter:card" content="summary_large_image">{{ end }}
 <link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="icon" href="{{ "favicon-32.png" | relURL }}" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 {{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">{{ end }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +32,7 @@
 <a class="skip" href="#main">{{ i18n "skipToContent" }}</a>
 <header class="bar">
   <a class="logo" href="{{ "/" | relURL }}">{{ site.Params.author }}</a>
+  <div class="bar-r">
   <nav aria-label="{{ i18n "mainMenu" }}">
     {{ $cur := . }}
     {{ range site.Menus.main }}
@@ -37,10 +43,27 @@
       <a href="{{ .URL | relURL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
     {{ end }}
   </nav>
+  <button type="button" class="theme-btn" id="theme-btn" aria-pressed="false" hidden data-to-dark="{{ i18n "themeToDark" }}" data-to-light="{{ i18n "themeToLight" }}"></button>
+  </div>
 </header>
 <main id="main">
 {{ block "main" . }}{{ end }}
 </main>
 <footer><p>{{ i18n "footer" }}</p></footer>
+<button type="button" class="to-top" id="to-top" hidden>{{ i18n "backToTop" }}</button>
+<script>
+/* 화면 색 바꾸기(다크모드)와 맨 위로 버튼. 스크립트가 없어도 사이트는 그대로 읽힌다 */
+(function(){
+  var root=document.documentElement,btn=document.getElementById('theme-btn'),top=document.getElementById('to-top');
+  function dark(){var t=root.getAttribute('data-theme');return t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches}
+  function label(){if(!btn)return;var d=dark();btn.textContent=d?btn.dataset.toLight:btn.dataset.toDark;btn.setAttribute('aria-pressed',d?'true':'false')}
+  if(btn){btn.hidden=false;label();btn.addEventListener('click',function(){var n=dark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}label()})}
+  if(top){
+    var on=false;function check(){var s=window.scrollY>480;if(s!==on){on=s;top.hidden=!s}}
+    window.addEventListener('scroll',check,{passive:true});check();
+    top.addEventListener('click',function(){var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:r?'auto':'smooth'});var m=document.getElementById('main');if(m){m.setAttribute('tabindex','-1');m.focus({preventScroll:true})}})
+  }
+})();
+</script>
 </body>
 </html>

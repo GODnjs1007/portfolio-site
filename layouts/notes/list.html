@@ -1,26 +1,107 @@
 {{ define "main" }}
+{{- /* 실습 로그 목록: 프로젝트마다 한 줄로 접어 두고, 펼치면 최근 단계부터 카드로 보인다.
+       단계가 늘어도 첫 화면 길이는 거의 그대로다. 카드가 많아지면 '이전 단계 더 보기'로 접힌다 */ -}}
 {{ $notes := where site.RegularPages "Section" "notes" }}
 {{ $ts := 0 }}{{ range $notes }}{{ with .Params.troubleshooting }}{{ $ts = add $ts (len .) }}{{ end }}{{ end }}
+{{ $recent := 6 }}
 <section class="intro">
   <h1>{{ .Title }}</h1>
   <p>{{ .Params.summary }} {{ i18n "notesTagHint" }}</p>
 </section>
 {{ partial "how-written.html" . }}
 <nav class="switch" aria-label="{{ i18n "viewSwitch" }}"><a href="{{ "/notes/" | relURL }}" aria-current="page">{{ i18n "viewAll" }}</a><a href="{{ "/learned/" | relURL }}">{{ i18n "viewLearned" }}</a></nav>
-<div class="stat-row" style="margin-bottom:32px"><div><b>{{ len $notes }}</b><span>{{ i18n "statNotes" }}</span></div><div><b>{{ $ts }}</b><span>{{ i18n "statTs" }}</span></div></div>
-<div class="note-groups">
+<div class="stat-row" style="margin-bottom:24px"><div><b>{{ len $notes }}</b><span>{{ i18n "statNotes" }}</span></div><div><b>{{ $ts }}</b><span>{{ i18n "statTs" }}</span></div></div>
+
+<form class="nfilter" id="nfilter" role="search" hidden onsubmit="return false">
+  <label class="nf-q"><span class="sr-only">{{ i18n "filterSearch" }}</span><input type="search" id="nf-q" placeholder="{{ i18n "filterSearch" }}" autocomplete="off"></label>
+  <div class="nf-btns" role="group" aria-label="{{ i18n "filterLabel" }}">
+    <button type="button" class="on" data-f="all" aria-pressed="true">{{ i18n "filterAll" }}</button>
+    <button type="button" data-f="ts" aria-pressed="false">{{ i18n "filterTs" }}</button>
+    <button type="button" data-f="mine" aria-pressed="false">{{ i18n "filterMine" }}</button>
+  </div>
+  <p class="nf-state" id="nf-state" aria-live="polite"></p>
+</form>
+
 {{ $projects := where (where (where site.RegularPages "Section" "projects") "Draft" false) "Params.preview" "!=" true }}
+{{ $newest := "" }}{{ with $notes.ByDate.Reverse }}{{ with index . 0 }}{{ $newest = index (.Params.projects | default (slice "")) 0 }}{{ end }}{{ end }}
+<div class="note-groups" id="ngroups">
 {{ range $projects.ByWeight }}
   {{ $p := . }}
   {{ $slug := partial "slug.html" . }}
   {{ $mine := where $notes "Params.projects" "intersect" (slice $slug) }}
   {{ if $mine }}
-  <section class="note-group" aria-labelledby="g-{{ $slug }}">
-    <h2 id="g-{{ $slug }}"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
-    <p>{{ i18n "groupCount" (len $mine) }}</p>
-    <ol class="note-rows">{{ range sort $mine "Params.step" }}{{ partial "note-row.html" . }}{{ end }}</ol>
-  </section>
+  {{ $sorted := sort $mine "Params.step" "desc" }}
+  {{ $tsn := 0 }}{{ range $mine }}{{ with .Params.troubleshooting }}{{ $tsn = add $tsn (len .) }}{{ end }}{{ end }}
+  {{ $lastmod := (index ($mine.ByDate.Reverse) 0).Date }}
+  <details class="ngroup" id="g-{{ $slug }}" data-slug="{{ $slug }}"{{ if eq $slug $newest }} open{{ end }}>
+    <summary>
+      <span class="ng-t">{{ $p.Title }}</span>
+      <span class="ng-m">{{ i18n "groupCount" (len $mine) }}{{ with $p.Params.steps }} · {{ i18n "groupPlanned" (len .) }}{{ end }}{{ if $tsn }} · {{ i18n "tsCount" $tsn }}{{ end }}</span>
+      <time class="ng-d" datetime="{{ $lastmod.Format "2006-01-02" }}">{{ i18n "groupLast" }} {{ $lastmod.Format "2006.01.02" }}</time>
+      <span class="hint"></span>
+    </summary>
+    <div class="ng-body">
+      <p class="ng-link"><a href="{{ $p.RelPermalink }}">{{ i18n "groupToProject" }}</a></p>
+      <ol class="ncards">
+      {{ range $i, $n := $sorted }}
+        {{ $learned := $n.Resources.GetMatch "learned.md" }}
+        {{ $tl := len ($n.Params.troubleshooting | default (slice)) }}
+        {{ $more := ge $i $recent }}
+        <li class="ncard{{ if $more }} older{{ end }}" data-ts="{{ $tl }}" data-mine="{{ if $learned }}1{{ else }}0{{ end }}" data-t="{{ lower (printf "%s %s" $n.Title $n.Params.summary) }}"{{ if $more }} hidden{{ end }}>
+          <p class="nc-top"><span class="no">{{ with $n.Params.step }}{{ printf "%02d" . }}{{ end }}</span><time datetime="{{ $n.Date.Format "2006-01-02" }}">{{ $n.Date.Format "2006.01.02" }}</time></p>
+          <h3><a href="{{ $n.RelPermalink }}">{{ $n.Title }}</a></h3>
+          <p class="nc-sum">{{ $n.Params.summary }}</p>
+          <p class="nc-parts"><span class="part">{{ i18n "notesHowProcess" }}</span>{{ if $learned }}<a class="part mine" href="{{ $n.RelPermalink }}#learned">{{ i18n "rowLearned" }}</a>{{ end }}</p>
+          {{ with $n.Params.troubleshooting }}
+          <details class="nc-ts"><summary>{{ i18n "tsCount" (len .) }}</summary><ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul></details>
+          {{ end }}
+        </li>
+      {{ end }}
+      </ol>
+      {{ if gt (len $sorted) $recent }}
+      <p class="nc-more"><button type="button" class="more-btn" data-more="{{ sub (len $sorted) $recent }}" data-label-show="{{ i18n "olderShow" (sub (len $sorted) $recent) }}" data-label-hide="{{ i18n "olderHide" }}" aria-expanded="false">{{ i18n "olderShow" (sub (len $sorted) $recent) }}</button></p>
+      {{ end }}
+    </div>
+  </details>
   {{ end }}
 {{ end }}
 </div>
+<p class="nf-empty" id="nf-empty" hidden>{{ i18n "filterEmpty" }}</p>
+<noscript><style>.ncard.older[hidden]{display:list-item}</style></noscript>
+<script>
+/* 실습 로그: 접힌 단계 펼치기, 검색, 필터. 스크립트가 없으면 접힌 카드도 전부 보인다(위 noscript) */
+(function(){
+  var form=document.getElementById('nfilter'),groups=[].slice.call(document.querySelectorAll('.ngroup'));
+  if(!form||!groups.length)return;form.hidden=false;
+  var q=document.getElementById('nf-q'),state=document.getElementById('nf-state'),empty=document.getElementById('nf-empty');
+  var mode='all',btns=[].slice.call(form.querySelectorAll('[data-f]'));
+  /* 주소에 #g-프로젝트가 있으면 그 묶음을 연다 */
+  function openHash(){var h=location.hash.slice(1),g=h&&document.getElementById(h);if(g&&g.classList.contains('ngroup')){g.open=true;g.scrollIntoView()}}
+  openHash();window.addEventListener('hashchange',openHash);
+  groups.forEach(function(g){
+    var b=g.querySelector('.more-btn');if(!b)return;
+    b.addEventListener('click',function(){var open=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',open?'false':'true');b.textContent=open?b.dataset.labelShow:b.dataset.labelHide;g.querySelectorAll('.ncard.older').forEach(function(c){c.hidden=open});});
+  });
+  function apply(){
+    var term=q.value.trim().toLowerCase(),active=term||mode!=='all',shown=0;
+    groups.forEach(function(g){
+      var hit=0;
+      g.querySelectorAll('.ncard').forEach(function(c){
+        var ok=(mode==='all'||(mode==='ts'&&+c.dataset.ts>0)||(mode==='mine'&&c.dataset.mine==='1'))&&(!term||c.dataset.t.indexOf(term)>-1);
+        c.classList.toggle('nf-off',!ok);
+        if(active){c.hidden=!ok}else{var b=g.querySelector('.more-btn'),openMore=b&&b.getAttribute('aria-expanded')==='true';c.hidden=c.classList.contains('older')&&!openMore}
+        if(ok)hit++;
+      });
+      g.hidden=active&&!hit;
+      if(active&&hit)g.open=true;
+      var mb=g.querySelector('.nc-more');if(mb)mb.hidden=active;
+      shown+=active?hit:0;
+    });
+    empty.hidden=!(active&&shown===0);
+    state.textContent=active?(shown+'개 단계'):'';
+  }
+  q.addEventListener('input',apply);
+  btns.forEach(function(b){b.addEventListener('click',function(){mode=b.dataset.f;btns.forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on?'true':'false')});apply()})});
+})();
+</script>
 {{ end }}

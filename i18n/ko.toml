@@ -55,20 +55,6 @@ other = "→ {{ .cat }} 칸 '{{ .name }}' 카드와 같은 페이지"
 # ── 프로젝트 목록 ─────────────────────
 [projectsMap]
 other = "지도"
-[projectsList]
-other = "목록"
-[colProject]
-other = "프로젝트"
-[colCategory]
-other = "분류"
-[colRole]
-other = "내 역할"
-[colStatus]
-other = "상태"
-[colPeriod]
-other = "기간"
-[previewNote]
-other = "상세 준비 중"
 
 # ── 프로젝트 상세 ─────────────────────
 [crumbProjects]
@@ -150,7 +136,9 @@ other = "배운 점 바로가기 ↓"
 [learnedTitle]
 other = "배운 점"
 [learnedHint]
-other = "단계 제목만 보고 먼저 떠올려본 다음, 펼쳐서 확인하는 용도로 씁니다."
+other = "단계마다 제가 이해한 내용을 한 페이지에 모아 복습하는 용도로 씁니다."
+[learnedIndex]
+other = "프로젝트별 바로가기"
 [learnedStepCount]
 other = "{{ .Count }}개 단계"
 [projLearnedJump]
@@ -190,8 +178,6 @@ other = "사용 종료"
 other = "생성 예정"
 
 # ── 소개 카드 ─────────────────────────
-[homeToList]
-other = "목록으로 보기 →"
 [profilePhotoAlt]
 other = "이해원 프로필 사진"
 [profileMore]
@@ -200,3 +186,42 @@ other = "자세히 보기 →"
 other = "기술 스택"
 [aboutTimeline]
 other = "활동"
+
+# ── 화면 색·맨 위로 ───────────────────
+[themeToDark]
+other = "어둡게"
+[themeToLight]
+other = "밝게"
+[backToTop]
+other = "↑ 맨 위로"
+
+# ── 지도 카드 ─────────────────────────
+[nodeRole]
+other = "역할"
+
+# ── 실습 로그 목록 ─────────────────────
+[filterLabel]
+other = "단계 거르기"
+[filterSearch]
+other = "단계 제목·요약 검색"
+[filterAll]
+other = "전체"
+[filterTs]
+other = "트러블슈팅 있는 단계"
+[filterMine]
+other = "직접 쓴 배운 점 있는 단계"
+[filterEmpty]
+other = "조건에 맞는 단계가 없습니다."
+[groupPlanned]
+other = "계획 전체 {{ .Count }}단계"
+[groupLast]
+other = "최근 기록"
+[groupToProject]
+other = "프로젝트 페이지 보기 →"
+[olderShow]
+other = "이전 단계 {{ .Count }}개 더 보기"
+[olderHide]
+other = "이전 단계 접기"
+
+[learnedOf]
+other = "배운 점 {{ .n }}편 · 기록 {{ .all }}개 중"

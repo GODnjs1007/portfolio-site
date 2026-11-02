@@ -3,7 +3,7 @@ title: "산학 실시간 심전도 처리 서버"
 summary: "환자 여러 명의 심전도가 실시간으로 들어오는 서버를 팀으로 만들고, 그중 가상 환자 스트림 생성기와 부하테스트를 맡았습니다. 홈랩 VM 101에 팀 테스트 서버를 구축해 운영했고, 공개 데이터로 기준 AI 모델을 학습해 정확도와 판정 속도를 비교했습니다."
 role: "팀장 · 서버 (스트림 생성기·부하테스트) · 기준 AI 모델"
 status: "진행 중"
-category: "인프라"
+category: "서비스"
 stack: ["Python", "TCP", "MQTT", "Redis Streams", "Docker", "Prometheus", "Grafana", "PyTorch", "PhysioNet"]
 period: "2026.09 ~"
 tone: "#5B84B1"

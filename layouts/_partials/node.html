@@ -9,6 +9,7 @@
   <p>{{ $p.Params.status }} · {{ $p.Params.role }}</p>
   {{- else }}
   <p>{{ $p.Params.status }}{{ with $p.Params.period }} · {{ . }}{{ end }}</p>
+  {{- with $p.Params.role }}<p class="role"><span class="rk">{{ i18n "nodeRole" }}</span>{{ . }}</p>{{ end }}
   {{- end }}
   {{- if or $p.Params.relations $a.label }}
   <div class="rel">{{ with $a.label }}<a class="vmtag" href="#{{ . | urlize }}">{{ $a.via | default (i18n "vmVia") }} → <b>{{ . }}</b></a>{{ end }}{{ range $p.Params.relations }}<span>{{ . }}</span>{{ end }}</div>

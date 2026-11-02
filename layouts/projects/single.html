@@ -7,7 +7,7 @@
   <h1>{{ .Title }}</h1>
   <p>{{ .Params.summary }}</p>
   <div class="chips"><span>{{ .Params.role }}</span><span>{{ .Params.status }}</span>{{ with .Params.period }}<span>{{ . }}</span>{{ end }}{{ range .Params.stack }}<span>{{ . }}</span>{{ end }}</div>
-  {{ with $learned }}<p class="learned-flag"><span class="badge">{{ i18n "learnedBadge" }}</span><a href="#h-mylearn">{{ i18n "projLearnedJump" (len .) }}</a></p>{{ end }}
+  {{ with $learned }}<p class="learned-flag"><span class="badge">{{ i18n "learnedBadge" }}</span><a href="{{ "/learned/" | relURL }}#l-{{ $slug }}">{{ i18n "projLearnedJump" (len .) }}</a></p>{{ end }}
 </header>
 
 <div class="layout">
@@ -54,7 +54,7 @@
   <aside class="side">
     {{ with $learned }}
     <section class="box learned-box" aria-labelledby="h-mylearn"><h2 id="h-mylearn">{{ i18n "rowLearned" }} <span class="badge">{{ i18n "learnedCount" (len .) }}</span></h2>
-      <ul class="rel-notes">{{ range sort . "Params.step" }}<li><a href="{{ .RelPermalink }}#learned">{{ .Title }}</a></li>{{ end }}</ul>
+      <ul class="rel-notes">{{ range sort . "Params.step" }}<li><a href="{{ "/learned/" | relURL }}#s-{{ .File.ContentBaseName }}">{{ .Title }}</a></li>{{ end }}</ul>
     </section>
     {{ end }}
     {{ with .Params.steps }}
