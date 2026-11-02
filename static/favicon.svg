@@ -1,9 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <title>HW</title>
-  <rect width="32" height="32" fill="#0E2A47"/>
-  <g fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="miter" stroke-linecap="butt">
-    <path d="M5.2 8V24M12.8 8V24M5.2 16H12.8"/>
-    <path d="M16.2 8L19.2 24L22.4 12.5L25.6 24L28.8 8" stroke-miterlimit="4"/>
-  </g>
-  <rect x="3" y="27" width="26" height="2" fill="#C2381F"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#0E2A47"/>
+<g fill="none" stroke-linecap="round" stroke-width="2.6">
+<path d="M3 10Q7.5 5.5 12 10T21 10T30 10" stroke="#FFFFFF"/>
+<path d="M3 17Q7.5 12.5 12 17T21 17T30 17" stroke="#7FB8E0"/>
+<path d="M3 24Q7.5 19.5 12 24T21 24T30 24" stroke="#3E86BD"/></g></svg>
