@@ -38,8 +38,7 @@ servers:
     - { id: "VM 102", name: "paper", spec: "2코어 / RAM 1GB / 디스크 20GB", role: "논문 실측 데이터 수집 (cron). 10.26 수집 종료 후 중지. cron으로 10분마다 API를 부르는 일 하나만 해서 자원을 최소로 배정. 실측 기록이 다른 작업에 섞이지 않게 VM을 따로 둠. 수집을 끝낸 뒤 데이터를 백업하고 중지, 학술대회 발표 후 삭제 예정.", off: true }
     - { id: "VM 103", name: "careernavi", spec: "2코어 / RAM 4GB / 디스크 28GB", role: "커리어 내비 팀 개발 서버. 팀원 계정과 Tailscale 공유는 이 VM 하나만. RAM 4GB는 FastAPI·Nginx·PostgreSQL에 한국어 임베딩 모델(약 2GB)과 여유분을 더해 잡음. 루트가 13.67GB만 잡혀 있어 lvextend로 28GB까지 늘림. docker 그룹이 사실상 관리자 권한이라 이 VM에는 이 프로젝트만 둠.", }
     - { id: "VM 104", name: "yeoulmok", spec: "2코어 / RAM 4GB / 디스크 28GB", role: "여울목 서버(관측 데이터 수집·경보 판정 API). 디스크를 늘린 뒤 리눅스 파티션도 같이 늘려(LVM 확장) 28GB 사용. Tailscale 기기 이름으로 접속하고, 저장소 하나에만 쓰는 배포 키로 GitHub와 연결. API 키는 VM 안 별도 파일(권한 600)에만 두고 저장소엔 키 이름만 올림." }
-    - { id: "VM 105", name: "calendar", spec: "2코어 / RAM 4GB / 디스크 28GB", role: "웹프로젝트 사이 캘린더 서버. calendar.ihaewon.com으로 외부 공개. Qemu Agent와 Discard는 켜고, 우분투에 필요 없는 TPM은 끔. 루트가 14GB만 잡혀 있어 28GB까지 늘리고, 기초 세팅이 끝난 상태를 스냅샷 base-setup으로 저장. 저장소 전용 배포 키를 SSH Host 별칭으로 구분해 한 VM에 여러 저장소 키를 둘 수 있게 함." }
-    - { id: "VM 106", name: "모두의 창업", spec: "사양 미정", role: "미용실 사전 상담 서비스 MVP 서버. 다른 서비스처럼 전용 VM으로 분리하고 서브도메인으로 공개할 계획.", planned: true }
+    - { id: "VM 105", name: "calendar", spec: "2코어 / RAM 4GB / 디스크 28GB", role: "웹프로젝트 MiCAL 서버. calendar.ihaewon.com으로 외부 공개. Qemu Agent와 Discard는 켜고, 우분투에 필요 없는 TPM은 끔. 루트가 14GB만 잡혀 있어 28GB까지 늘리고, 기초 세팅이 끝난 상태를 스냅샷 base-setup으로 저장. 저장소 전용 배포 키를 SSH Host 별칭으로 구분해 한 VM에 여러 저장소 키를 둘 수 있게 함." }
 steps:
   - { name: "Proxmox 설치와 원격 접속", status: "완료", note: "homelab-01-proxmox" }
   - { name: "VM 원격 접속과 Docker", status: "완료", note: "homelab-02-vm-docker" }
@@ -48,12 +47,13 @@ steps:
   - { name: "k3s 이전", status: "예정" }
   - { name: "GitHub Actions·Argo CD 자동 배포", status: "예정" }
   - { name: "통합 모니터링 (먼저 진행)", status: "완료", note: "homelab-07-monitoring" }
-next: "정전 후 자동 부팅을 BIOS에서 켜고, 알림을 메일이나 메신저로 보내도록 붙인 뒤 k3s로 서비스를 옮길 계획입니다."
+  - { name: "홈랩 운영 점검", status: "완료", note: "homelab-08-ops-check" }
+next: "정전 후 자동 부팅을 BIOS에서 켜고, 외부에 열린 포트(3000·9090·8000)를 127.0.0.1로 묶고, careernavi Guest Agent를 켠 뒤(11/16 발표 이후), 알림을 메일이나 메신저로 보내도록 붙이고 k3s로 서비스를 옮길 계획입니다."
 draft: false
 ---
 
 ## 개요
 
-최종 목표는 코드를 push하면 홈서버의 서비스까지 자동으로 갱신되는 구조입니다. 지금은 4단계(도메인·HTTPS 외부 공개)와 7단계(통합 모니터링)를 마쳤고, 5·6단계(k3s, 자동 배포)가 남았습니다.
+최종 목표는 코드를 push하면 홈서버의 서비스까지 자동으로 갱신되는 구조입니다. 지금은 4단계(도메인·HTTPS 외부 공개), 7단계(통합 모니터링), 8단계(운영 점검)를 마쳤고, 5·6단계(k3s, 자동 배포)가 남았습니다.
 
 <!-- 작성 틀: 선택한 이유 / 배운 점(호스트·VM별) 은 직접 작성. 서버별 배운 점은 front matter servers.*.learn 에 넣으면 펼치기 칸에 표시됨 -->

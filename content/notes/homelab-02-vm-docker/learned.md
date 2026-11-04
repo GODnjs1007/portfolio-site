@@ -40,7 +40,7 @@ title: "배운 점"
     3. ecg : `<Tailscale IP>`
 
 ### B. Docker 설치
-!image.png
+![물리 서버 → 호스트 → VM → Docker 엔진 → 컨테이너 구조도](img-learned-05.webp)
 
 - 기초 개념 (큰 거에서 작은 순으로)
     - <mark>물리 서버 → 호스트 (pve) → VM → 게스트 OS → docker 엔진 → 컨테이너 → 애플리케이션</mark>

@@ -151,4 +151,4 @@ sudo docker exec <grafana 컨테이너> grafana cli admin reset-admin-password <
 
 - [ ] Grafana 비번 재설정 (산학 ecg, 홈랩 portfolio)
 - [ ] 알림을 메일이나 메신저로 보내기 (Alertmanager)
-- [ ] ecg 종료 후 수집 대상에서 빼기 (`targets.yml` 한 줄 삭제)
+- [ ] ecg 종료 후 수집 대상에서 빼기 (`targets.local.yml` 한 줄 삭제)

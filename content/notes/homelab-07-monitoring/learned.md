@@ -51,7 +51,7 @@ cd infra/monitoring
 GRAFANA_PASSWORD=새비번 docker compose up -d
 ```
 
-!monitoring_tree.png
+![infra/monitoring 폴더 구조](img-learned-06.webp)
 
 - 파일 연결 흐름 (이 순서대로 아래에 설명)
 

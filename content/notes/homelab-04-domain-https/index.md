@@ -109,6 +109,6 @@ curl -sI http://localhost/projects | grep -i location     # Location: /projects/
 
 ## 남은 작업
 
-- [ ] Hugo `baseURL`을 `https://ihaewon.com/`으로 변경
-- [ ] 휴대폰 LTE로 접속 확인
+- [x] Hugo `baseURL`을 `https://ihaewon.com/`으로 변경
+- [x] 휴대폰 LTE로 접속 확인
 - [ ] BIOS 정전 후 자동 부팅 설정 (사이트가 집 미니PC에서 돌아가므로)

@@ -1,10 +1,10 @@
 ---
 title: "커리어 내비 · 채용공고 기반 역량 갭 진단"
-summary: "학생이 목표로 하는 채용공고를 기준으로 부족한 역량을 찾고, 교내 교과목·비교과·현장실습으로 졸업 전에 채우도록 학기별 경로를 안내하는 AI 웹 서비스입니다. 2026학년도 캡스톤디자인 경진대회에 2인 팀으로 신청할 예정이고, 웹 서비스와 배포·운영을 맡습니다."
+summary: "학생이 목표로 하는 채용공고를 기준으로 부족한 역량을 찾고, 교내 교과목·비교과·현장실습으로 졸업 전에 채우도록 학기별 경로를 안내하는 AI 웹 서비스입니다. 2026학년도 캡스톤디자인 경진대회에 2인 팀으로 선발돼 10.28부터 개발 중이고 11.16에 발표합니다. 웹 서비스와 배포·운영을 맡습니다."
 role: "팀원 · 웹 서비스(서버·DB·화면), 배포·운영"
-status: "개발 중"
+status: "선발 · 개발 중 (11.16 발표)"
 category: "서비스"
-stack: ["FastAPI", "React", "LLM API", "벡터 DB", "자체 서버(Proxmox)"]
+stack: ["FastAPI", "React", "Claude API", "pgvector (PostgreSQL 16)", "Docker", "Nginx", "Cloudflare Tunnel", "자체 서버(Proxmox)"]
 period: "2026.10 ~ 2026.11"
 tone: "#8C9A3E"
 weight: 25
@@ -24,15 +24,20 @@ brief:
     - "모든 판정에 '공고 문장 – 내 경험 문장' 근거를 함께 보여주고, 근거가 부족하면 '판단 보류'로 안내하도록 설계"
     - "검증 계획: 실제 공고 50건의 역량 추출 결과를 사람이 분류한 결과와 비교, 재학생 사용성 테스트"
     - "역할 분담: 진단 결과 JSON 하나를 경계로 나눔. 웹 서비스(FastAPI·DB·API·React)와 배포·운영(본인) / AI 파이프라인(데이터·LLM·RAG·판정 엔진·What-If, 팀원)"
+    - "홈랩에 프로젝트 전용 VM(103)을 만들고 web(Nginx)·api(FastAPI)·db(pgvector) 컨테이너로 구성, Cloudflare Tunnel로 careernavi.ihaewon.com 공개 (공유기 포트 개방 없음)"
+    - "Claude API 비용 보호: 전용 워크스페이스·30일 만료 키·월 지출 한도 $30, /docs 외부 차단, IP당 분당 5회·하루 300회 요청 제한, 입력 3000자 제한"
   verified:
-    - "아직 만든 화면이나 서버는 없고, 신청서와 설계까지 진행"
+    - "외부 도메인에서 화면과 API가 한 주소로 동작 (curl localhost → html, /api/health → ok), 읽기 전용 배포 키라 VM에서 git push가 거부되는 것 확인"
+    - "팀원 엔진 연결 후 도메인에서 진단 결과(팀원 가짜 데이터 기준 43%, 역량 4개) 표시, /docs는 Swagger 대신 첫 화면, 연타 시 429, 3001자 입력 시 422"
+    - "What-If: 데이터베이스 + 동계 현장실습 체크 시 43% → 86%로 재계산되고 학기별 로드맵이 3-2 → 겨울 → 4-1 순서로 채워짐"
+    - "pgvector DB는 127.0.0.1:5432에만 열고 vector 확장 0.8.7 설치 확인"
 steps:
   - { name: "신청서 작성과 제출", status: "완료", note: "careernavi-01-application" }
-  - { name: "개발 환경과 프로젝트 뼈대", status: "완료", note: "careernavi-02-dev-env" }
-  - { name: "웹 서비스 MVP (진단 리포트, 자원 추천, What-If, 로드맵)", status: "진행 중", note: "careernavi-03-web-mvp" }
-  - { name: "데이터 구축 (NCS 직무 정보, 교과목·비교과 역량 사전)", status: "예정" }
-  - { name: "시연 준비와 검증 (공고 50건 정확도, 사용성 테스트)", status: "예정" }
-next: "신청서를 제출한 뒤 첫 주에 진단 결과 JSON 형식을 팀원과 맞추고, 예시 JSON으로 서버와 화면부터 만듭니다. 11월 중순까지 시연 가능한 MVP를 완성하는 일정입니다. 개발·시연 서버는 홈랩 미니PC에 서비스용 VM을 따로 만들어 올릴 계획입니다."
+  - { name: "개발 환경과 프로젝트 뼈대 (GitHub 레포, API 형식, 서버·도메인)", status: "완료", note: "careernavi-02-dev-env" }
+  - { name: "웹 서비스 MVP (엔진 연결, 진단 리포트, What-If, 로드맵)", status: "진행 중", note: "careernavi-03-web-mvp" }
+  - { name: "데이터 연동 (진단 결과 DB 저장, 교내 자원 pgvector)", status: "예정" }
+  - { name: "시연 준비와 검증 (시연 시나리오, 사용성 테스트, 발표)", status: "예정" }
+next: "팀원과 진단 결과 JSON 형식(ncs_code·score_gain 계산 가능 여부)을 확정하고, 체험 모드(/demo)를 서버에 반영해 핸드폰으로 QR을 찍어 확인합니다. 팀원의 공고 역량 추출(Claude API) PR을 리뷰·merge해 서버에 반영하고 Nginx 응답 대기 시간(proxy_read_timeout 120s)을 늘린 뒤 동작을 확인합니다. 이후 진단 결과 DB 저장과 시연 시나리오 점수 맞추기를 거쳐 11.16 발표를 준비합니다."
 draft: false
 ---
 
