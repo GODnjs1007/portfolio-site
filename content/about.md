@@ -43,6 +43,8 @@ profile:
       items: [{ n: "Docker", i: "docker" }, { n: "Terraform", i: "terraform" }, { n: "Hugo", i: "hugo" }]
     - group: "가상화·기타"
       items: [{ n: "Proxmox VE", i: "proxmox" }, { n: "Redis Streams", i: "redis" }, { n: "GitHub", i: "github" }]
+    - group: "백엔드"
+      items: [{ n: "FastAPI", i: "fastapi" }, { n: "Django", i: "django" }, { n: "PostgreSQL", i: "postgresql" }]
   activities:
     - { period: "2026.09 ~", title: "AI 산학프로젝트 (팀장)", note: "서버 구조(TCP 수신, Redis Streams, 워커) 설계" }
     - { period: "2026.09 ~", title: "융합캡스톤디자인 (Frozen Stiff)", note: "게임 접속 솔루션 검증, 플레이 기록 수집 서버, 빌드·배포 자동화 담당" }
