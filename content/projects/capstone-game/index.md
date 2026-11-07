@@ -4,7 +4,7 @@ summary: "팀 게임 프로젝트 Frozen Stiff에서 게임 로직 밖의 인프
 role: "팀원 · 게임 밖 인프라"
 status: "진행 중"
 category: "서비스"
-stack: ["Godot 4.6", "GodotSteam", "Steamworks", "FastAPI", "Python"]
+stack: ["Godot 4.6", "GodotSteam", "Steamworks", "FastAPI", "Python", "systemd", "Cloudflare Tunnel"]
 period: "2026 2학기"
 weight: 21
 brief:
@@ -14,13 +14,18 @@ brief:
     - "엔진 4.6.2에 맞는 GodotSteam 버전 선택 (하위호환 기준 g452)"
     - "Steam 테스트 앱ID 480으로 초기화·로그인·로비 생성 검증"
     - "플레이 기록 수집 서버(FastAPI): 이벤트 저장·목록·다운로드 API, 토큰 인증, run_id 경로 조작 차단"
+    - "개선 1차: 브라우저 주소창만으로 CSV·전체 zip·런별 요약·쉘터 산점도 내보내기, 토큰 없으면 시작 거부, run_id 허용 문자 제한"
+    - "홈랩 VM 106에 systemd로 상시 실행, Cloudflare 터널로 playlog.ihaewon.com 공개 (공유기 포트 개방 없음)"
   verified:
     - "Steam 초기화 true, 연결 성공, 공개 로비 생성 성공 출력 확인"
     - "단일 프로세스 기준 정상 동작. MultiplayerPeer는 4.6 정식 태그 전이라 조건부 지원으로 정리"
     - "Godot 4.6.2 HTTPRequest로 이벤트 10개 전송 → 저장·목록·다운로드 세 요청 모두 200, 10줄 그대로 내려받기"
+    - "기획자가 준 실제 샘플 2개로 요약·CSV·산점도·zip 확인, 토큰 없이 실행하면 서버가 안 뜨고 콜론 run_id는 400"
+    - "외부에서 https로 POST → 저장 확인"
 steps:
   - { name: "GodotSteam 검증", status: "완료", note: "capstone-01-godotsteam" }
   - { name: "플레이 기록 수집 서버", status: "완료", note: "capstone-02-telemetry" }
+  - { name: "플레이 기록 서버 개선 1차", status: "완료", note: "capstone-03-playlog-upgrade" }
   - { name: "빌드·배포 자동화", status: "예정" }
 next: "다음은 빌드·배포 자동화입니다."
 draft: false
