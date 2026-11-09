@@ -22,7 +22,7 @@ brief:
     - "홈랩에 프로젝트 전용 VM 105를 만들고 Docker Compose로 frontend(nginx)·web(Django + gunicorn)·db(PostgreSQL 16) 컨테이너 구성. DB는 외부 포트 없음, nginx는 127.0.0.1:8080에만 열고 Cloudflare Tunnel로 공개 (공유기 포트 개방 없음)"
     - "Django · DRF로 회원가입·로그인(토큰 인증, 비밀번호 해시 저장)과 일정 조회·필터·개인 일정 API 작성. 공식 일정과 개인 일정을 owner로 나누고 부분 유니크 제약으로 중복 방지"
     - "nginx가 /api/·/admin/은 Django로, 나머지는 화면 파일로 나눠 한 주소에서 화면과 API를 같이 서비스 (CORS 설정 불필요)"
-    - "서버 계정은 서버에서 직접 작업할 팀원(크롤링 담당)에게만 SSH 키 전용으로 발급하고, Tailscale도 이 VM 하나만 공유"
+    - "서버 계정은 서버에서 작업할 팀원(크롤링 담당)에게만 SSH 키 전용으로 발급하고, Tailscale도 이 VM 하나만 공유"
     - "DB 비번·Django 비밀키는 서버 .env에만 두고, 작업 로그에 노출된 비밀키는 새로 발급해 교체"
     - "프론트 팀 프로토타입에 연결 코드 파일 하나(prototype-api.js)만 따로 붙여 실제 일정이 뜨게 연결. 프론트 팀 파일은 2줄만 수정"
   verified:

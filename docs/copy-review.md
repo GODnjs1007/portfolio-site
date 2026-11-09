@@ -6,14 +6,13 @@
 
 없음
 
-## 2. 오타 후보 (노션 원문 포함, 고칠지는 직접 판단) (8건)
+## 2. 오타 후보 (노션 원문 포함, 고칠지는 직접 판단) (7건)
 
 - `content/notes/aws-06-terraform/index.md:416` — **바뀜다** → 바뀐다
 - `content/notes/aws-08-docker-ecs/index.md:674` — **없앱다** → 없앤다
 - `content/notes/aws-08-docker-ecs/index.md:674` — **서브티** → 서브넷
 - `content/notes/aws-09-cloudwatch/index.md:73` — **바뀜다** → 바뀐다
 - `content/notes/aws-09-cloudwatch/index.md:145` — **곷** → 곧
-- `content/notes/aws-01-ec2-nginx/learned.md:9` — **설지** → 설치
 - `content/notes/aws-05-alb-asg/learned.md:8` — **트랙픽** → 트래픽
 - `content/notes/homelab-03-site-deploy/learned.md:35` — **되도** → 돼도
 
