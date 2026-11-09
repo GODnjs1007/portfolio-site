@@ -48,6 +48,18 @@ AI_TONE = [
     (r"뿐만 아니라|나아가|더 나아가", "연결어 과다"),
     (r"(습니다\.\s*){3,}", "'~습니다.'가 연속 3번 이상. 문장 길이·어미 섞기"),
     (r"직접", "'직접' 반복. 정말 강조할 곳만 남기기"),
+    # korean-humanizer(NomaDamas/k-skill, im-not-ai 분류) S1 패턴
+    (r"에 대해서?\b|에 대한", "번역투 A-1. 목적격 조사로 직결 ('X에 대해 논의' → 'X를 논의')"),
+    (r"에 있어서?", "번역투 A-3. '~에서'로"),
+    (r"가지고 있", "번역투 A-7. 형용사·동사로 ('경쟁력을 가지고 있다' → '경쟁력이 강하다')"),
+    (r"되어지|보여지|만들어지게 되", "이중 피동 A-8. 한 번만"),
+    (r"에서의|으로의|으로부터의|에의\b", "이중 조사 A-19. 절로 풀어쓰기"),
+    (r"결론적으로|요약하면|정리하자면", "결산 상투구 D-1"),
+    (r"주목할 만|시사하는 바", "상투어 D-2. 구체 결론으로"),
+    (r"본질적으로|핵심적으로", "상투어 D-3. 삭제"),
+    (r"획기적|압도적|파격적|자리매김|새로운 지평", "과장 D-4·D-8. 사실·수치로"),
+    (r"단순한 \S+(이|가) 아니라|단순히 \S+(이|가) 아니라", "부정 병렬 F-2. 평서로"),
+    (r"해 보세요|해보세요", "권유형. 하는 일을 평서로"),
 ]
 
 # 사이트 문구(AI 말투 검사 대상) vs 노션 원문(오타·깨진 문자만 검사)
@@ -58,6 +70,7 @@ AUTHORED = [
     "content/projects/**/*.md",
     "content/notes/_index.md",
     "content/learned/_index.md",
+    "layouts/**/*.html",
 ]
 ORIGINAL = [
     "content/notes/*/index.md",
@@ -108,7 +121,7 @@ def main():
                 todo.append((where, line.strip()))
             if "<!-- 이미지" in line:
                 image_count[rel(f)] = image_count.get(rel(f), 0) + 1
-            if is_authored and not line.lstrip().startswith(("#", "<!--")):
+            if is_authored and not line.lstrip().startswith(("#", "<!--", "{{- /*", "{{/*")):
                 for pat, why in AI_TONE:
                     if re.search(pat, line):
                         tone.append((where, why, line.strip()))
