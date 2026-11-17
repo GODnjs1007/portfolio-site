@@ -33,11 +33,13 @@ brief:
     - "실제 데이터를 붙이자 주간 보기에서 같은 시간 일정 10개 이상이 찌그러지는 문제를 찾아 최대 2개 + '+N개 더'로 수정"
 steps:
   - { name: "저장소와 서버 구축 (시안 배포까지)", status: "완료", note: "mical-01-repo-server" }
-  - { name: "백엔드 배포와 데이터 적재 (DB 설계, 로그인·일정 API, 크롤링 데이터)", status: "진행 중", note: "mical-02-backend-data" }
+  - { name: "백엔드 배포와 데이터 적재 (DB 설계, 로그인·일정 API, 크롤링 데이터)", status: "완료", note: "mical-02-backend-data" }
   - { name: "화면과 API 연결", status: "진행 중", note: "mical-03-frontend-api" }
-  - { name: "런어스 iCal 연동·크롤러 주기 실행", status: "예정" }
+  - { name: "로그인과 관리 화면 (아이디·구글·카카오)", status: "완료" }
+  - { name: "런어스 iCal 연동·크롤러 주기 실행", status: "완료" }
+  - { name: "AI 비서 MiCA (공지 추천, 말로 일정 넣기)", status: "완료" }
   - { name: "2차 과제 제출", status: "예정" }
-next: "회원가입·로그인 화면을 연결하고(회원가입 때 런어스 URL 받기), 개인 일정을 브라우저 localStorage 대신 서버 API에 저장합니다. 장학금·공모전·비교과 분류를 화면에서 어떻게 묶을지 정하고, 크롤러 주기 실행(cron) 방식을 팀원과 결정한 뒤 런어스 iCal 연동으로 넘어갑니다."
+next: "개인 일정이 아직 브라우저에만 저장돼서, 이미 만들어 둔 개인 일정 API에 화면을 연결합니다. 로그인 없이 열려 있는 일정·공지 API를 막을지 정하고, 구글 로그인 브랜드 인증을 위해 개인정보 처리방침의 문의처를 채운 뒤 2차 과제를 제출합니다."
 draft: false
 ---
 

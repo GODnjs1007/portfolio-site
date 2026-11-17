@@ -48,8 +48,8 @@ steps:
   - { name: "기준 AI 모델 학습과 모델 비교", status: "완료", note: "sanhak-07-base-model" }
   - { name: "실제 기기 조건(1리드)으로 재학습과 외부 평가", status: "완료" }
   - { name: "병목 찾기와 최적화", status: "진행 중" }
-  - { name: "산학 논문 작성", status: "예정", note: "/projects/sanhak-paper" }
-next: "모델을 넣은 서버의 병목을 찾아 최적화하고, 결과를 논문으로 정리할 계획입니다."
+  - { name: "산학 논문 작성 (11.13 투고)", status: "완료", note: "/projects/sanhak-paper" }
+next: "실제 모델을 워커에 넣은 100명 부하테스트를 마쳤습니다 (1리드 CNN 유실 0, 창 판정 p95 41ms, 워커 4개부터 안정). 이어서 CNN+LSTM 모델과 MQTT·TCP 전송을 같은 조건으로 비교하고 병목을 개선합니다. 11.20~21 중간 발표 뒤에는 매주 교수님 자문(데이터 증강, 100채널 데이터셋, 속도 개선, 교차 검증)을 받으며 진행합니다."
 draft: false
 ---
 
