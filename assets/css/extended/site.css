@@ -597,3 +597,12 @@ html{scroll-padding-top:84px}
   .learned-toc{order:0;position:static;max-height:none;overflow:visible}
   .learned-layout>.note-groups{order:1}
 }
+
+/* 완료·수상 표시: 지도 카드와 프로젝트 페이지 머리 */
+.flags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}
+.flag{font-size:12px;font-weight:700;line-height:1;padding:5px 8px;border:2px solid var(--ink)}
+.flag.done{background:var(--ink);color:var(--on-ink)}
+.flag.award{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.node.awarded{border-color:var(--accent);box-shadow:4px 4px 0 var(--accent)}
+.d-head .flags{margin:8px 0 10px}
+.d-head .flag{font-size:13px;padding:6px 10px}

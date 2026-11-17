@@ -2,7 +2,7 @@
 title: "여울목 · 계곡 급류 사전경보 서비스"
 summary: "비가 내리지 않는 계곡에서도 상류 강우로 물이 불어납니다. 상류 강수량과 하류 수위 상승폭을 지점 단위로 연결해 두 단계로 경보하는 서비스를 2인 팀으로 설계했습니다."
 role: "팀장 · 서버·데이터·판정 엔진"
-status: "My AI 랩 선정 · 개발 중 (11월 중간평가, 12.11 최종 제출)"
+status: "My AI 랩 선정 · 개발 중 (12.7 결과보고서 제출)"
 category: "서비스"
 stack: ["FastAPI", "한강홍수통제소 API", "기상청 API허브", "생성형 AI API", "iOS", "자체 서버(Proxmox)", "Docker", "Cloudflare Tunnel"]
 period: "2026.08 ~"

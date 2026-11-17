@@ -225,3 +225,6 @@ other = "이전 단계 접기"
 
 [learnedOf]
 other = "배운 점 {{ .n }}편 · 기록 {{ .all }}개 중"
+
+[flagDone]
+other = "완료"
