@@ -602,7 +602,12 @@ html{scroll-padding-top:84px}
 .flags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}
 .flag{font-size:12px;font-weight:700;line-height:1;padding:5px 8px;border:2px solid var(--ink)}
 .flag.done{background:var(--ink);color:var(--on-ink)}
-.flag.award{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.node.awarded{border-color:var(--accent);box-shadow:4px 4px 0 var(--accent)}
+.flag.award{background:var(--award);border-color:var(--award);color:var(--on-award)}
+.node.awarded{border-color:var(--award);box-shadow:4px 4px 0 var(--award)}
 .d-head .flags{margin:8px 0 10px}
 .d-head .flag{font-size:13px;padding:6px 10px}
+
+/* 수상 전용 금색: 강조색(빨강)·vm 태그 색과 겹치지 않게 */
+:root{--award:#B07D10;--on-award:#1A1405}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--award:#E0B43C;--on-award:#1A1405}}
+:root[data-theme="dark"]{--award:#E0B43C;--on-award:#1A1405}
