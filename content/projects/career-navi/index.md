@@ -1,8 +1,10 @@
 ---
 title: "커리어 내비 · 채용공고 기반 역량 갭 진단"
-summary: "학생이 목표로 하는 채용공고를 기준으로 부족한 역량을 찾고, 교내 교과목·비교과·현장실습으로 졸업 전에 채우도록 학기별 경로를 안내하는 AI 웹 서비스입니다. 2026학년도 캡스톤디자인 경진대회에 2인 팀으로 선발돼 10.28부터 개발 중이고 11.16에 발표합니다. 웹 서비스와 배포·운영을 맡습니다."
+summary: "학생이 목표로 하는 채용공고를 기준으로 부족한 역량을 찾고, 교내 교과목·비교과·현장실습으로 졸업 전에 채우도록 학기별 경로를 안내하는 AI 웹 서비스입니다. 2026학년도 캡스톤디자인 경진대회에 2인 팀으로 선발돼 10.28부터 개발해 11.16 발표에서 우수상을 받았습니다. 웹 서비스와 배포·운영을 맡습니다."
 role: "팀원 · 웹 서비스(서버·DB·화면), 배포·운영"
-status: "우수상 · 2026 캡스톤디자인 경진대회"
+status: "11.16 발표 · 서비스 운영 중"
+done: true
+award: "우수상 · 2026 캡스톤디자인 경진대회"
 category: "서비스"
 stack: ["FastAPI", "React", "Claude API", "pgvector (PostgreSQL 16)", "Docker", "Nginx", "Cloudflare Tunnel", "자체 서버(Proxmox)"]
 period: "2026.10 ~ 2026.11"
@@ -34,10 +36,10 @@ brief:
 steps:
   - { name: "신청서 작성과 제출", status: "완료", note: "careernavi-01-application" }
   - { name: "개발 환경과 프로젝트 뼈대 (GitHub 레포, API 형식, 서버·도메인)", status: "완료", note: "careernavi-02-dev-env" }
-  - { name: "웹 서비스 MVP (엔진 연결, 진단 리포트, What-If, 로드맵)", status: "진행 중", note: "careernavi-03-web-mvp" }
-  - { name: "데이터 연동 (진단 결과 DB 저장, 교내 자원 pgvector)", status: "예정" }
-  - { name: "시연 준비와 검증 (시연 시나리오, 사용성 테스트, 발표)", status: "예정" }
-next: "팀원과 진단 결과 JSON 형식(ncs_code·score_gain 계산 가능 여부)을 확정하고, 체험 모드(/demo)를 서버에 반영해 핸드폰으로 QR을 찍어 확인합니다. 팀원의 공고 역량 추출(Claude API) PR을 리뷰·merge해 서버에 반영하고 Nginx 응답 대기 시간(proxy_read_timeout 120s)을 늘린 뒤 동작을 확인합니다. 이후 진단 결과 DB 저장과 시연 시나리오 점수 맞추기를 거쳐 11.16 발표를 준비합니다."
+  - { name: "웹 서비스 MVP (엔진 연결, 진단 리포트, What-If, 로드맵)", status: "완료", note: "careernavi-03-web-mvp" }
+  - { name: "데이터 연동 (진단 결과 DB 저장, 교내 자원 pgvector)", status: "완료" }
+  - { name: "시연 준비와 검증 (시연 시나리오, 사용성 테스트, 발표)", status: "완료" }
+next: "발표 후에도 서비스를 계속 띄워 둡니다. 두 직무 노선이 같은 역량을 함께 지나가는 환승역, 진단 기록이 없는 학생을 위한 학과별 예시 노선, 폰 화면에서 노선 곡선이 잘리는 문제를 이어서 고칩니다."
 draft: false
 ---
 
