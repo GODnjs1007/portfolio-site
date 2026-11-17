@@ -612,3 +612,10 @@ html{scroll-padding-top:84px}
 :root{--award:#E3B341;--on-award:#0E2A47;--award-line:var(--ink)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--award:#E0B43C;--on-award:#0A1722;--award-line:#E0B43C}}
 :root[data-theme="dark"]{--award:#E0B43C;--on-award:#0A1722;--award-line:#E0B43C}
+
+/* 실제 서비스 바로가기: 카드 전체 링크(h4 a::after) 위로 올려서 따로 눌리게 */
+.node .livetag{position:relative;z-index:1;display:inline-block;font-size:13px;font-weight:700;padding:3px 9px;border:2px solid var(--ink);background:var(--node);color:var(--ink);text-decoration:none}
+.node .livetag:hover{background:var(--ink);color:var(--on-ink)}
+.d-head .live-link{margin:0 0 10px;font-size:15px}
+.d-head .live-link a{font-weight:700}
+.d-head .live-link span{color:var(--muted);font-family:var(--mono);font-size:13px;margin-left:6px}

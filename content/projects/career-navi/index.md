@@ -5,6 +5,9 @@ role: "팀원 · 웹 서비스(서버·DB·화면), 배포·운영"
 status: "11.16 발표 · 서비스 운영 중"
 done: true
 award: "우수상 · 2026 캡스톤디자인 경진대회"
+live:
+  url: "https://careernavi.ihaewon.com/demo"
+  label: "체험해 보기"
 category: "서비스"
 stack: ["FastAPI", "React", "Claude API", "pgvector (PostgreSQL 16)", "Docker", "Nginx", "Cloudflare Tunnel", "자체 서버(Proxmox)"]
 period: "2026.10 ~ 2026.11"
