@@ -602,7 +602,13 @@ html{scroll-padding-top:84px}
 .flags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}
 .flag{font-size:12px;font-weight:700;line-height:1;padding:5px 8px;border:2px solid var(--ink)}
 .flag.done{background:var(--ink);color:var(--on-ink)}
-.flag.award{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.node.awarded{border-color:var(--accent);box-shadow:4px 4px 0 var(--accent)}
+.flag.award{background:var(--award);border-color:var(--award);color:var(--on-award)}
+.node.awarded{border-color:var(--award-line);box-shadow:5px 5px 0 var(--award)}
 .d-head .flags{margin:8px 0 10px}
 .d-head .flag{font-size:13px;padding:6px 10px}
+
+/* 수상 전용 금색: 청사진 남색·강조 빨강·vm 6색(파랑·청록·빨강·황토·보라·초록)과 겹치지 않는 밝은 금색.
+   글자는 사이트 남색(--ink / 다크 바탕색)으로 맞추고, 라이트에선 카드 테두리를 남색 그대로 두고 금색 그림자만 */
+:root{--award:#E3B341;--on-award:#0E2A47;--award-line:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--award:#E0B43C;--on-award:#0A1722;--award-line:#E0B43C}}
+:root[data-theme="dark"]{--award:#E0B43C;--on-award:#0A1722;--award-line:#E0B43C}
