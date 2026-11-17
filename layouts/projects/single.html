@@ -7,6 +7,7 @@
   <h1>{{ .Title }}</h1>
   <p>{{ .Params.summary }}</p>
   {{ if or .Params.done .Params.award }}<div class="flags">{{ if .Params.done }}<span class="flag done">{{ i18n "flagDone" }}</span>{{ end }}{{ with .Params.award }}<span class="flag award">{{ . }}</span>{{ end }}</div>{{ end }}
+  {{ with .Params.live }}<p class="live-link"><a href="{{ .url }}" target="_blank" rel="noopener">{{ .label }} ↗</a> <span>{{ replace .url "https://" "" }}</span></p>{{ end }}
   <div class="chips"><span>{{ .Params.role }}</span><span>{{ .Params.status }}</span>{{ with .Params.period }}<span>{{ . }}</span>{{ end }}{{ range .Params.stack }}<span>{{ . }}</span>{{ end }}</div>
   {{ with $learned }}<p class="learned-flag"><span class="badge">{{ i18n "learnedBadge" }}</span><a href="{{ "/learned/" | relURL }}#l-{{ $slug }}">{{ i18n "projLearnedJump" (len .) }}</a></p>{{ end }}
 </header>
