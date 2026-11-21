@@ -2,12 +2,12 @@
 title: "LLM API 지연·오류 대응 정책 실측"
 summary: "LLM API가 느리거나 오류를 낼 때 기다리기·같은 API 재시도·다른 AI 전환 중 어떤 정책이 나은지 비교한 논문입니다. 홈랩 실측 VM에서 10분마다 자동으로 쌓은 기록 1,528건으로 세 정책을 시뮬레이션했습니다."
 role: "단독 저자 · 실측 환경 구성과 분석"
-status: "게재 가능 · 11.20~21 추계학술대회 포스터 발표"
+status: "게재 · 한국인공지능융합기술학회 추계학술대회 포스터 발표"
 category: "연구"
 stack: ["Proxmox VM", "Ubuntu", "Tailscale", "Python", "cron", "Gemini API", "OpenAI API"]
 period: "2026.10"
 tone: "#3F9A94"
-weight: 41
+weight: 42
 mapLabel: "논문"
 alsoOn:
   host: "homelab"
@@ -38,8 +38,8 @@ steps:
   - { name: "cron 자동 실행과 수집 확인", status: "완료", note: "paper-04-cron" }
   - { name: "정책 시뮬레이션과 결과", status: "완료", note: "paper-05-sim" }
   - { name: "수집 중지 → 데이터 백업 → 학술대회 투고", status: "완료", note: "paper-06-wrapup" }
-  - { name: "심사 결과 → 포스터 발표 (API 키는 남겨둠)", status: "예정" }
-next: "심사에서 게재 가능 판정을 받았습니다. 11.20~21 학술대회에서 포스터로 발표합니다. API 키는 남겨둠 (선불·자동 충전 끔, OpenAI 키는 30일 만료)."
+  - { name: "심사 결과(게재 가능) → 포스터 발표 (11.21)", status: "완료" }
+next: "11.21 2026 한국인공지능융합기술학회 추계학술대회에서 포스터로 발표하고 게재됐습니다. 실측 VM은 수집 종료 후 정리합니다."
 draft: false
 ---
 
