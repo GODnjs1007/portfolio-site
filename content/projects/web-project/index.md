@@ -4,8 +4,8 @@ summary: "학교·학과 학사일정, 장학금, 비교과, 공모전, 런어�
 role: "조원 · 백엔드·DB·서버"
 status: "1차 기획 제출 · 2차 구현 중"
 live:
-  url: "https://calendar.ihaewon.com"
-  label: "사이트 열기"
+  url: "https://calendar.ihaewon.com/api-demo.html"
+  label: "체험해 보기"
 category: "서비스"
 stack: ["Django 5.2", "Django REST Framework", "PostgreSQL 16", "Docker Compose", "Nginx", "Cloudflare Tunnel", "자체 서버(Proxmox)"]
 period: "2026 2학기"
