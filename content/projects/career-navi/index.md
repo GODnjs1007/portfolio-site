@@ -12,7 +12,7 @@ category: "서비스"
 stack: ["FastAPI", "React", "Claude API", "pgvector (PostgreSQL 16)", "Docker", "Nginx", "Cloudflare Tunnel", "자체 서버(Proxmox)"]
 period: "2026.10 ~ 2026.11"
 tone: "#8C9A3E"
-weight: 25
+weight: 19
 mapLabel: "팀 갭스톤"
 relations: ["캡스톤디자인 경진대회"]
 alsoOn:
