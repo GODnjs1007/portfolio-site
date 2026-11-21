@@ -27,6 +27,14 @@
     <h2 id="h-act">{{ i18n "aboutTimeline" }}</h2>
     <ol class="timeline">{{ range .Params.profile.activities }}<li><time>{{ .period }}</time><div><b>{{ .title }}</b><p>{{ .note }}</p></div></li>{{ end }}</ol>
   </section>
+  {{ with .Params.profile.awards }}<section aria-labelledby="h-award">
+    <h2 id="h-award">{{ i18n "aboutAwards" }}</h2>
+    <ol class="timeline">{{ range . }}<li><time>{{ .period }}</time><div><b>{{ with .link }}<a href="{{ . }}">{{ end }}{{ .title }}{{ with .link }}</a>{{ end }}</b><p>{{ .note }}</p></div></li>{{ end }}</ol>
+  </section>{{ end }}
+  {{ with .Params.profile.papers }}<section aria-labelledby="h-paper">
+    <h2 id="h-paper">{{ i18n "aboutPapers" }}</h2>
+    <ol class="timeline">{{ range . }}<li><time>{{ .period }}</time><div><b>{{ with .link }}<a href="{{ . }}">{{ end }}{{ .title }}{{ with .link }}</a>{{ end }}</b><p>{{ .note }}</p></div></li>{{ end }}</ol>
+  </section>{{ end }}
   {{ with .Content }}<section class="prose">{{ . }}</section>{{ end }}
   <section aria-labelledby="h-link"><h2 id="h-link">{{ i18n "aboutLinks" }}</h2>
     <p class="links" style="display:flex;gap:20px;font-weight:700">{{ range .Params.links }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</p>

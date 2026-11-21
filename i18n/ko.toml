@@ -228,3 +228,9 @@ other = "배운 점 {{ .n }}편 · 기록 {{ .all }}개 중"
 
 [flagDone]
 other = "완료"
+
+[aboutAwards]
+other = "수상"
+
+[aboutPapers]
+other = "논문"

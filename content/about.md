@@ -46,11 +46,19 @@ profile:
     - group: "백엔드"
       items: [{ n: "FastAPI", i: "fastapi" }, { n: "Django", i: "django" }, { n: "PostgreSQL", i: "postgresql" }]
   activities:
-    - { period: "2026.09 ~", title: "AI 산학프로젝트 (팀장)", note: "서버 구조(TCP 수신, Redis Streams, 워커) 설계" }
+    - { period: "2026.09 ~", title: "AI 산학프로젝트 (팀장)", note: "서버 구조(TCP 수신, Redis Streams, 워커) 설계, 환자 100명 부하테스트 실측 → 학회 우수 발표 논문상" }
     - { period: "2026.09 ~", title: "융합캡스톤디자인 (Frozen Stiff)", note: "게임 접속 솔루션 검증, 플레이 기록 수집 서버, 빌드·배포 자동화 담당" }
     - { period: "2026.09 ~", title: "Proxmox 홈랩 운영, ihaewon.com 포트폴리오 사이트", note: "Proxmox 위에 Ubuntu VM을 운영하고, Tailscale 원격 접속과 Docker Nginx·Cloudflare Tunnel로 사이트를 공개" }
     - { period: "2026.07 ~", title: "AWS 인프라 구축 실습", note: "EC2·Nginx부터 VPC, ALB, Terraform, ECS Fargate, CloudWatch까지. 장애를 로그로 추적해 기록" }
     - { period: "2026 여름", title: "연세대 AI부트캠프 의료AI응용", note: "비정형데이터분석, AI기반건강보험빅데이터분석, 의료버티컬AI에이전트 수료" }
+  awards:
+    - { period: "2026.11", title: "우수 발표 논문상 · 2026 한국인공지능융합기술학회 추계학술대회", note: "산학 심전도 서버 처리 지연 실측 논문, 제1저자", link: "/projects/sanhak-paper/" }
+    - { period: "2026.11", title: "수상 · 2026 AI 기술 혁신 챌린지(반려·돌봄) 결선", note: "반려동물 위탁돌봄 지시 점검 논문, 제1저자 · 구두 발표", link: "/projects/pet-handover-ai/" }
+    - { period: "2026.11", title: "우수상 · 2026 캡스톤디자인 경진대회", note: "커리어 내비, 웹 서비스와 배포·운영 담당", link: "/projects/career-navi/" }
+  papers:
+    - { period: "2026.11", title: "다중 환자 동시 심전도 부정맥 실시간 모니터링을 위한 큐 기반 서버의 처리 지연 실측", note: "2026 한국인공지능융합기술학회 추계학술대회 · 제1저자 (공저 7명) · 우수 발표 논문상", link: "/projects/sanhak-paper/" }
+    - { period: "2026.11", title: "반려동물 위탁 돌봄 지시 정리에서 LLM 구조화 추출과 규칙 기반 검증의 효과 비교", note: "같은 학회 AI 기술 혁신 챌린지(반려·돌봄) 결선 구두 발표 · 제1저자 · 수상. 학술지 「인공지능융합기술연구」 심사 중", link: "/projects/pet-handover-ai/" }
+    - { period: "2026.11", title: "LLM API 응답 지연 대응 정책의 실측 기반 비교: 대기, 재시도, 대체 모델 전환", note: "2026 한국인공지능융합기술학회 추계학술대회 포스터 발표 · 단독 저자", link: "/projects/llm-api-policy/" }
 links:
   - { name: "GitHub", url: "https://github.com/GODnjs1007" }
 draft: false
