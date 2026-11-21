@@ -2,11 +2,11 @@
 title: "산학 실시간 심전도 서버 논문"
 summary: "산학 프로젝트에서 공개 데이터로 학습한 부정맥 판정 모델의 정확도와 판정 속도, 환자 수별 부하테스트 결과를 정리해 학술대회에 투고할 예정인 논문입니다."
 role: "제1저자 · 팀원 공동저자"
-status: "추계학술대회 발표·수상 (11.21)"
+status: "수상"
 category: "연구"
 stack: ["PyTorch", "PhysioNet", "Python"]
 period: "2026.11"
-weight: 42
+weight: 41
 mapLabel: "논문"
 relations: ["산학 프로젝트", "추계학술대회"]
 brief:

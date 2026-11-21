@@ -7,7 +7,7 @@ category: "연구"
 stack: ["Proxmox VM", "Ubuntu", "Tailscale", "Python", "cron", "Gemini API", "OpenAI API"]
 period: "2026.10"
 tone: "#3F9A94"
-weight: 41
+weight: 42
 mapLabel: "논문"
 alsoOn:
   host: "homelab"
