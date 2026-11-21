@@ -8,7 +8,7 @@ award: "우수 발표 논문상 · 2026 한국인공지능융합기술학회 추
 category: "연구"
 stack: ["Python", "Redis Streams", "TCP", "PyTorch", "PhysioNet"]
 period: "2026.11"
-weight: 41
+weight: 39
 mapLabel: "논문"
 relations: ["산학 프로젝트", "추계학술대회"]
 brief:
