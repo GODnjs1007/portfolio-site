@@ -3,6 +3,9 @@ title: "MiCAL · 학사·학과·장학금 일정 통합 캘린더"
 summary: "학교·학과 학사일정, 장학금, 비교과, 공모전, 런어스 과제처럼 여러 홈페이지에 흩어진 일정을 한 캘린더로 모아 보여주는 웹 서비스입니다. 웹프로그래밍 5인 조별 과제로 만들고 있고, 백엔드·DB·서버를 맡았습니다. 홈랩 VM 105에서 calendar.ihaewon.com으로 공개해 두었습니다."
 role: "조원 · 백엔드·DB·서버"
 status: "1차 기획 제출 · 2차 구현 중"
+live:
+  url: "https://calendar.ihaewon.com"
+  label: "사이트 열기"
 category: "서비스"
 stack: ["Django 5.2", "Django REST Framework", "PostgreSQL 16", "Docker Compose", "Nginx", "Cloudflare Tunnel", "자체 서버(Proxmox)"]
 period: "2026 2학기"
@@ -12,7 +15,7 @@ alsoOn:
   label: "vm 105"
   title: "MiCAL 서버"
 tone: "#C49A32"
-weight: 29
+weight: 27
 mapLabel: "웹프"
 brief:
   why: "학사일정, 학과 공지, 장학금, 비교과, 공모전, 런어스 과제가 서로 다른 홈페이지에 흩어져 있어서 하나씩 찾아봐야 했습니다. 이 일정들을 한 캘린더로 모아 보여주는 서비스를 웹프로그래밍 조별 과제로 만들기로 했습니다."

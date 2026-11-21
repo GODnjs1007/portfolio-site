@@ -12,7 +12,7 @@ alsoOn:
   via: "서버"
   label: "vm 106"
   title: "플레이 기록 수집 서버"
-weight: 21
+weight: 26
 brief:
   why: "게임 로직은 팀원들이 맡고, 저는 접속·기록 수집·빌드처럼 게임 밖에서 서비스를 받쳐주는 인프라를 맡았습니다."
   did:

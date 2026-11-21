@@ -7,7 +7,7 @@ category: "서비스"
 stack: ["FastAPI", "한강홍수통제소 API", "기상청 API허브", "생성형 AI API", "iOS", "자체 서버(Proxmox)", "Docker", "Cloudflare Tunnel"]
 period: "2026.08 ~"
 tone: "#5E9E6E"
-weight: 22
+weight: 21
 mapLabel: "팀 여울목"
 alsoOn:
   host: "homelab"
