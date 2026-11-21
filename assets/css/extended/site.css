@@ -600,7 +600,7 @@ html{scroll-padding-top:84px}
 
 /* 완료·수상 표시: 지도 카드와 프로젝트 페이지 머리 */
 .flags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}
-.flag{font-size:12px;font-weight:700;line-height:1;padding:5px 8px;border:2px solid var(--ink)}
+.flag{font-size:12px;font-weight:700;line-height:1.35;padding:4px 8px;border:2px solid var(--ink)}
 .flag.done{background:var(--ink);color:var(--on-ink)}
 .flag.award{background:var(--award);border-color:var(--award);color:var(--on-award)}
 .node.awarded{border-color:var(--award-line);box-shadow:5px 5px 0 var(--award)}
@@ -619,3 +619,9 @@ html{scroll-padding-top:84px}
 .d-head .live-link{margin:0 0 10px;font-size:15px}
 .d-head .live-link a{font-weight:700}
 .d-head .live-link span{color:var(--muted);font-family:var(--mono);font-size:13px;margin-left:6px}
+
+/* 완료 표시: 글자 대신 카드 오른쪽 위 체크 원 */
+.done-mark{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;font-weight:700;line-height:1}
+.node>.done-mark{position:absolute;top:10px;right:10px}
+.node:has(>.done-mark)>.id{padding-right:28px}
+.d-head .done-mark{width:28px;height:28px;font-size:16px;align-self:center}

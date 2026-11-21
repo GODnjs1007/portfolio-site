@@ -4,9 +4,8 @@
 {{- $slug := partial "slug.html" $p -}}
 <div class="node{{ if $p.Params.preview }} draft{{ end }}{{ if $p.Params.award }} awarded{{ end }}{{ if $p.Params.here }} here{{ end }}{{ if $a.label }} has-co{{ if $a.off }} co-off{{ end }}{{ end }}" id="p-{{ $slug }}"{{ with $a.label }} style="--co:{{ partial "vm-color.html" . }}"{{ end }}>
   {{ with $p.Params.mapLabel }}<span class="id">{{ . }}</span>{{ end }}
-  {{- if or $p.Params.done $p.Params.award }}
-  <div class="flags">{{ if $p.Params.done }}<span class="flag done">{{ i18n "flagDone" }}</span>{{ end }}{{ with $p.Params.award }}<span class="flag award">{{ . }}</span>{{ end }}</div>
-  {{- end }}
+  {{- if $p.Params.done }}<span class="done-mark" title="{{ i18n "flagDone" }}" aria-label="{{ i18n "flagDone" }}">✓</span>{{ end }}
+  {{- with $p.Params.award }}<div class="flags"><span class="flag award">{{ . }}</span></div>{{ end }}
   <h4>{{ if $p.Params.preview }}{{ $p.Title }}{{ else }}<a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>{{ end }}</h4>
   {{- if $p.Params.preview }}
   <p>{{ $p.Params.status }} · {{ $p.Params.role }}</p>
