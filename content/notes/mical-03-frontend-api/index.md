@@ -3,8 +3,8 @@ title: "MiCAL 3단계 · 화면과 API 연결"
 date: 2026-11-04
 projects: ["web-project"]
 step: 3
-summary: "(진행 중) 프론트 팀이 만든 새 프로토타입을 서버에 올리고, 2단계에서 DB에 넣은 실제 일정(742건)이 프로토타입 캘린더에 뜨게 연결한다. 프론트 팀 코드는 최소로만 건드린다."
-tags: ["JavaScript", "API 연결", "Nginx", "트러블슈팅", "진행 중"]
+summary: "프론트 팀이 만든 새 프로토타입을 서버에 올리고, 2단계에서 DB에 넣은 실제 일정(742건)이 프로토타입 캘린더에 뜨게 연결한다. 프론트 팀 코드는 최소로만 건드린다."
+tags: ["JavaScript", "API 연결", "Nginx", "트러블슈팅"]
 troubleshooting:
   - "주간 보기에서 일정이 세로 글씨로 찌그러짐"
 draft: false

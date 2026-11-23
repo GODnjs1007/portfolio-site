@@ -3,8 +3,8 @@ title: "MiCAL 2단계 · 백엔드 배포와 데이터 적재"
 date: 2026-11-02
 projects: ["web-project"]
 step: 2
-summary: "(진행 중) 1단계에서 만든 서버 위에 Django 백엔드(회원가입·로그인, 일정 API)와 PostgreSQL을 실제로 띄우고, 팀원 크롤러가 모은 학사·장학금·공모전·비교과 데이터를 DB에 넣는다. 팀원 중 서버가 필요한 사람에게만 계정을 준다."
-tags: ["Django", "PostgreSQL", "Docker Compose", "Nginx", "트러블슈팅", "진행 중"]
+summary: "1단계에서 만든 서버 위에 Django 백엔드(회원가입·로그인, 일정 API)와 PostgreSQL을 실제로 띄우고, 팀원 크롤러가 모은 학사·장학금·공모전·비교과 데이터를 DB에 넣는다. 팀원 중 서버가 필요한 사람에게만 계정을 준다."
+tags: ["Django", "PostgreSQL", "Docker Compose", "Nginx", "트러블슈팅"]
 troubleshooting:
   - "크롤러 결과 저장 실패 (Permission denied)"
   - "소프트웨어학부 공지만 SSL 오류"
